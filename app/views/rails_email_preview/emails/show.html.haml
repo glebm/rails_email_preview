@@ -1,0 +1,33 @@
+%a#back-to-all{:href => rails_email_preview.root_url} &laquo; Back to list
+#message_headers
+  %dl
+    %dt From:
+    %dd= @mail.from
+
+    %dt Subject:
+    %dd
+      %strong= @mail.subject
+
+    %dt Date:
+    %dd= Time.now.strftime("%b %e, %Y %I:%M:%S %p %Z")
+
+    %dt To:
+    %dd= @mail.to
+
+  - if @mail.multipart?
+    %p.alternate
+      - if body_part.content_type && body_part.content_type.match(/text\/html/)
+        %a{:href => rails_email_preview.email_url(params.merge(:format => 'txt'))}} View plain text version
+      - else
+        %a{:href => rails_email_preview.email_url(params.merge(:format => 'html'))}} View HTML version
+
+
+%iframe#src-iframe{:src => rails_email_preview.raw_email_url(params),
+  :width => "100%", :height => "800", :onload => 'emailLoaded()', :style => "display:none"}
+%pre#loading Loading...
+
+:javascript
+  window.emailLoaded = function () {
+    document.getElementById('src-iframe').style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
+  };

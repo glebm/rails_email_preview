@@ -1,0 +1,9 @@
+%h1 Available Mailers
+%ul
+  - @preview_classes.each do |m|
+    %li
+      %h2= m.name
+      %ul
+        - m.instance_methods(false).map(&:to_s).each do |method|
+          %li
+            %a{:href => rails_email_preview.email_url(:mail_class => m.name.underscore, :mail_action => method)}= method
