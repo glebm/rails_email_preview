@@ -1,5 +1,11 @@
 %a#back-to-all{:href => rails_email_preview.root_url} &laquo; Back to list
 #message_headers
+  - if @mail.multipart?
+    %p.alternate
+      - if @part_type == 'text/html'
+        %a{:href => rails_email_preview.email_url(params.merge(:part_type => 'text/plain'))} View plain text version
+      - else
+        %a{:href => rails_email_preview.email_url(params.merge(:part_type => 'text/html'))} View HTML version
   %dl
     %dt From:
     %dd= @mail.from
@@ -14,15 +20,7 @@
     %dt To:
     %dd= @mail.to
 
-  - if @mail.multipart?
-    %p.alternate
-      - if body_part.content_type && body_part.content_type.match(/text\/html/)
-        %a{:href => rails_email_preview.email_url(params.merge(:format => 'txt'))}} View plain text version
-      - else
-        %a{:href => rails_email_preview.email_url(params.merge(:format => 'html'))}} View HTML version
-
-
-%iframe#src-iframe{:src => rails_email_preview.raw_email_url(params),
+%iframe#src-iframe{:src => rails_email_preview.raw_email_url(params.slice(:mail_class, :mail_action, :part_type)),
   :width => "100%", :height => "800", :onload => 'emailLoaded()', :style => "display:none"}
 %pre#loading Loading...
 
