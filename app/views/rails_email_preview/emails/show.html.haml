@@ -1,11 +1,23 @@
 %a#back-to-all{:href => rails_email_preview.root_url} &laquo; Back to list
+:ruby
+  raw_url  = rails_email_preview.email_url(params.merge(:part_type => 'raw'))
+  html_url = if @mail.multipart? || @mail.content_type =~ %r(text/html)
+   rails_email_preview.email_url(params.merge(:part_type => 'text/html'))
+  end
+  plain_url = if @mail.multipart? || @mail.content_type =~ %r(text/plain)
+   rails_email_preview.email_url(params.merge(:part_type => 'text/plain'))
+  end
+
 #message_headers
-  - if @mail.multipart?
-    %p.alternate
-      - if @part_type == 'text/html'
-        %a{:href => rails_email_preview.email_url(params.merge(:part_type => 'text/plain'))} View plain text version
-      - else
-        %a{:href => rails_email_preview.email_url(params.merge(:part_type => 'text/html'))} View HTML version
+  %p.alternate
+    - if @part_type != 'raw'
+      %a{:href => raw_url} View Original Message (raw)
+      %br
+    - if @part_type != 'text/html' && html_url
+      %a{:href => html_url} View HTML version
+      %br
+    - if @part_type != 'text/plain' && plain_url
+      %a{:href => plain_url} View plain text version
   %dl
     %dt From:
     %dd= @mail.from

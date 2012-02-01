@@ -69,9 +69,27 @@ In config/routes.rb add:
 
 To get the url of RailsEmailPreview in your main app you can call rails_email_preview.root_url
 
+
+Premailer integration
+---------------------
+
+[Premailer](https://github.com/alexdunae/premailer) (CSS inlining) integration can be done by using the <code>before_render</code> hook:
+
+For example, to process the previews with [ActionMailer Inline CSS](https://github.com/ndbroadbent/actionmailer_inline_css)
+can be done like so:
+
+    RailsEmailPreview.setup do |config|
+      config.before_render do |message|
+        ActionMailer::InlineCssHook.delivering_email(message)
+      end
+    end
+
 Interface
 ---------
 
-ToDo: Add a screenshot
+![List of application mails](http://4.bp.blogspot.com/-hkZlhO7ze8I/Tylinqxas2I/AAAAAAAABQo/17eEkwBkdnQ/s1600/email-preview-index.png)
+![Viewing an email](http://3.bp.blogspot.com/-Y6aM_RVrZXE/TyliuI3P6AI/AAAAAAAABQ0/_YJkeC9D5xg/s1600/email-preview-show.png)
+
+As this is a rails engine, you can ovveride any of the views, or make them use your layout.
 
 This project rocks and uses MIT-LICENSE.
