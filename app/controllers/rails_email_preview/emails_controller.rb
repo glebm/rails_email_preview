@@ -16,9 +16,10 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
     if @part_type == 'raw'
       body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
     else
-      body_part = @mail
       if @mail.multipart?
-        body_part = @mail.parts.find { |part| part.content_type.start_with?(@part_type) } || @mail.parts.first
+        body_part = (@part_type =~ /html/ ? @mail.html_part : @mail.text_part)
+      else
+        body_part = @mail
       end
       body = body_part.body
       if body_part.content_type =~ /plain/
