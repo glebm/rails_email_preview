@@ -73,9 +73,15 @@ To get the url of RailsEmailPreview in your main app you can call rails_email_pr
 Premailer integration
 ---------------------
 
-[Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. It will also automatically create plain text emails based on their HTML counterparts. If you're your running Rails 3, I suggest using [premailer-rails3](https://github.com/fphilipe/premailer-rails3) as it requires almost no configuration.
+[Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook:
 
-Integration can be done by using the <code>before_render</code> hook:
+    RailsEmailPreview.setup do |config|
+      config.before_render do |message|
+        ActionMailer::InlineCssHook.delivering_email(message)
+      end
+    end
+
+If you're your running Rails 3, you may consider using [premailer-rails3](https://github.com/fphilipe/premailer-rails3). It will inline CSS, automatically create plain text emails, and requires almost no configuration.
 
     RailsEmailPreview.setup do |config|
       config.before_render do |message|
