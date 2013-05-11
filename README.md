@@ -81,11 +81,12 @@ Premailer integration
       end
     end
 
-If you're your running Rails 3, you may consider using [premailer-rails3](https://github.com/fphilipe/premailer-rails3). It will inline CSS, automatically create plain text emails, and requires almost no configuration.
+If you're your running Rails 3, you may consider using [premailer-rails](https://github.com/fphilipe/premailer-rails). It will inline CSS, automatically create plain text emails, and requires almost no configuration.
+
 
     RailsEmailPreview.setup do |config|
       config.before_render do |message|
-        PremailerRails::Hook.delivering_email(message)
+        Premailer::Rails::Hook.delivering_email(message)
       end
     end
 
