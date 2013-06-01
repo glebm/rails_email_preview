@@ -1,18 +1,14 @@
-RailsEmailPreview -- Visual email testing
+Rails Email Preview 
 ================================
 
-Preview plain text and html mail templates in your browser without redelivering it every time you make a change.
-
-Inspired by MailView: https://github.com/37signals/mail_view/
-However, implemented as a Rails engine, with layouts and multiple mailers support.
-
-Compatible with Rails version >= 3 only.
+A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
 Usage
 -----
 
-Since most emails do something interesting with database data, you'll need to write some scenarios to load messages with fake data. Its similar to writing mailer unit tests but you see a visual representation of the output instead.
+Since most emails use data, you will need to provide it to the preview.
 
+    # Say you have this mailer
     class Notifier < ActionMailer::Base
       def invitation(inviter, invitee)
         # ...
@@ -22,27 +18,30 @@ Since most emails do something interesting with database data, you'll need to wr
         # ...
       end
 
+      # Define a Preview class with the same mail action names, but with no arguments
       class Preview
-        # Pull data from existing fixtures
+        # The only requirement is that you return a Mail object from the preview methods
+        # You could use existing data for this:
         def invitation
           account = Account.first
           inviter, invitee = account.users[0, 2]
           Notifier.invitation(inviter, invitee)
         end
 
-        # Factory-like pattern
+        # In most cases though it's better to build the data the email requires:
         def welcome
-          user = User.create!
-          mail = Notifier.welcome(user)
-          user.destory
-          mail
+          User.transaction do 
+            user = User.new(email: "user@test.com", name: "Test User")
+            user.define_singleton_method(:id) { 123 }
+            Notifier.welcome(user)                    
+          end
         end
       end
     end
 
-The methods must return a Mail object.
 
-Since this is a Rails engine, it can be configured in an initializer:
+Configuration
+---
 
 In config/initializers/rails_email_preview.rb
 
@@ -51,23 +50,23 @@ In config/initializers/rails_email_preview.rb
       config.preview_classes = [ Notifier::Preview ]
     end
 
-    # If you want to render it within the application layout, uncomment the following lines:
+    # If you want to render preview views within the application layout, uncomment the following lines:
     # Rails.application.config.to_prepare do
     #   RailsEmailPreview::ApplicationController.layout "application"
     # end
-    # Note that if you do use it with your main_app layout, all the main_app URLs must be generated explicitly
-    # E.g. you would need to change links like login_url to main_app.login_url
+    # Note that if you use it with an app layout, all the app URLs in the layout file must be generated explicitly via `main_app`
+    # E.g. `login_url` would need to be changed to `main_app.login_url` (this is due to how isolated engines are implemented in Rails).
 
 
 Routing is very simple
 
-In config/routes.rb add:
+In `config/routes.rb` add:
 
     if Rails.env.development?
-      mount RailsEmailPreview::Engine, :at => 'email_preview' # You can choose any URL here
+      mount RailsEmailPreview::Engine, at: 'email_preview' # You can choose any URL here
     end
 
-To get the url of RailsEmailPreview in your main app you can call rails_email_preview.root_url
+To get the url of RailsEmailPreview in your app use `rails_email_preview.root_url`
 
 
 Premailer integration
@@ -90,6 +89,7 @@ If you're your running Rails 3, you may consider using [premailer-rails](https:/
       end
     end
 
+You can ovveride any view by placing a file with the same path in `app/views`.
 
 Interface
 ---------
@@ -98,4 +98,5 @@ Interface
 
 As this is a rails engine, you can ovveride any of the views, or make them use your layout.
 
+---
 This project rocks and uses MIT-LICENSE.
