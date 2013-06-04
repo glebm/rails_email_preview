@@ -9,7 +9,7 @@ How to
 You will need to provide data for preview of each email:
 
     # Say you have this mailer
-    class Notifier < ActionMailer::Base
+    class UserMailer < ActionMailer::Base
       def invitation(inviter, invitee)
         # ...
       end
@@ -17,25 +17,23 @@ You will need to provide data for preview of each email:
       def welcome(user)
         # ...
       end
+    end
 
-      # Define a Preview class with the same mail action names, but with no arguments
-      class Preview
-        # The only requirement is that you return a Mail object from the preview methods
-        # You could use existing data for this:
-        def invitation
-          account = Account.first
-          inviter, invitee = account.users[0, 2]
-          Notifier.invitation(inviter, invitee)
-        end
-
-        # In most cases though it's better to build the data the email requires:
-        def welcome
-          User.transaction do 
-            user = User.new(email: "user@test.com", name: "Test User")
-            user.define_singleton_method(:id) { 123 }
-            Notifier.welcome(user)                    
-          end
-        end
+    # Define a Preview class with the same mail action names, but with no arguments
+    # mkdir -p app/mailer_previews/; touch app/mailer_previews/user_mailer_preview.rb
+    class UserMailerPreview
+      # preview methods should return Mail objects, e.g.:
+      def invitation        
+        UserMailer.invitation mock_user('Alice'), mock_user('Bob')
+      end
+            
+      def welcome                
+        UserMailer.welcome mock_user                            
+      end
+      
+      private
+      def mock_user(name = 'Bill Gates')
+        User.new(name: name, email: "user@test.com#{rand 100}").tap { |u| u.define_singleton_method(:id) { 123 + rand(100) } }      
       end
     end
 
@@ -49,11 +47,11 @@ Routing
 Config 
 -------
     
-    # config/initializers/rails_email_preview.rb
+    # touch config/initializers/rails_email_preview.rb
 
     require 'rails_email_preview'
     RailsEmailPreview.setup do |config|
-      config.preview_classes = [ Notifier::Preview ]
+      config.preview_classes = [ UserMailerPreview ]
     end
 
     # To render previews within layout other than the default one. NB: that layout must reference application urls via `main_app`, e.g. `main_app.login_url` (due to how isolated engines are in rails):
@@ -74,7 +72,7 @@ For [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline
     
     config.before_render { |message| ActionMailer::InlineCssHook.delivering_email(message) }    
 
-For [premailer-rails](https://github.com/fphilipe/premailer-rails):
+For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `RailsEmailPreview.setup`:
     
     config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
 
