@@ -3,10 +3,10 @@ Rails Email Preview
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
-Usage
+How to
 -----
 
-Since most emails use data, you will need to provide it to the preview.
+You will need to provide data for preview of each email:
 
     # Say you have this mailer
     class Notifier < ActionMailer::Base
@@ -40,57 +40,49 @@ Since most emails use data, you will need to provide it to the preview.
     end
 
 
-Configuration
----
+Routing
+-------
+    
+    mount RailsEmailPreview::Engine, at: 'email_preview' # rails_email_preview.root_url #=> '/email_preview'    
 
-In config/initializers/rails_email_preview.rb
+
+Config 
+-------
+    
+    # config/initializers/rails_email_preview.rb
 
     require 'rails_email_preview'
     RailsEmailPreview.setup do |config|
       config.preview_classes = [ Notifier::Preview ]
     end
 
-    # If you want to render preview views within the application layout, uncomment the following lines:
-    # Rails.application.config.to_prepare do
-    #   RailsEmailPreview::ApplicationController.layout "application"
-    # end
-    # Note that if you use it with an app layout, all the app URLs in the layout file must be generated explicitly via `main_app`
-    # E.g. `login_url` would need to be changed to `main_app.login_url` (this is due to how isolated engines are implemented in Rails).
+    # To render previews within layout other than the default one. NB: that layout must reference application urls via `main_app`, e.g. `main_app.login_url` (due to how isolated engines are in rails):
 
-
-Routing is very simple
-
-In `config/routes.rb` add:
-
-    if Rails.env.development?
-      mount RailsEmailPreview::Engine, at: 'email_preview' # You can choose any URL here
+    Rails.application.config.to_prepare do
+      RailsEmailPreview::ApplicationController.layout 'admin'
     end
-
-To get the url of RailsEmailPreview in your app use `rails_email_preview.root_url`
 
 
 Premailer integration
 ---------------------
 
-[Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook:
+[Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
-    RailsEmailPreview.setup do |config|
-      config.before_render do |message|
-        ActionMailer::InlineCssHook.delivering_email(message)
-      end
-    end
+To integrate Premailer with rails you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
 
-If you're your running Rails 3, you may consider using [premailer-rails](https://github.com/fphilipe/premailer-rails). It will inline CSS, automatically create plain text emails, and requires almost no configuration.
+For [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css), add to `RailsEmailPreview.setup`:
+    
+    config.before_render { |message| ActionMailer::InlineCssHook.delivering_email(message) }    
 
-
-    RailsEmailPreview.setup do |config|
-      config.before_render do |message|
-        Premailer::Rails::Hook.delivering_email(message)
-      end
-    end
-
-You can ovveride any view by placing a file with the same path in `app/views`.
+For [premailer-rails](https://github.com/fphilipe/premailer-rails):
+    
+    config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
 
 
----
+Customizing rails_email_preview views
+---------------------
+
+You can ovveride any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
+
+
 This project rocks and uses MIT-LICENSE.
