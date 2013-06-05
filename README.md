@@ -44,7 +44,7 @@ Routing
     mount RailsEmailPreview::Engine, at: 'email_preview' # rails_email_preview.root_url #=> '/email_preview'    
 
 
-Config 
+Configuration 
 -------
     
     # touch config/initializers/rails_email_preview.rb
@@ -77,7 +77,7 @@ For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `Rail
     config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
 
 
-Customizing rails_email_preview views
+Customizing views
 ---------------------
 
 You can ovveride any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
@@ -88,5 +88,6 @@ Interface
 ![List of application mails](http://4.bp.blogspot.com/-hkZlhO7ze8I/Tylinqxas2I/AAAAAAAABQo/17eEkwBkdnQ/s1600/email-preview-index.png)
 
 As this is a rails engine, you can ovveride any of the views, or make them use your layout.
+You can also extend the `RailsEmailPreview::EmailsController` for further customization.
 
 This project rocks and uses MIT-LICENSE.
