@@ -80,7 +80,7 @@ For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `Rail
 Customizing views
 ---------------------
 
-You can ovveride any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
+You can override any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
 You can also extend the `RailsEmailPreview::EmailsController` for further customization.
 
 This project rocks and uses MIT-LICENSE.
