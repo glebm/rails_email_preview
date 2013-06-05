@@ -5,8 +5,7 @@ Gem::Specification.new do |s|
   s.name = "rails_email_preview"
   s.author = 'Gleb Mazovetskiy'
   s.email = 'glex.spb@gmail.com'
-  s.summary = "Visual Email Preview for Rails >= 3, implemented as a Rails Engine. v#{RailsEmailPreview::VERSION}"
-  s.description = "Insert RailsEmailPreview description."
+  s.description = s.summary = "Preview emails in browser (rails engine)" 
 
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
 
