@@ -87,7 +87,7 @@ Interface
 
 ![List of application mails](http://4.bp.blogspot.com/-hkZlhO7ze8I/Tylinqxas2I/AAAAAAAABQo/17eEkwBkdnQ/s1600/email-preview-index.png)
 
-As this is a rails engine, you can ovveride any of the views, or make them use your layout.
+You can override any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
 You can also extend the `RailsEmailPreview::EmailsController` for further customization.
 
 This project rocks and uses MIT-LICENSE.
