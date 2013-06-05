@@ -33,11 +33,6 @@
     %dd= @mail.to
 
 %iframe#src-iframe{:src => rails_email_preview.raw_email_url(params.slice(:mail_class, :mail_action, :part_type)),
-  :width => "100%", :height => "800", :onload => 'emailLoaded()', :style => "display:none"}
+  :width => "100%", :height => "800", :onload => "document.getElementById('src-iframe').style.display = 'block';document.getElementById('loading').style.display = 'none'", :style => "display:none"}
 %pre#loading Loading...
 
-:javascript
-  window.emailLoaded = function () {
-    document.getElementById('src-iframe').style.display = 'block';
-    document.getElementById('loading').style.display = 'none';
-  };
