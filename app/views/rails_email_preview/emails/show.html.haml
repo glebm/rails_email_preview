@@ -4,7 +4,7 @@
   html_url = if @mail.multipart? || @mail.content_type =~ %r(text/html)
    rails_email_preview.email_url(params.merge(:part_type => 'text/html'))
   end
-  plain_url = if @mail.multipart? || @mail.content_type =~ %r(text/plain) || Object.const_defined?('PremailerRails')
+  plain_url = if @mail.multipart? || @mail.content_type =~ %r(text/plain) || defined?(Premailer::Rails)
    rails_email_preview.email_url(params.merge(:part_type => 'text/plain'))
   end
 
