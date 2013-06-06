@@ -1,9 +1,0 @@
-%h1 Application Emails
-%ul
-  - @preview_class_names.each do |m|
-    %li
-      %h2= m.underscore.humanize
-      %ul
-        - m.constantize.instance_methods(false).map(&:to_s).each do |method|
-          %li
-            %a{:href => rails_email_preview.email_url(:mail_class => m.underscore, :mail_action => method)}= method.humanize

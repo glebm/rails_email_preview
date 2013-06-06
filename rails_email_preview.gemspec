@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "activesupport", ">= 3.2"
   s.add_dependency "rails", ">= 3.2"
-  s.add_dependency "haml"
+  s.add_dependency "slim"
   s.add_dependency "sass"
 
   s.version = RailsEmailPreview::VERSION

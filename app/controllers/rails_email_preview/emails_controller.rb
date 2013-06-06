@@ -1,6 +1,7 @@
 class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationController
   include ERB::Util
-  before_filter :load_preview_class, :except => :index
+  before_filter :load_preview_class, except: :index
+  before_filter :set_locale, except: :index
 
   def index
     @preview_class_names = (RailsEmailPreview.preview_classes || []).map { |klass| klass.is_a?(String) ? klass : klass.name }
@@ -31,6 +32,11 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
   end
 
   private
+
+  def set_locale
+    I18n.locale = params[:locale]
+  end
+
   def load_preview_class
     @preview_class = (RailsEmailPreview.preview_classes || []).find { |pc|
       (pc.is_a?(String) ? pc : pc.name).underscore == params[:mail_class]

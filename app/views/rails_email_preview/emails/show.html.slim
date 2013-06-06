@@ -1,0 +1,44 @@
+a.btn.btn-link href=rails_email_preview.root_url &laquo; Back to list
+
+#message_headers
+  .pull-right
+    p.btn-group
+      - { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}.each do |mime, label|
+        a.btn.btn-link href=rails_email_preview.email_url(params.merge(part_type: mime)) class=('active' if @part_type == mime) = label
+    br
+    p.btn-group
+      - I18n.available_locales.each do |locale|
+        a.btn.btn-link href=rails_email_preview.email_url(params.merge(part_type: @part_type, email_locale: locale)) class=('active' if @email_locale == locale.to_s) = locale
+  dl
+    dt From:
+    dd= @mail.from * ', '
+
+    dt To:
+    dd= @mail.to  * ', '
+
+    dt Subject:
+    dd
+      strong= @mail.subject
+
+javascript:
+  function iFrameAutoResize(id){
+      document.getElementById('loading-el').style.display = 'none';
+      setTimeout(function(){
+      var newheight;
+      var newwidth;
+
+      if(document.getElementById){
+          newheight = document.getElementById(id).contentWindow.document.body.scrollHeight;
+
+          newwidth  = $(document.getElementById(id).parentNode).innerWidth();
+      }
+
+      var el    = document.getElementById(id);
+      el.height = (newheight) + "px";
+      el.width  = (newwidth) + "px";
+      });
+  }
+
+pre#loading-el.lead #{icon 'spinner', 'spin'} Loading...
+iframe#src-iframe[src=rails_email_preview.raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(locale: @email_locale))
+  width="100%" height=1 onLoad="iFrameAutoResize('src-iframe')" style="border:none;padding:0;margin:0"]
