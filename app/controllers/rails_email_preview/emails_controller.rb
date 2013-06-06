@@ -34,7 +34,7 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
   private
 
   def set_locale
-    I18n.locale = params[:locale]
+    I18n.locale = params[:email_locale] || params[:locale] || I18n.default_locale
   end
 
   def load_preview_class
