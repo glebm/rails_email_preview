@@ -83,7 +83,7 @@ Email editing
 -------------
 
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
-[See ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Comfortable-Mexican-Sofa-integration-for-email-editing).
+See [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
 
 This is what it looks like:
 
