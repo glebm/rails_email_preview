@@ -79,6 +79,16 @@ For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `Rail
     
     config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
 
+Email editing 
+-------------
+
+You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
+[See ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Comfortable-Mexican-Sofa-integration-for-email-editing).
+
+This is what it looks like:
+
+![CMS integration screenshot](http://screencloud.net//img/screenshots/c3437edd8cdd52dbff58663a0b30d6ca.png)
+
 
 Customizing views
 ---------------------
