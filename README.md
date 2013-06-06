@@ -4,7 +4,7 @@ Rails Email Preview
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
 ![screenshot](http://screencloud.net//img/screenshots/749d6c6a84b5d79b436ad627902944a8.png)
-*Preview UI (editing and i18n are custom and are not part of this gem)*
+*Preview UI*
 
 How to
 -----
@@ -88,6 +88,13 @@ You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexi
 This is what it looks like:
 
 ![CMS integration screenshot](http://screencloud.net//img/screenshots/c3437edd8cdd52dbff58663a0b30d6ca.png)
+
+I18n
+-------------
+
+Rails Email Preview sets `I18n.locale` for rendering an email.
+This means your emails should use I18n.locale but not set it.
+If you are using `Resque::Mailer` or `Devise::Async`, you will want to [inject I18n.locale into the job](https://gist.github.com/glebm/5725347).
 
 
 Customizing views
