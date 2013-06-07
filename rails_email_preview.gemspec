@@ -5,7 +5,14 @@ Gem::Specification.new do |s|
   s.name = "rails_email_preview"
   s.author = 'Gleb Mazovetskiy'
   s.email = 'glex.spb@gmail.com'
-  s.description = s.summary = "Preview emails in browser (rails engine)" 
+  s.homepage = 'https://github.com/glebm/rails_email_preview'
+  s.license = 'MIT'
+
+  s.summary = "Preview emails in browser (rails engine)"
+  s.description = "Implemented as a rails engine with a simple UI for previewing your app emails,
+I18n support, easy premailer integration and editing via comfortable_mexican_sofa
+(https://github.com/comfy/comfortable-mexican-sofa)."
+
 
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
 
