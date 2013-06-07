@@ -6,5 +6,5 @@ ul.list-unstyled
       ul.list-group
         - m.constantize.instance_methods(false).map(&:to_s).each do |method|
           li.list-group-item
-            a href=rails_email_preview.email_url(mail_class: m.to_s.underscore, mail_action: method.to_s)
+            a href=rails_email_preview.email_url(mail_class: m.to_s.underscore, mail_action: method.to_s, email_locale: @email_locale)
               = method.to_s.humanize
