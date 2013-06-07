@@ -1,6 +1,6 @@
 class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationController
   include ERB::Util
-  around_filter :set_locale
+  around_filter :set_locale_for_mail, only: :show_raw
   before_filter :load_preview_class, except: :index
 
   def index
@@ -8,7 +8,7 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
   end
 
   def show
-    @email_locale = (params[:email_locale] || I18n.locale)
+    @email_locale = (params[:email_locale].presence || I18n.locale).to_s
     I18n.with_locale(@email_locale) do
       @part_type = params[:part_type] || 'text/html'
       @mail      = @preview_class.new.send(params[:mail_action])
@@ -37,8 +37,10 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
 
   private
 
-  def set_locale(&block)
-    I18n.with_locale(params[:locale].presence || I18n.locale, &block)
+  def set_locale_for_mail
+    I18n.with_locale(params[:locale]) {
+      yield if block_given?
+    }
   end
 
   def load_preview_class
