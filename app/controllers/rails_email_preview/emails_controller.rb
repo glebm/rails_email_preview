@@ -1,20 +1,20 @@
 class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationController
   include ERB::Util
-  around_filter :set_locale_for_mail, only: :show_raw
   before_filter :load_preview_class, except: :index
+  around_filter :with_email_locale, only: [:show, :show_raw]
 
+  # list screen
   def index
     @preview_class_names = (RailsEmailPreview.preview_classes || []).map { |klass| klass.is_a?(String) ? klass : klass.name }
   end
 
+  # preview screen
   def show
-    @email_locale = (params[:email_locale].presence || I18n.locale).to_s
-    I18n.with_locale(@email_locale) do
-      @part_type = params[:part_type] || 'text/html'
-      @mail      = @preview_class.new.send(params[:mail_action])
-    end
+    @part_type = params[:part_type] || 'text/html'
+    @mail      = @preview_class.new.send(params[:mail_action])
   end
 
+  # render actual email content
   def show_raw
     @mail = @preview_class.new.send(params[:mail_action])
     RailsEmailPreview.run_before_render(@mail)
@@ -31,17 +31,17 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
         body = "<pre id='message_body'>#{body}</body>"
       end
     end
+    render text: body, layout: false
+  end
 
-    render :text => body, :layout => false
+  protected
+
+  def with_email_locale(&block)
+    @email_locale = (params[:email_locale] || I18n.locale).to_s
+    I18n.with_locale @email_locale, &block
   end
 
   private
-
-  def set_locale_for_mail
-    I18n.with_locale(params[:locale]) {
-      yield if block_given?
-    }
-  end
 
   def load_preview_class
     @preview_class = (RailsEmailPreview.preview_classes || []).find { |pc|
