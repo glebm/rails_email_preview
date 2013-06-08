@@ -92,9 +92,16 @@ This is what it looks like:
 I18n
 -------------
 
-Rails Email Preview sets `I18n.locale` for rendering an email.
-This means your emails should use I18n.locale but not set it.
-If you are using `Resque::Mailer` or `Devise::Async`, you will want to [inject I18n.locale into the job](https://gist.github.com/glebm/5725347).
+Rails Email Preview expect emails to be rendered using `I18n.locale`:
+    
+    # current locale
+    AccountMailer.some_notification.deliver     
+    # different locale
+    I18n.with_locale('es') { InviteMailer.send_invites.deliver }
+
+
+If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add I18n.locale information when the mail job is scheduled 
+[with this initializer](https://gist.github.com/glebm/5725347).
 
 
 Customizing views
