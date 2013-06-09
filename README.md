@@ -106,11 +106,12 @@ You can render all REP views inside your own layout:
       RailsEmailPreview::ApplicationController.layout 'admin'      
     end
 
-When using a layout other than the default, that layout has to access all the route helpers via `main_app`, e.g. `main_app.login_url`.
+When using a layout other than the default, that layout has to access all route helpers via `main_app`, e.g. `main_app.login_url`.
 This is due to how [isolated engines](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine) work in Rails.
 
-You can override any individual view by placing a file with the same path in your project's `app/views`, e.g. `app/views/rails_email_preview/emails/index.html.slim`.
-You can also extend the `RailsEmailPreview::EmailsController` for further customization.
+You can also override any individual view by placing a file with the same path in your project's `app/views`, e.g. `app/views/rails_email_preview/emails/index.html.slim`.
+
+*Pull requests adding view hooks are welcome!*
 
 
 Authentication & authorization
