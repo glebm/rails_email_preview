@@ -1,0 +1,17 @@
+-# Hide nav when rendering inside rails_email_preview
+javascript:
+  jQuery(function($) {
+    if (window.parent && /email/.test(parent.location.href)) {
+      $('.left-column,.right-column').hide();
+      $('.center-column').css('margin', 0);
+    }
+    // Snippet form:
+    // * Label -> Subject
+    $('[name="snippet[label]"]').closest('.control-group').find('.control-label').text("Subject");
+    // * Content -> Body
+    $('[name="snippet[content]"]').closest('.control-group').find('.control-label').text("Body");
+    // * Hide identifier
+    $('[name="snippet[identifier]"]').closest('.control-group').hide();
+    // * Hide categories
+    $('label[for="snippet_"]').closest('.control-group').hide();
+  });
