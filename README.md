@@ -57,10 +57,12 @@ Configuration
       config.preview_classes = [ UserMailerPreview ]
     end
 
-    # To render previews within layout other than the default one. NB: that layout must reference application urls via `main_app`, e.g. `main_app.login_url` (due to how isolated engines are in rails):
+To render previews within layout other than the default one. 
+NB: that layout must reference application urls via `main_app`, e.g. `main_app.login_url`, since rails_email_preview is an [isolated engine](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine).
 
     Rails.application.config.to_prepare do
       RailsEmailPreview::ApplicationController.layout 'admin'
+      # you can further extend RailsEmailPreview::ApplicationController here (to add admin authentatication etc)
     end
 
 
