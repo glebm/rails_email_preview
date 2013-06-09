@@ -62,7 +62,7 @@ Premailer integration
 
 [Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
-To integrate Premailer with rails you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
+To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
 
 For [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css), add to `RailsEmailPreview.setup`:
     
@@ -100,11 +100,10 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 Views
 ---------------------
 
-You can change the layout for all Rails Email Preview views:
+You can render all REP views inside your own layout:
 
     Rails.application.config.to_prepare do
-      RailsEmailPreview::ApplicationController.layout 'admin'
-      # you can further extend RailsEmailPreview::ApplicationController here (to add admin authentatication etc)
+      RailsEmailPreview::ApplicationController.layout 'admin'      
     end
 
 When using a layout other than the default, that layout has to access all the route helpers via `main_app`, e.g. `main_app.login_url`.
