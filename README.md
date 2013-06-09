@@ -113,8 +113,8 @@ You can override any individual view by placing a file with the same path in you
 You can also extend the `RailsEmailPreview::EmailsController` for further customization.
 
 
-Adding authentication and authorization
-------------------------
+Authentication & authorization
+------------------------------
 
 To only allow certain users view emails add a before filter to `RailsEmailPreview::ApplicationController`, e.g.:
 
