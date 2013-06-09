@@ -3,8 +3,9 @@ Rails Email Preview
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
-![screenshot](http://screencloud.net//img/screenshots/749d6c6a84b5d79b436ad627902944a8.png)
-*Preview UI*
+![screenshot](http://screencloud.net//img/screenshots/8861336ed60923429d3747e1fd379619.png)
+![screenshot](http://screencloud.net//img/screenshots/22aa58b651815068f4b0676754275c6a.png)
+*Rendered within an application layout*
 
 How to
 -----
@@ -76,11 +77,9 @@ Email editing
 -------------
 
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
-See [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
+REP comes with a CMS integration, see [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
 
-This is what it looks like:
-
-![CMS integration screenshot](http://screencloud.net//img/screenshots/c3437edd8cdd52dbff58663a0b30d6ca.png)
+![CMS integration screenshot](http://screencloud.net//img/screenshots/b000595dbd13ae061373fd1473f113ba.png)
 
 I18n
 -------------

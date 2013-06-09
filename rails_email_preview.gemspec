@@ -10,8 +10,7 @@ Gem::Specification.new do |s|
 
   s.summary = "Preview emails in browser (rails engine)"
   s.description = "Implemented as a rails engine with a simple UI for previewing your app emails,
-I18n support, easy premailer integration and editing via comfortable_mexican_sofa
-(https://github.com/comfy/comfortable-mexican-sofa)."
+I18n support, easy premailer integration and editing integration via comfortable_mexican_sofa CMS."
 
 
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]

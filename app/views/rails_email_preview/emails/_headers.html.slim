@@ -1,0 +1,4 @@
+dl
+  - { 'From' => @mail.from * ', ', 'To' => @mail.to  * ', ', 'Subject' => @mail.subject}.each do |header, value|
+    dt #{header}
+    dd #{value}
