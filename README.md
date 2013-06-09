@@ -97,7 +97,7 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 [with this initializer](https://gist.github.com/glebm/5725347).
 
 
-Customizing views
+Views
 ---------------------
 
 You can change the layout for all Rails Email Preview views:
@@ -107,7 +107,8 @@ You can change the layout for all Rails Email Preview views:
       # you can further extend RailsEmailPreview::ApplicationController here (to add admin authentatication etc)
     end
 
-*if you use a layout other than default that layout must reference application urls via `main_app`, e.g. `main_app.login_url`, since rails_email_preview is an [isolated engine](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine).*
+When using a layout other than the default, that layout has to access all the route helpers via `main_app`, e.g. `main_app.login_url`.
+This is due to how [isolated engines](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine) work in Rails.
 
 You can override any individual view by placing a file with the same path in your project's `app/views`, e.g. `app/views/rails_email_preview/emails/index.html.slim`.
 You can also extend the `RailsEmailPreview::EmailsController` for further customization.
