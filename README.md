@@ -57,15 +57,6 @@ Configuration
       config.preview_classes = [ UserMailerPreview ]
     end
 
-To render previews within layout other than the default one. 
-NB: that layout must reference application urls via `main_app`, e.g. `main_app.login_url`, since rails_email_preview is an [isolated engine](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine).
-
-    Rails.application.config.to_prepare do
-      RailsEmailPreview::ApplicationController.layout 'admin'
-      # you can further extend RailsEmailPreview::ApplicationController here (to add admin authentatication etc)
-    end
-
-
 Premailer integration
 ---------------------
 
@@ -109,14 +100,34 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 Customizing views
 ---------------------
 
-You can ovveride any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
+You can change the layout for all Rails Email Preview views:
 
-Interface
----------
+    Rails.application.config.to_prepare do
+      RailsEmailPreview::ApplicationController.layout 'admin'
+      # you can further extend RailsEmailPreview::ApplicationController here (to add admin authentatication etc)
+    end
 
-![List of application mails](http://4.bp.blogspot.com/-hkZlhO7ze8I/Tylinqxas2I/AAAAAAAABQo/17eEkwBkdnQ/s1600/email-preview-index.png)
+*if you use a layout other than default that layout must reference application urls via `main_app`, e.g. `main_app.login_url`, since rails_email_preview is an [isolated engine](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine).*
 
-You can override any `rails_email_preview` view by placing a file with the same path as in the gem in your project's `app/views`.
+You can override any individual view by placing a file with the same path in your project's `app/views`, e.g. `app/views/rails_email_preview/emails/index.html.slim`.
 You can also extend the `RailsEmailPreview::EmailsController` for further customization.
+
+
+Adding authentication and authorization
+------------------------
+
+To only allow certain users view emails add a before filter to `RailsEmailPreview::ApplicationController`, e.g.:
+
+    Rails.application.config.to_prepare do
+      RailsEmailPreview::ApplicationController.module_eval do
+        before_filter :check_permissions
+      
+        private
+        def check_permissions
+           render status: 403 unless current_user.try(:admin?)
+        end
+      end
+    end 
+
 
 This project rocks and uses MIT-LICENSE.
