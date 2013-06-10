@@ -25,12 +25,13 @@ module RailsEmailPreview
           title = snippet.label.to_s
           interpolation = interpolation.stringify_keys
           # set all missing values to ''
-          title.scan(/%{([^}]+)}/) { |key| interpolation[key] ||= ''}
+          title.scan(/%{([^}]+)}/) { |m| interpolation[m[0]] ||= ''}
           # remove all missing keys
-          subject = title % interpolation.delete_if { |k, v| title !~ /%{#{k}}/ }
+          subject = title % interpolation.symbolize_keys.delete_if { |k, v| title !~ /%{#{k}}/ }
 
           return subject if subject.present?
         end
+        '(no subject)'
       end
 
       # Will return snippet content, passing through Kramdown
@@ -44,7 +45,7 @@ module RailsEmailPreview
           default_site     = Cms::Site.find_by_locale(I18n.default_locale)
           fallback_content = cms_snippet_content(snippet_id, default_site).presence
         end
-        result = content || fallback_content
+        result = (content || fallback_content).to_s
 
         # If rendering in preview from admin, add edit/create lnk
         if caller.grep(/emails_controller/).present?
