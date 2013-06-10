@@ -51,10 +51,10 @@ You will need to provide data for preview of each email:
 Routing
 -------
     
-    mount RailsEmailPreview::Engine, at: 'email_preview' 
+    mount RailsEmailPreview::Engine, at: 'emails' 
     
     # You can access REP urls like this:
-    rails_email_preview.root_url #=> '/email_preview'
+    rails_email_preview.root_url #=> '/emails'
     
 Email editing 
 -------------
