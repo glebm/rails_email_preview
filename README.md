@@ -40,23 +40,30 @@ You will need to provide data for preview of each email:
         User.new(name: name, email: "user@test.com#{rand 100}").tap { |u| u.define_singleton_method(:id) { 123 + rand(100) } }      
       end
     end
+    
+    # Let REP know about UserMailerPreview:
+    # touch config/initializers/rails_email_preview.rb    
+    RailsEmailPreview.setup do |config|
+      config.preview_classes = [ UserMailerPreview ]
+    end
 
 
 Routing
 -------
     
-    mount RailsEmailPreview::Engine, at: 'email_preview' # rails_email_preview.root_url #=> '/email_preview'    
-
-
-Configuration 
--------
+    mount RailsEmailPreview::Engine, at: 'email_preview' 
     
-    # touch config/initializers/rails_email_preview.rb
+    # You can access REP urls like this:
+    rails_email_preview.root_url #=> '/email_preview'
+    
+Email editing 
+-------------
 
-    require 'rails_email_preview'
-    RailsEmailPreview.setup do |config|
-      config.preview_classes = [ UserMailerPreview ]
-    end
+You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
+REP comes with a CMS integration, see [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
+
+![CMS integration screenshot](http://screencloud.net//img/screenshots/b000595dbd13ae061373fd1473f113ba.png)
+
 
 Premailer integration
 ---------------------
@@ -73,13 +80,6 @@ For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `Rail
     
     config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
 
-Email editing 
--------------
-
-You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
-REP comes with a CMS integration, see [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
-
-![CMS integration screenshot](http://screencloud.net//img/screenshots/b000595dbd13ae061373fd1473f113ba.png)
 
 I18n
 -------------
