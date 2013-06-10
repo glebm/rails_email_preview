@@ -84,7 +84,7 @@ For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `Rail
 I18n
 -------------
 
-Rails Email Preview expect emails to be rendered using `I18n.locale`:
+REP expects emails to use current `I18n.locale`:
     
     # current locale
     AccountMailer.some_notification.deliver     
