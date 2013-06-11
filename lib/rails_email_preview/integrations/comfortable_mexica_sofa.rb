@@ -67,7 +67,7 @@ module RailsEmailPreview
                        })
                      end
 
-          result += cms_edit_email_snippet_link(cms_path)
+          result += "\n\n" + cms_edit_email_snippet_link(cms_path)
         end
         result
       end

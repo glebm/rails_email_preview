@@ -14,5 +14,7 @@ javascript:
       $('[name="snippet[label]"]').closest('.control-group').find('.control-label').text("Subject");
       // Content to Body
       $('[name="snippet[content]"]').closest('.control-group').find('.control-label').text("Body");
+      // Do not mess with identifier
+      $('[data-slug]').removeAttr('data-slug');
     }
   });
