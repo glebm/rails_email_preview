@@ -44,7 +44,7 @@ You will need to provide data for preview of each email:
     # Let REP know about UserMailerPreview:
     # touch config/initializers/rails_email_preview.rb    
     RailsEmailPreview.setup do |config|
-      config.preview_classes = [ UserMailerPreview ]
+      config.preview_classes = %w( UserMailerPreview )
     end
 
 
