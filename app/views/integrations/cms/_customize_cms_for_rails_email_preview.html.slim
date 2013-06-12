@@ -7,14 +7,15 @@ javascript:
       $('.center-column').css('margin', 0);
 
       // Snippet form:
-      var control = function(name) { return $('[name="snippet[' + name + ']"]').closest('.control-group'); };
+      var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.control-group'); };
 
+      // retext labels
       control('label').find('.control-label').text("Subject");
       control('content').find('.control-label').text("Body");
 
-      // Hide identifier and categories
+      // hide identifier and categories
       control('identifier').hide();
-      $('label[for="snippet_"]').closest('.control-group').hide();
+      control('category_ids').hide()
 
       // Do not mess with identifier
       $('[data-slug]').removeAttr('data-slug');
