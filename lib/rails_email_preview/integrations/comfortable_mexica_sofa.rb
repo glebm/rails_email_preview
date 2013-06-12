@@ -67,13 +67,17 @@ module RailsEmailPreview
                        })
                      end
 
-          result += "\n\n" + cms_edit_email_snippet_link(cms_path)
+          result = safe_join [result, "\n\n",
+                              "<table><tr><td>".html_safe,
+                              cms_edit_email_snippet_link(cms_path),
+                              "</td></tr></table>".html_safe,
+                              "\n"]
         end
         result
       end
 
       def cms_edit_email_snippet_link(path)
-        link_to(RailsEmailPreview.edit_link_text, path, style: RailsEmailPreview.edit_link_style, 'onClick' => '')
+        link_to(RailsEmailPreview.edit_link_text, path, style: RailsEmailPreview.edit_link_style.html_safe, 'onClick' => '')
       end
     end
   end
