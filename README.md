@@ -12,9 +12,9 @@ How to
 
 Add to Gemfile
 
-    gem 'rails_email_preview'
+    gem 'rails_email_preview', '~> 0.1.6'
 
-REP handles the setup for you:
+REP handles setup for you:
 
     # adds initializer and route:
     rails g rails_email_preview:install
