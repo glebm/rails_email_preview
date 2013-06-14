@@ -12,7 +12,17 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
   def show
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
-      @mail      = @preview_class.new.send(params[:mail_action])
+      if @preview_class.respond_to?(:new)
+        @mail = @preview_class.new.send(params[:mail_action])
+      else
+        # @preview_class is not a preview class
+        arg_info = "#{@preview_class}"
+        if @preview_class.is_a?(Module)
+          chain = @preview_class.ancestors.map(&:to_s)
+          chain = chain[1 .. chain.index { |c| c =~ /^Application[A-Z][A-z]+$/ } || -1]
+        end
+        raise ArgumentError.new("#{arg_info} is not a preview class #{"(ancestors: #{chain * ' < '})"} ")
+      end
     end
     render
   end
@@ -42,7 +52,7 @@ class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationContro
   protected
 
   def set_email_preview_locale
-    @email_locale = (params[:email_locale] || I18n.locale).to_s
+    @email_locale = (params[:email_locale] || I18n.default_locale).to_s
   end
 
   private

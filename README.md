@@ -10,21 +10,22 @@ A Rails Engine to preview plain text and html email in your browser. Compatible 
 How to
 -----
 
+Add to Gemfile
+
+    gem 'rails_email_preview'
+
+Run generators
+
+  # Add initializer and route
+  rails g rails_email_preview:install
+
+  # Generate preview classes and method stubs in app/mailer_previews/
+  rails g rails_email_preview:update_previews
+
 You will need to provide data for preview of each email:
 
-    # Say you have this mailer
-    class UserMailer < ActionMailer::Base
-      def invitation(inviter, invitee)
-        # ...
-      end
-
-      def welcome(user)
-        # ...
-      end
-    end
-
-    # Define a Preview class with the same mail action names, but with no arguments
-    # mkdir -p app/mailer_previews/; touch app/mailer_previews/user_mailer_preview.rb
+    # Say there is a UserMailer with 2 actions
+    # in app/mailer_previews/user_mailer_preview.rb initialize the emails for preview:
     class UserMailerPreview
       # preview methods should return Mail objects, e.g.:
       def invitation        
@@ -36,24 +37,24 @@ You will need to provide data for preview of each email:
       end
       
       private
+      # You can put all your mock helpers in a module
+      # Or, if you have factories/fabricators for your tests you could use those, but be careful not to create anything!
       def mock_user(name = 'Bill Gates')
-        User.new(name: name, email: "user@test.com#{rand 100}").tap { |u| u.define_singleton_method(:id) { 123 + rand(100) } }      
+        fake_id User.new(name: name, email: "user#{rand 100}@test.com")
       end
-    end
-    
-    # Let REP know about UserMailerPreview:
-    # touch config/initializers/rails_email_preview.rb    
-    RailsEmailPreview.setup do |config|
-      config.preview_classes = %w( UserMailerPreview )
+
+      def fake_id(obj)
+        obj.define_singleton_method(:id) { 123 + rand(100) }
+        obj
+      end
     end
 
 
 Routing
 -------
-    
-    mount RailsEmailPreview::Engine, at: 'emails' 
-    
-    # You can access REP urls like this:
+
+You can access REP urls like this:
+
     rails_email_preview.root_url #=> '/emails'
     
 Email editing 
