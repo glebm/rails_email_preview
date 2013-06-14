@@ -19,6 +19,7 @@ I18n support, easy premailer integration and editing integration via comfortable
   s.add_dependency "rails", ">= 3.2"
   s.add_dependency "slim"
   s.add_dependency "sass"
+  s.add_dependency "thor"
 
   s.version = RailsEmailPreview::VERSION
 end
