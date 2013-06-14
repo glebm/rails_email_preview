@@ -16,11 +16,11 @@ Add to Gemfile
 
 Run generators
 
-  # Add initializer and route
-  rails g rails_email_preview:install
+    # Add initializer and route
+    rails g rails_email_preview:install
 
-  # Generate preview classes and method stubs in app/mailer_previews/
-  rails g rails_email_preview:update_previews
+    # Generate preview classes and method stubs in app/mailer_previews/
+    rails g rails_email_preview:update_previews
 
 You will need to provide data for preview of each email:
 
