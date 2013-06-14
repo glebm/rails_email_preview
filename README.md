@@ -12,7 +12,7 @@ How to
 
 Add to Gemfile
 
-    gem 'rails_email_preview', '~> 0.1.6'
+    gem 'rails_email_preview', '~> 0.1.7'
 
 REP handles setup for you:
 
