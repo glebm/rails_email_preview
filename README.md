@@ -14,18 +14,17 @@ Add to Gemfile
 
     gem 'rails_email_preview'
 
-Run generators
+REP handles the setup for you:
 
-    # Add initializer and route
+    # adds initializer and route:
     rails g rails_email_preview:install
 
-    # Generate preview classes and method stubs in app/mailer_previews/
+    # generates preview classes and method stubs in app/mailer_previews/:
     rails g rails_email_preview:update_previews
 
-You will need to provide data for preview of each email:
+This last generator will add a stub for each of your emails, then you populate the stubs with mock data:
 
-    # Say there is a UserMailer with 2 actions
-    # in app/mailer_previews/user_mailer_preview.rb initialize the emails for preview:
+    # app/mailer_previews/user_mailer_preview.rb:
     class UserMailerPreview
       # preview methods should return Mail objects, e.g.:
       def invitation        
@@ -38,12 +37,13 @@ You will need to provide data for preview of each email:
       
       private
       # You can put all your mock helpers in a module
-      # Or, if you have factories/fabricators for your tests you could use those, but be careful not to create anything!
+      # or you can use your factories / fabricators, just make sure you are not creating anythin
       def mock_user(name = 'Bill Gates')
         fake_id User.new(name: name, email: "user#{rand 100}@test.com")
       end
-
+      
       def fake_id(obj)
+        # overrides the method on just this object
         obj.define_singleton_method(:id) { 123 + rand(100) }
         obj
       end
