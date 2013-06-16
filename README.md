@@ -106,6 +106,9 @@ You can render all REP views inside your own layout:
       RailsEmailPreview::ApplicationController.layout 'admin'      
     end
 
+You can use REP default styles in your own custom layout by requiring (CSS) or importing (SASS / LESS etc) `rails_email_preview/application`.
+REP default looks can be better, PRs with improvements would be fantastic!
+
 When using a layout other than the default, that layout has to access all route helpers via `main_app`, e.g. `main_app.login_url`.
 This is due to how [isolated engines](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine) work in Rails.
 
