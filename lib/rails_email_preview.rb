@@ -1,6 +1,13 @@
 require 'rails_email_preview/engine'
+require 'rails_email_preview/main_app_route_delegator'
+require 'rails_email_preview/version'
 
 module RailsEmailPreview
+
+  mattr_accessor :parent_controller
+  self.parent_controller = '::ApplicationController'
+
+  # auto-loading configured in initializer
   mattr_accessor :preview_classes
 
   class << self
@@ -14,6 +21,10 @@ module RailsEmailPreview
       ((@hooks ||= {})[:before_render] ||= []) << block
     end
 
+    def inline_main_app_routes!
+      ::RailsEmailPreview::ApplicationController.helper ::RailsEmailPreview::MainAppRouteDelegator
+    end
+
     def setup
       yield self
     end
@@ -22,7 +33,7 @@ module RailsEmailPreview
   # = Editing settings
   # edit link is rendered inside an iframe, so these options are provided for simple styling
   mattr_accessor :edit_link_text
-  self.edit_link_text  = '✎ Edit Text'
+  self.edit_link_text = '✎ Edit Text'
   mattr_accessor :edit_link_style
   self.edit_link_style = <<-CSS.strip.gsub(/\n+/m, ' ')
   display: block;

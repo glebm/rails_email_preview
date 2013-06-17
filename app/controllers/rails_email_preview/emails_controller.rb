@@ -1,4 +1,4 @@
-class RailsEmailPreview::EmailsController < RailsEmailPreview::ApplicationController
+class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationController
   include ERB::Util
   before_filter :load_preview_class, except: :index
   before_filter :set_email_preview_locale
