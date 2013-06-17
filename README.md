@@ -3,8 +3,8 @@ Rails Email Preview
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
-![screenshot](http://screencloud.net//img/screenshots/22aa58b651815068f4b0676754275c6a.png)
-![screenshot](http://screencloud.net//img/screenshots/8861336ed60923429d3747e1fd379619.png)
+![screenshot](https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-nav.png) 
+![screenshot](https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-show.png)
 *(styles are from the application)*
 
 How to
