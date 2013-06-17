@@ -88,6 +88,11 @@ REP expects emails to use current `I18n.locale`:
     AccountMailer.some_notification.deliver     
     # different locale
     I18n.with_locale('es') { InviteMailer.send_invites.deliver }
+    
+When linking to REP pages you can pass `email_locale` to set the locale for rendering:
+
+    # will render email in Spanish:
+    rails_email_preview.root_url(email_locale: 'es')
 
 
 If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add I18n.locale information when the mail job is scheduled 
