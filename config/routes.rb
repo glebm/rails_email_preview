@@ -1,11 +1,9 @@
 RailsEmailPreview::Engine.routes.draw do
-  root :to => 'emails#index'
-  get 'raw/:mail_class/:mail_action',
-        :as => :raw_email,
-        :to => 'emails#show_raw',
-        :mail_class => %r([\w/]+)
-  get ':mail_class/:mail_action',
-        :as => :email,
-        :to => 'emails#show',
-        :mail_class => %r([\w/]+)
+  get '/' => 'emails#index', as: :rep_emails
+
+  get 'raw/:mail_class/:mail_action' => 'emails#show_raw', as: :rep_raw_email
+  get ':mail_class/:mail_action' => 'emails#show', as: :rep_email
+
+  # define alias for the root url as part of stable api
+  get '/' => 'emails#index', as: :rep_root
 end

@@ -12,7 +12,7 @@ How to
 
 Add to Gemfile
 
-    gem 'rails_email_preview', '~> 0.1.7'
+    gem 'rails_email_preview', '~> 0.2.0'
 
 REP handles setup for you:
 
@@ -55,32 +55,29 @@ Routing
 
 You can access REP urls like this:
 
-    rails_email_preview.root_url #=> '/emails'
-    
+    # engine root:
+    rails_email_preview.rep_root_url
+    # list of emails (same as root):
+    rails_email_preview.rep_emails_url
+    # email show:
+    rails_email_preview.rep_email_url(mail_class: "user_mailer", mail_action: "welcome")
+
 Email editing 
 -------------
 
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
-REP comes with a CMS integration, see [ComfortableMexicanSofa integration guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
+REP comes with an integration for it -- see [CMS Guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
 
 ![CMS integration screenshot](http://screencloud.net//img/screenshots/b000595dbd13ae061373fd1473f113ba.png)
 
 
-Premailer integration
+Premailer
 ---------------------
 
 [Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
-
-For [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css), add to `RailsEmailPreview.setup`:
-    
-    config.before_render { |message| ActionMailer::InlineCssHook.delivering_email(message) }    
-
-For [premailer-rails](https://github.com/fphilipe/premailer-rails), add to `RailsEmailPreview.setup`:
-    
-    config.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }    
-
+Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
 I18n
 -------------
@@ -102,33 +99,31 @@ Views
 
 You can render all REP views inside your own layout:
 
-    Rails.application.config.to_prepare do
-      RailsEmailPreview::ApplicationController.layout 'admin'      
-    end
+    # # Use admin layout with REP:
+    # RailsEmailPreview::ApplicationController.layout 'admin'
+    # # If you are using a custom layout, you will want to make app routes available to REP:
+    # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
 
-You can use REP default styles in your own custom layout by requiring (CSS) or importing (SASS / LESS etc) `rails_email_preview/application`.
-REP default looks can be better, PRs with improvements would be fantastic!
-
-When using a layout other than the default, that layout has to access all route helpers via `main_app`, e.g. `main_app.login_url`.
-This is due to how [isolated engines](http://edgeapi.rubyonrails.org/classes/Rails/Engine.html#label-Isolated+Engine) work in Rails.
-
-You can also override any individual view by placing a file with the same path in your project's `app/views`, e.g. `app/views/rails_email_preview/emails/index.html.slim`.
-
-*Pull requests adding view hooks are welcome!*
-
+You can also override any individual view by placing a file with the same path in your project's `app/views`,
+e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks.
 
 Authentication & authorization
 ------------------------------
 
-To only allow certain users view emails add a before filter to `RailsEmailPreview::ApplicationController`, e.g.:
+You can specify the parent controller for REP controller, and it will inherit all before filters.
+Note that this must be placed before any other references to REP application controller in the initializer:
+
+    RailsEmailPreview.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
+
+Alternatively, to have custom rules just for REP you can:
 
     Rails.application.config.to_prepare do
       RailsEmailPreview::ApplicationController.module_eval do
-        before_filter :check_permissions
+        before_filter :check_rep_permissions
       
         private
-        def check_permissions
-           render status: 403 unless current_user.try(:admin?)
+        def check_rep_permissions
+           render status: 403 unless current_user && can_manage_emails?(current_user)
         end
       end
     end 

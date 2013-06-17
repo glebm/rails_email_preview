@@ -1,5 +1,5 @@
 module RailsEmailPreview
-  class ApplicationController < ::ApplicationController
+  class ApplicationController < ::RailsEmailPreview.parent_controller.constantize
 
   end
 end

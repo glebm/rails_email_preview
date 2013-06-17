@@ -12,5 +12,5 @@ javascript:
   }
 
 pre#loading-el.lead #{icon 'spinner', 'spin'} Loading...
-iframe#src-iframe[src=rails_email_preview.raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(email_locale: @email_locale))
+iframe#src-iframe[src=rails_email_preview.rep_raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(email_locale: @email_locale))
   width="100%" height=1 onLoad="iFrameLoad('src-iframe')" style="border:none;padding:0;margin:0"]
