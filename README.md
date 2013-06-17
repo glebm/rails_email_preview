@@ -3,8 +3,8 @@ Rails Email Preview
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
-![screenshot](https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-nav.png) 
-![screenshot](https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-show.png)
+![screenshot][rep-show-screenshot]
+![screenshot][rep-nav-screenshot]
 *(styles are from the application)*
 
 How to
@@ -68,7 +68,7 @@ Email editing
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
 REP comes with an integration for it -- see [CMS Guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
 
-![CMS integration screenshot](http://screencloud.net//img/screenshots/b000595dbd13ae061373fd1473f113ba.png)
+![screenshot][rep-edit-sofa-screenshot]
 
 
 Premailer
@@ -135,3 +135,7 @@ Alternatively, to have custom rules just for REP you can:
 
 
 This project rocks and uses MIT-LICENSE.
+
+  [rep-nav-screenshot]: https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-nav.png "Email List Screenshot"
+  [rep-show-screenshot]: https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-show.png "Show Email Screenshot"
+  [rep-edit-sofa-screenshot]: https://raw.github.com/glebm/rails_email_preview/doc-img/doc/img/rep-edit-sofa.png "Edit Email with Comfortable Mexican Sofa Screenshot"
