@@ -2,7 +2,7 @@ javascript:
   function iFrameLoad(id){
     var resize = function(id) {
       var el = document.getElementById(id),
-          w = jQuery(el.parentNode).innerWidth(),
+          w = el.parentNode.clientWidth,
           h = el.contentWindow.document.body.scrollHeight;
       el.height = (h) + "px";
       el.width  = (w) + "px";
@@ -11,6 +11,8 @@ javascript:
     setTimeout(function() { resize(id) });
   }
 
-pre#loading-el.lead #{icon 'spinner', 'spin'} Loading...
+pre#loading-el.lead
+  i.icon-spinner.icon-spin
+  |  Loading...
 iframe#src-iframe[src=rails_email_preview.rep_raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(email_locale: @email_locale))
   width="100%" height=1 onLoad="iFrameLoad('src-iframe')" style="border:none;padding:0;margin:0"]
