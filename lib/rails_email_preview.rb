@@ -3,6 +3,9 @@ require 'rails_email_preview/engine'
 require 'rails_email_preview/main_app_route_delegator'
 require 'rails_email_preview/version'
 
+require 'slim'
+require 'slim-rails'
+
 module RailsEmailPreview
 
   mattr_accessor :parent_controller
