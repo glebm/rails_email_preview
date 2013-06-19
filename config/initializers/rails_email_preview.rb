@@ -3,7 +3,7 @@ require 'rails_email_preview'
 #= Premailer
 #
 # # process preview with premailer-rails:
-# RailsEmailPreview.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }
+# RailsEmailPreview.before_render { |message| PremailerRails::Hook.delivering_email(message) }
 # # process preview with actionmailer-inline-css:
 # RailsEmailPreview.before_render { |message| ActionMailer::InlineCssHook.delivering_email(message) }
 
