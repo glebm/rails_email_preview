@@ -6,7 +6,7 @@ A Rails Engine to preview plain text and html email in your browser. Compatible 
 ![screenshot][rep-show-screenshot]
 ![screenshot][rep-nav-screenshot]
 
-*(styles are from the application)*
+*styles are provided by the application, above is [Zuigo](http://zuigo.com/), a platform to organize & discover events*
 
 How to
 -----
