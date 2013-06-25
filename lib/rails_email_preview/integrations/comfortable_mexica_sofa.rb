@@ -1,3 +1,4 @@
+# coding: utf-8
 # simply require this file to enable Comfortable Mexican Sofa integration
 # read more https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa
 
