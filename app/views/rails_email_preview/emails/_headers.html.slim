@@ -9,7 +9,7 @@ ruby:
   }.delete_if { |k, v| v.blank? }
 
 
-dl
+dl.inline-dl
   - headers.each do |header, value|
     dt #{header}
     dd #{format_header(value)}
