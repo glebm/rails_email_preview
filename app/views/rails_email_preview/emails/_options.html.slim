@@ -1,5 +1,3 @@
-a.lead.pull-left.no-margin href=""
-  ' #{icon 'check-sign'} Edit text
 .btn-group.pull-left.margin-left.margin-right
   - { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}.each do |mime, label|
     a.btn.btn-default href=rails_email_preview.rep_email_url(params.merge(part_type: mime)) class=('active' if @part_type == mime)
