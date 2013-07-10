@@ -68,11 +68,10 @@ module RailsEmailPreview
                        })
                      end
 
-          result = safe_join [result, "\n\n",
-                              "<table><tr><td>".html_safe,
+          result = safe_join ["<table class='rep-edit-link'><tr><td>".html_safe,
                               cms_edit_email_snippet_link(cms_path),
                               "</td></tr></table>".html_safe,
-                              "\n"]
+                              "\n\n", result]
         end
         result
       end
