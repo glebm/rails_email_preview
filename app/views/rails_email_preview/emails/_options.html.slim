@@ -1,8 +1,8 @@
 .btn-group.pull-left.margin-left.margin-right
   - { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}.each do |mime, label|
-    a.btn.btn-default href=rails_email_preview.rep_email_url(params.merge(part_type: mime)) class=('active' if @part_type == mime)
+    a.btn href=rails_email_preview.rep_email_url(params.merge(part_type: mime)) class=('active' if @part_type == mime)
       = label
 .btn-group.pull-left.margin-left
   - I18n.available_locales.each do |locale|
-    a.btn.btn-default href=rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)) class=('active' if @email_locale == locale.to_s)
+    a.btn href=rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)) class=('active' if @email_locale == locale.to_s)
       = locale
