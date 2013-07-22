@@ -1,15 +1,18 @@
 ruby:
-  headers = {
-    'From'     => @mail.from,
-    'To'       => @mail.to,
-    'Reply to' => @mail.reply_to,
-    'CC'       => @mail.cc,
-    'BCC'      => @mail.bcc,
-    'Subject'  => @mail.subject || '(no subject)'
-  }.delete_if { |k, v| v.blank? }
+  headers = I18n.with_locale @email_locale do
+    {
+      'From'     => @mail.from,
+      'To'       => @mail.to,
+      'Reply to' => @mail.reply_to,
+      'CC'       => @mail.cc,
+      'BCC'      => @mail.bcc,
+      'Subject'  => @mail.subject || '(no subject)'
+    }.delete_if { |k, v| v.blank? }
+  end
 
 
 dl.inline-dl
-  - headers.each do |header, value|
-    dt #{header}
-    dd #{format_header(value)}
+  -
+    - headers.each do |header, value|
+      dt = header
+      dd = format_header(value)
