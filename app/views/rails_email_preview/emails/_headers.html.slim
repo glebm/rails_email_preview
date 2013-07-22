@@ -12,7 +12,6 @@ ruby:
 
 
 dl.inline-dl
-  -
-    - headers.each do |header, value|
-      dt = header
-      dd = format_header(value)
+  - headers.each do |header, value|
+    dt = header
+    dd = format_header(value)
