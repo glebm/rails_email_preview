@@ -4,7 +4,7 @@ ul.list-unstyled
     li.col-lg-6.col-sm-6
       h2= m.underscore.sub(/(_mailer)?_preview$/, '').humanize
       ul.list-group
-        - m.constantize.instance_methods(false).map(&:to_s).each do |method|
+        - m.constantize.instance_methods(false).map(&:to_s).sort.each do |method|
           li.list-group-item
             a href=rails_email_preview.rep_email_url(mail_class: m.to_s.underscore, mail_action: method.to_s, email_locale: @email_locale)
               = method.to_s.humanize

@@ -5,7 +5,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   # list screen
   def index
-    @preview_class_names = (RailsEmailPreview.preview_classes || []).map { |klass| klass.is_a?(String) ? klass : klass.name }
+    @preview_class_names = (RailsEmailPreview.preview_classes || []).map { |klass| klass.is_a?(String) ? klass : klass.name }.sort
   end
 
   # preview screen
