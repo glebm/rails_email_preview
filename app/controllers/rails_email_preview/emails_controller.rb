@@ -49,6 +49,19 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
+  def test_deliver
+    I18n.with_locale @email_locale do
+      mail = @preview_class.new.send(params[:mail_action])
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(mail, to: params[:recepient_email], cc: nil, bcc: nil)
+      delivery_handler.mail.deliver
+      begin
+        redirect_to :back
+      rescue ActionController::RedirectBackError
+        redirect_to rep_root_url
+      end
+    end
+  end
+
   protected
 
   def set_email_preview_locale

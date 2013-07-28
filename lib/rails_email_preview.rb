@@ -2,6 +2,7 @@
 require 'rails_email_preview/engine'
 require 'rails_email_preview/main_app_route_delegator'
 require 'rails_email_preview/version'
+require 'rails_email_preview/delivery_handler'
 
 require 'slim'
 require 'slim-rails'
