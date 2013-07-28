@@ -6,3 +6,9 @@
   - I18n.available_locales.each do |locale|
     a.btn href=rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)) class=('active' if @email_locale == locale.to_s)
       = locale
+br
+br
+= form_tag rails_email_preview.rep_test_deliver_url, method: :post do
+  = hidden_field_tag :email_locale, @email_locale
+  = text_field_tag :recepient_email, @mail.to.first
+  = submit_tag "Send Email", class: "btn btn-default"
