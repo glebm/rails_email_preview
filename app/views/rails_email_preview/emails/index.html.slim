@@ -1,10 +1,16 @@
 h1 #{t 'rep.list_title'}
-ul.list-unstyled
-  - @preview_class_names.each do |m|
-    li.col-lg-6.col-sm-6
-      h2= m.underscore.sub(/(_mailer)?_preview$/, '').humanize
-      ul.list-group
-        - m.constantize.instance_methods(false).map(&:to_s).sort.each do |method|
-          li.list-group-item
-            a href=rails_email_preview.rep_email_url(mail_class: m.to_s.underscore, mail_action: method.to_s, email_locale: @email_locale)
-              = method.to_s.humanize
+
+- previews_group = proc do |m|
+  - capture do
+    h2= m.underscore.sub(/(_mailer)?_preview$/, '').humanize
+    ul.list-group
+      - email_methods(m).each do |method|
+        li.list-group-item
+          a href=rails_email_preview.rep_email_url(mail_class: m.to_s.underscore, mail_action: method.to_s, email_locale: @email_locale)
+            = method.to_s.humanize
+
+.row
+  - split_in_halves(@preview_class_names) { |c| email_methods(c).length } .each do |classes|
+    .col-sm-6
+      - classes.each do |class_name|
+        = previews_group.call(class_name)
