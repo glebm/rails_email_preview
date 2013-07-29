@@ -9,4 +9,5 @@
       a.btn href=rails_email_preview.rep_email_url(params.merge(part_type: mime)) class=('active' if @part_type == mime)
         = label
 
-  .btn-group= render 'rails_email_preview/emails/send_form'
+  - if RailsEmailPreview.enable_send_email
+    .btn-group= render 'rails_email_preview/emails/send_form'

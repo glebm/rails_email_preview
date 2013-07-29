@@ -24,7 +24,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   def show_raw
     I18n.with_locale @email_locale do
       @mail = preview_mail
-      RailsEmailPreview.run_before_render(@mail)
+      RailsEmailPreview.run_before_render(@mail, @preview_class.name, @mail_action)
       if @part_type == 'raw'
         body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
       else
@@ -44,8 +44,8 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   def test_deliver
     I18n.with_locale @email_locale do
-      mail    = preview_mail
-      address = params[:recipient_email]
+      mail             = preview_mail
+      address          = params[:recipient_email]
       delivery_handler = RailsEmailPreview::DeliveryHandler.new(mail, to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
       redirect_to rep_email_url(params.slice(:mail_class, :mail_action, :email_locale)), notice: "Sent to #{address}"
@@ -64,7 +64,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   def preview_mail
-    @preview_class.new.send(params[:mail_action])
+    @preview_class.new.send(@mail_action)
   end
 
   def set_email_preview_locale
@@ -78,6 +78,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       (pc.is_a?(String) ? pc : pc.name).underscore == params[:mail_class]
     }
     @preview_class = @preview_class.constantize if @preview_class.is_a?(String)
-    @part_type = params[:part_type] || 'text/html'
+    @mail_action = params[:mail_action]
+    @part_type   = params[:part_type] || 'text/html'
   end
 end

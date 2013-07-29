@@ -15,10 +15,14 @@ module RailsEmailPreview
   # auto-loading configured in initializer
   mattr_accessor :preview_classes
 
+  # send email button (experimental, false by default)
+  mattr_accessor :enable_send_email
+  self.enable_send_email = false
+
   class << self
-    def run_before_render(mail)
+    def run_before_render(mail, preview_class_name, mailer_action)
       (defined?(@hooks) && @hooks[:before_render] || []).each do |block|
-        block.call(mail)
+        block.call(mail, preview_class_name, mailer_action)
       end
     end
 
