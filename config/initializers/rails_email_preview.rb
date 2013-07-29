@@ -1,18 +1,25 @@
 require 'rails_email_preview'
 
-#= Premailer
+#= REP hooks and config
+#RailsEmailPreview.setup do |config|
+#  # enable (experimental) Send Email button:
+#  config.enable_send_email = true
 #
-# # process preview with premailer-rails:
-# RailsEmailPreview.before_render { |message| Premailer::Rails::Hook.delivering_email(message) }
-# # process preview with actionmailer-inline-css:
-# RailsEmailPreview.before_render { |message| ActionMailer::InlineCssHook.delivering_email(message) }
+#  # hook before rendering preview:
+#  config.before_render do |message, preview_class_name, mailer_action|
+#    # apply premailer-rails:
+#    Premailer::Rails::Hook.delivering_email(message)
+#    # or actionmailer-inline-css:
+#    ActionMailer::InlineCssHook.delivering_email(message)
+#  end
+#end
 
-#= Comfortable Mexican Sofa
+#= REP + Comfortable Mexican Sofa integration
 #
 # # enable comfortable_mexican_sofa integration:
 # require 'rails_email_preview/integrations/comfortable_mexica_sofa'
 
-#= Application-specific
+#= Application-specific (layout, permissions, customizations)
 #
 # # You can specify a controller for RailsEmailPreview::ApplicationController to inherit from:
 # RailsEmailPreview.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
