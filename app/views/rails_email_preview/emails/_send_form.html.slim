@@ -1,0 +1,6 @@
+div style="max-width: 250px"
+  = form_tag rails_email_preview.rep_test_deliver_url, method: :post do
+    = hidden_field_tag :email_locale, @email_locale
+    .input-group
+      span.input-group-btn: button.btn.btn-danger type='submit' data-confirm=t('rep.send_are_you_sure') #{t('rep.send_btn')}
+      = text_field_tag :recipient_email, '', class: 'form-control', placeholder: t('rep.send_recipient_placeholder')

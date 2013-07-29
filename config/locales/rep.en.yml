@@ -1,0 +1,8 @@
+en:
+  rep:
+    list_title: Application Emails
+    back_to_list: Back to list
+    send_recipient_placeholder: Email
+    send_btn: Send to
+    send_are_you_sure: This will actually send this email. Are you sure?
+
