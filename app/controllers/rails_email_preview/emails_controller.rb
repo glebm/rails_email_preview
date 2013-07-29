@@ -13,24 +13,17 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
       if @preview_class.respond_to?(:new)
-        @mail = @preview_class.new.send(params[:mail_action])
+        @mail = preview_mail
       else
-        # @preview_class is not a preview class
-        arg_info = "#{@preview_class}"
-        if @preview_class.is_a?(Module)
-          chain = @preview_class.ancestors.map(&:to_s)
-          chain = chain[1 .. chain.index { |c| c =~ /^Application[A-Z][A-z]+$/ } || -1]
-        end
-        raise ArgumentError.new("#{arg_info} is not a preview class #{"(ancestors: #{chain * ' < '})"} ")
+        raise ArgumentError.new("#{@preview_class} is not a preview class, does not respond_to?(:new)")
       end
     end
-    render
   end
 
   # render actual email content
   def show_raw
     I18n.with_locale @email_locale do
-      @mail = @preview_class.new.send(params[:mail_action])
+      @mail = preview_mail
       RailsEmailPreview.run_before_render(@mail)
       if @part_type == 'raw'
         body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
@@ -51,18 +44,28 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   def test_deliver
     I18n.with_locale @email_locale do
-      mail = @preview_class.new.send(params[:mail_action])
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(mail, to: params[:recepient_email], cc: nil, bcc: nil)
-      delivery_handler.mail.deliver
-      begin
-        redirect_to :back
-      rescue ActionController::RedirectBackError
-        redirect_to rep_root_url
-      end
+      mail    = preview_mail
+      address = params[:recipient_email]
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(mail, to: address, cc: nil, bcc: nil)
+      deliver_email!(delivery_handler.mail)
+      redirect_to rep_email_url(params.slice(:mail_class, :mail_action, :email_locale)), notice: "Sent to #{address}"
     end
   end
 
   protected
+
+  def deliver_email!(mail)
+    # support deliver! if present
+    if mail.respond_to?(:deliver!)
+      mail.deliver!
+    else
+      mail.deliver
+    end
+  end
+
+  def preview_mail
+    @preview_class.new.send(params[:mail_action])
+  end
 
   def set_email_preview_locale
     @email_locale = (params[:email_locale] || I18n.default_locale).to_s

@@ -1,11 +1,14 @@
-a.btn.btn-link href=rails_email_preview.rep_emails_url(email_locale: @email_locale) &laquo; Back to list
+.row
+  .pull-left
+    a.btn.btn-link href=rails_email_preview.rep_emails_url(email_locale: @email_locale) « #{t 'rep.back_to_list'}
+  .margin-right= render 'rails_email_preview/emails/toolbar'
 
-#email-show
-  -# email format and language
-  .pull-right = render 'rails_email_preview/emails/options'
-
-  -# from, to, subject
+#email-show: .row
+  -# From, To, Subject and other
   = render 'rails_email_preview/emails/headers'
+  -# Locale, format and actions
 
 -# actual email content, rendered in an iframe to prevent browser styles from interfering
-= render 'rails_email_preview/emails/email_iframe'
+.row
+  .margin-right
+    = render 'rails_email_preview/emails/email_iframe'
