@@ -2,8 +2,6 @@ require 'rails_email_preview'
 
 #= REP hooks and config
 #RailsEmailPreview.setup do |config|
-#  # enable (experimental) Send Email button:
-#  config.enable_send_email = true
 #
 #  # hook before rendering preview:
 #  config.before_render do |message, preview_class_name, mailer_action|
@@ -12,6 +10,9 @@ require 'rails_email_preview'
 #    # or actionmailer-inline-css:
 #    ActionMailer::InlineCssHook.delivering_email(message)
 #  end
+#
+#  # do not show Send Email button
+#  config.enable_send_email = false
 #end
 
 #= REP + Comfortable Mexican Sofa integration
