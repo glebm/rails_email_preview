@@ -1,3 +1,7 @@
+# v0.2.3
+
+* Send Email from REP
+
 # v0.2.0
 
 New options:

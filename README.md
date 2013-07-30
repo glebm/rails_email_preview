@@ -63,6 +63,15 @@ You can access REP urls like this:
     # email show:
     rails_email_preview.rep_email_url(mail_class: "user_mailer", mail_action: "welcome")
 
+Sending test emails
+-------------------
+
+You can send emails via REP. This is especially useful when testing with limited clients (Blackberry, Outlook, etc.).
+This will use the environment's mailer settings, but the handler will `perform_deliveries`.
+Uncomment this line in the initializer to disable sending test emails:
+
+  config.enable_send_email = false
+
 Email editing 
 -------------
 
