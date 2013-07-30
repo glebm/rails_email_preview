@@ -1,5 +1,7 @@
 en:
   rep:
+    test_deliver_provide_email: Send to which address?
+    test_deliver_sent_notice: "Sent to %{address}"
     list_title: Application Emails
     back_to_list: Back to list
     send_recipient_placeholder: Email

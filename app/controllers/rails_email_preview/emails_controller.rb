@@ -43,12 +43,15 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   def test_deliver
+    redirect_url = rep_email_url(params.slice(:mail_class, :mail_action, :email_locale))
+    if (address = params[:recipient_email]).blank?
+      redirect_to redirect_url, alert: t('rep.test_deliver_provide_email')
+      return
+    end
     I18n.with_locale @email_locale do
-      mail             = preview_mail
-      address          = params[:recipient_email]
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(mail, to: address, cc: nil, bcc: nil)
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview_mail, to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
-      redirect_to rep_email_url(params.slice(:mail_class, :mail_action, :email_locale)), notice: "Sent to #{address}"
+      redirect_to redirect_url, notice: t('rep.test_deliver_sent_notice', address: address)
     end
   end
 
