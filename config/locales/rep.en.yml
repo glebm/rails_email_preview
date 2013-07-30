@@ -1,7 +1,9 @@
 en:
   rep:
-    test_deliver_provide_email: Send to which address?
-    test_deliver_sent_notice: "Sent to %{address}"
+    test_deliver:
+      no_delivery_method: Please set "config.action_mailer.delivery_method" to send emails in "%{environment}" environment
+      provide_email: Send to which address?
+      sent_notice: "Sent to %{address} via %{delivery_method}"
     list_title: Application Emails
     back_to_list: Back to list
     send_recipient_placeholder: Email

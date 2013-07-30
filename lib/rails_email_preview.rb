@@ -17,7 +17,7 @@ module RailsEmailPreview
 
   # send email button (experimental, false by default)
   mattr_accessor :enable_send_email
-  self.enable_send_email = false
+  self.enable_send_email = true
 
   class << self
     def run_before_render(mail, preview_class_name, mailer_action)
