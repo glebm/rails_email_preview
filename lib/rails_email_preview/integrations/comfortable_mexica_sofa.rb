@@ -49,7 +49,7 @@ module RailsEmailPreview
         result = (content || fallback_content).to_s
 
         # If rendering in preview from admin, add edit/create lnk
-        if caller.grep(/emails_controller/).present?
+        if caller.grep(/rails_email_preview\/emails_controller/).present? && !caller.grep(/rails_email_preview\/delivery_handler/).present?
           snippet = site.snippets.find_by_identifier(snippet_id)
 
 
