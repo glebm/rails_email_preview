@@ -3,10 +3,14 @@ Rails Email Preview
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
+Preview:
 ![screenshot][rep-show-screenshot]
+
+List:
 ![screenshot][rep-nav-screenshot]
 
-*styles are provided by the application, above is [Zuigo](http://zuigo.com/), a platform to organize & discover events*
+REP can use the application styles and comes with simple defaults (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
+*These screenshots are from [Zuigo](http://zuigo.com/), a platform to organize & discover events.*
 
 How to
 -----
