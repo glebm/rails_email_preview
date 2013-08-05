@@ -1,7 +1,7 @@
 -# When rendering inside rails_email_preview hide nav, and hide irrelevant things from the form
 ruby:
   prefix = 'email-'
-  if @snippet && @snippet.identifier.try(:start_with?, prefix)
+  if @snippet && @snippet.identifier.try(:start_with?, prefix) && %w(new edit create update).include?(params[:action])
     url_params = {part_type: 'text/html'}
     url_params[:mail_class], url_params[:mail_action] = @snippet.identifier[prefix.length..-1].split('-')
     url_params[:mail_class] += '_preview'
