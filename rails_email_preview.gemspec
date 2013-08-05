@@ -21,6 +21,7 @@ I18n support, easy premailer integration and editing integration via comfortable
   s.add_dependency "slim-rails"
   s.add_dependency "sass"
   s.add_dependency "thor"
+  s.add_dependency "binding_of_caller", '>= 0.7.2'
 
   s.version = RailsEmailPreview::VERSION
 end

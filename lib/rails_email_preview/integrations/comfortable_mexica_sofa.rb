@@ -35,6 +35,14 @@ module RailsEmailPreview
         '(no subject)'
       end
 
+      # show edit link?
+      def cms_email_edit_link?
+        ctrl = caller.grep(%r(rails_email_preview/emails_controller.rb))[1]
+        ctrl && eval(<<-RUBY, binding.of_caller(caller.index(ctrl)))
+          respond_to?(:params) && (params[:part_type] || 'text/html') == 'text/html' && params[:action] != 'test_deliver'
+        RUBY
+      end
+
       # Will return snippet content, passing through Kramdown
       # Will also render an "✎ Edit text" link if used from
       def cms_email_snippet(snippet_id = self.cms_email_id)
@@ -49,7 +57,7 @@ module RailsEmailPreview
         result = (content || fallback_content).to_s
 
         # If rendering in preview from admin, add edit/create lnk
-        if caller.grep(/rails_email_preview\/emails_controller/).present? && !caller.grep(/rails_email_preview\/delivery_handler/).present?
+        if cms_email_edit_link?
           snippet = site.snippets.find_by_identifier(snippet_id)
 
 
