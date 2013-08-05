@@ -82,7 +82,7 @@ Email editing
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
 REP comes with an integration for it -- see [CMS Guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
 
-![screenshot][rep-edit-sofa-screenshot]
+[![screenshot](https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-edit-sofa.png)](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa)
 
 
 Premailer
@@ -152,4 +152,3 @@ This project rocks and uses MIT-LICENSE.
 
   [rep-nav-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png "Email List Screenshot"
   [rep-show-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png "Show Email Screenshot"
-  [rep-edit-sofa-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-edit-sofa.png "Edit Email with Comfortable Mexican Sofa Screenshot"
