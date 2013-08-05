@@ -37,10 +37,7 @@ module RailsEmailPreview
 
       # show edit link?
       def cms_email_edit_link?
-        ctrl = caller.grep(%r(rails_email_preview/emails_controller.rb))[1]
-        ctrl && eval(<<-RUBY, binding.of_caller(caller.index(ctrl)))
-          respond_to?(:params) && (params[:part_type] || 'text/html') == 'text/html' && params[:action] != 'test_deliver'
-        RUBY
+        RequestStore.store[:rep_edit_links]
       end
 
       # Will return snippet content, passing through Kramdown

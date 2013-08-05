@@ -23,7 +23,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   # render actual email content
   def show_raw
     I18n.with_locale @email_locale do
-      @mail = preview_mail
+      @mail = preview_mail(edit_links: (@part_type == 'text/html'))
       RailsEmailPreview.run_before_render(@mail, @preview_class.name, @mail_action)
       if @part_type == 'raw'
         body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
@@ -70,8 +70,10 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
-  def preview_mail
-    @preview_class.new.send(@mail_action)
+  def preview_mail(opt = {})
+    RequestStore.store[:rep_edit_links] = true if opt[:edit_links]
+    mail = @preview_class.new.send(@mail_action)
+    mail
   end
 
   def set_email_preview_locale
