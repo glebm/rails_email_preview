@@ -18,15 +18,15 @@ module RailsEmailPreview
       def cms_email_subject(interpolation = {})
         snippet_id = "email-#{cms_email_id}"
         [I18n.locale, I18n.default_locale].compact.each do |locale|
-          site = Cms::Site.find_by_locale(locale)
+          site    = Cms::Site.find_by_locale(locale)
           snippet = site.snippets.find_by_identifier(snippet_id)
           next unless snippet.try(:content).present?
 
           # interpolate even if keys/values are missing
-          title = snippet.label.to_s
+          title         = snippet.label.to_s
           interpolation = interpolation.stringify_keys
           # set all missing values to ''
-          title.scan(/%{([^}]+)}/) { |m| interpolation[m[0]] ||= ''}
+          title.scan(/%{([^}]+)}/) { |m| interpolation[m[0]] ||= '' }
           # remove all missing keys
           subject = title % interpolation.symbolize_keys.delete_if { |k, v| title !~ /%{#{k}}/ }
 
@@ -60,7 +60,7 @@ module RailsEmailPreview
 
           cms_path = if snippet
                        unless content
-                         fallback_snippet = default_site.snippets.find_by_identifier(snippet_id)
+                         fallback_snippet     = default_site.snippets.find_by_identifier(snippet_id)
                          prefill_from_default = {label: fallback_snippet.label, content: fallback_snippet.content}
                        end
                        edit_cms_admin_site_snippet_path(site_id: site.id, id: snippet.id,
@@ -83,6 +83,16 @@ module RailsEmailPreview
 
       def cms_edit_email_snippet_link(path)
         link_to(RailsEmailPreview.edit_link_text, path, style: RailsEmailPreview.edit_link_style.html_safe, 'onClick' => '')
+      end
+
+      def self.rep_email_params_from_snippet(snippet)
+        id_prefix = 'email-'
+        return unless snippet && snippet.identifier.starts_with?(id_prefix)
+        mailer_cl, act = snippet.identifier[id_prefix.length..-1].split('-')
+        mailer_cl += '_preview'
+        { mail_class: mailer_cl,
+          mail_action: act,
+          email_locale: snippet.site.locale}
       end
     end
   end
