@@ -9,7 +9,7 @@ Preview:
 List:
 ![screenshot][rep-nav-screenshot]
 
-REP can use the application styles and comes with [simple styles][rep-show-default-screenshot] by default (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
+REP can use the application styles and comes with [a bootstrap 3 theme][rep-show-default-screenshot] by default (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
 *These screenshots are from [Zuigo](http://zuigo.com/), a platform to organize & discover events; using REP default markup and app styles*
 
 How to
