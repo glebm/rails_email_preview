@@ -5,7 +5,7 @@ en:
       provide_email: Send to which address?
       sent_notice: "Sent to %{address} via %{delivery_method}"
     list_title: Application Emails
-    back_to_list: Back to list
+    breadcrumb_list: Emails
     send_recipient_placeholder: Email
     send_btn: Send to
     send_are_you_sure: This will actually send this email. Are you sure?

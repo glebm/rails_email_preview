@@ -1,0 +1,5 @@
+.btn-group
+  - { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}.each do |mime, label|
+    a.btn *change_format_attr(mime)
+      code= label
+
