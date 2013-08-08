@@ -1,12 +1,9 @@
 -# When rendering inside rails_email_preview hide nav, and hide irrelevant things from the form
 ruby:
-  prefix = 'email-'
   snippet = @snippet || @record.is_a?(Cms::Snippet) && @record
-  if snippet && snippet.identifier.try(:start_with?, prefix)
-    url_params = {part_type: 'text/html'}
-    url_params[:mail_class], url_params[:mail_action] = snippet.identifier[prefix.length..-1].split('-')
-    url_params[:mail_class] += '_preview'
-    show_url = rails_email_preview.rep_raw_email_url url_params
+  if snippet
+    p = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa.rep_email_params_from_snippet(snippet)
+    show_url = rails_email_preview.rep_raw_email_url(p.merge part_type: 'text/html')
   end
 javascript:
   jQuery(function($) {
@@ -16,7 +13,7 @@ javascript:
       $('.center-column').css('margin', 0);
       $('.page-header h2').html(
         "Editing email" +
-        " <a href='#{show_url}'>#{t 'rep.view_link'}</a>"
+        " <a class='btn btn-primary' href='#{show_url}'>#{t 'rep.view_link'}</a>"
       )
 
       // Snippet form:
