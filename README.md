@@ -140,7 +140,7 @@ E.g., to change column class from `col-` to `column-` everywhere where REP uses 
 
     RailsEmailPreview.style[:column_class] = 'column-%{n}'
 
-You can `//= require 'rails_email_preview/layout'` REP specific styles or `@import 'rails_email_preview/layout'` for SASS.
+You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import 'rails_email_preview/layout'` for SASS).
 
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
 e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks. 
