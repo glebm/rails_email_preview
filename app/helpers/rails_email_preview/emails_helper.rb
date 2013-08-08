@@ -9,12 +9,12 @@ module RailsEmailPreview::EmailsHelper
 
   def change_locale_attr(locale)
     {href:  rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)),
-     class: ('active' if @email_locale == locale.to_s)}
+     class: ('active btn-primary' if @email_locale == locale.to_s)}
   end
 
   def change_format_attr(mime)
     {href: rails_email_preview.rep_email_url(params.merge(part_type: mime)),
-     class: ('active' if @part_type == mime)}
+     class: ('active btn-primary' if @part_type == mime)}
   end
 
   def locale_name(locale)
