@@ -123,8 +123,10 @@ You can render all REP views inside your own layout:
     # # If you are using a custom layout, you will want to make app routes available to REP:
     # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
 
+You can add REP styles (some `.rep-` prefixed classes) with `@import 'rails_email_preview/layout'` in your SASS if you want them (note that they expect to be imported after bootstrap 3 styles).
+
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
-e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks.
+e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks. 
 
 Authentication & authorization
 ------------------------------
