@@ -1,3 +1,9 @@
+# v0.2.4 .. 0.2.5
+
+* UI enhancements
+* CMS integration bug fixes
+* Send email bug fixes
+
 # v0.2.3
 
 * Send Email from REP
