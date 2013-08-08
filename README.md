@@ -17,7 +17,7 @@ How to
 
 Add to Gemfile
 
-    gem 'rails_email_preview', '~> 0.2.0'
+    gem 'rails_email_preview', '~> 0.2'
 
 REP handles setup for you:
 
@@ -115,6 +115,19 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 
 Views
 ---------------------
+
+REP allows you to customize some of the classes via `RailsEmailPreview.style`:
+
+    {
+      btn_default_class:     'btn btn-default',
+      btn_active_class:      'btn btn-primary active',
+      btn_group_class:       'btn-group',
+      list_group_class:      'list-group',
+      list_group_item_class: 'list-group-item',
+      panel_class:           'panel',
+      row_class:             'row',
+      column_class:          'col-%{n}'
+    }
 
 You can render all REP views inside your own layout:
 

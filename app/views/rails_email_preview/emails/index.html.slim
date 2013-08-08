@@ -4,15 +4,15 @@ h1
 - previews_group = proc do |m|
   - capture do
     h2 = preview_class_human_name(m)
-    ul.list-group
+    ul class=rep_style[:list_group_class]
       - email_methods(m).each do |method|
-        li.list-group-item
+        li class=rep_style[:list_group_item_class]
           a href=rails_email_preview.rep_email_url(mail_class: m.to_s.underscore, mail_action: method.to_s, email_locale: @email_locale)
             = method.to_s.humanize
 
-.row
+div class=rep_row_class
   - split_in_halves(@preview_class_names) { |c| email_methods(c).length }.each do |classes|
-    .col-sm-6.col-lg-6
+    div class=rep_col_class(6)
       - classes.each do |class_name|
         = previews_group.call(class_name)
 

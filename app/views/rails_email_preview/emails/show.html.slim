@@ -1,19 +1,21 @@
 .rep-email-show#email-show
-  .row
+  div class=rep_row_class
     .pull-left
       ul.breadcrumb
         li: a href=rails_email_preview.rep_emails_url(email_locale: @email_locale) #{t 'rep.breadcrumb_list'}
         li.active: a href=(request.url) = current_email_name
 
-  .panel: .row
-    -# From, To, Subject and other headers
-    .col-8= render 'rails_email_preview/emails/headers'
-
-    -# Locale, format and actions
-    .col-4: ul.list-unstyled.text-right.rep-email-options
-      li= render 'rails_email_preview/emails/i18n_nav'
-      li= render 'rails_email_preview/emails/send_form' if RailsEmailPreview.enable_send_email
-      li= render 'rails_email_preview/emails/format_nav'
+  div class=rep_style[:panel_class]
+    div class=rep_style[:row_class]
+      -# From, To, Subject and other headers
+      div class=rep_col_class(8)
+        = render 'rails_email_preview/emails/headers'
+      -# Locale, format and actions
+      div class=rep_col_class(4)
+        ul.list-unstyled.text-right.rep-email-options
+          li= render 'rails_email_preview/emails/i18n_nav'
+          li= render 'rails_email_preview/emails/send_form' if RailsEmailPreview.enable_send_email
+          li= render 'rails_email_preview/emails/format_nav'
 
   -# actual email content, rendered in an iframe to prevent browser styles from interfering
   .margin-right

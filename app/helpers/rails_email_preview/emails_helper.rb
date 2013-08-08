@@ -9,12 +9,12 @@ module RailsEmailPreview::EmailsHelper
 
   def change_locale_attr(locale)
     {href:  rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)),
-     class: ('active btn-primary' if @email_locale == locale.to_s)}
+     class: rep_btn_class(@email_locale == locale.to_s)}
   end
 
   def change_format_attr(mime)
     {href: rails_email_preview.rep_email_url(params.merge(part_type: mime)),
-     class: ('active btn-primary' if @part_type == mime)}
+     class: rep_btn_class(@part_type == mime)}
   end
 
   def locale_name(locale)
@@ -66,5 +66,26 @@ module RailsEmailPreview::EmailsHelper
     end
     cols[1].reverse!
     cols
+  end
+
+  # style
+  def rep_style
+    RailsEmailPreview.style
+  end
+
+  def rep_btn_class(active = false)
+    rep_style[:"btn_#{active ? 'active' : 'default'}_class"]
+  end
+
+  def rep_row_class
+    rep_style[:row_class]
+  end
+
+  def rep_col_class(n)
+    rep_style[:column_class] % {n: n}
+  end
+
+  def rep_btn_group_class
+    rep_style[:btn_group_class]
   end
 end
