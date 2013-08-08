@@ -50,6 +50,10 @@ module RailsEmailPreview::EmailsHelper
     m.constantize.instance_methods(false).map(&:to_s).sort
   end
 
+  def total_emails
+    @total_emails ||= @preview_class_names.sum { |p| email_methods(p).length }
+  end
+
   def split_in_halves(elements, &weight)
     tot_w  = elements.map(&weight).sum
     cols   = [elements.dup, []]

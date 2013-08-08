@@ -6,4 +6,6 @@ html
     = stylesheet_link_tag 'rails_email_preview/application'
     = yield(:head)
   body
-    #content = yield
+    #content.container
+      = render 'layouts/rails_email_preview/flash_notices'
+      = yield
