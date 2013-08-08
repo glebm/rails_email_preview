@@ -1,32 +1,22 @@
-#email-show
-  padding: 10px 0 0 0
-  margin: 0
-  background: rgb(242, 236, 245)
-  font-size: 12px
-  font-family: "Monaco", "Lucida Grande", sans-serif
-  border-bottom: 1px solid rgb(142, 137, 148)
-  overflow: hidden
+//= require './bootstrap'
 
-  .pull-right
-    float: right
-
-  .btn-group
-    a
-      display: inline-block
-
-  dl
-    margin: 0
-    padding: 0
-
+.rep-headers-list
+  margin-left: 1em
   dt
-    width: 60px
-    padding: 1px
     float: left
-    text-align: right
-    font-weight: bold
-    color: rgb(142, 137, 148)
-
+    clear: left
+    width: auto
+    text-align: left
+    margin-right: 10px
+    &:after
+      content: ':'
   dd
-    margin-left: 70px
-    padding: 1px
+    width: auto
+    margin-left: 0
 
+.rep-email-options
+  margin-bottom: 0
+  li
+    padding-top: 0.8em
+    &:first-child
+      padding-top: 0
