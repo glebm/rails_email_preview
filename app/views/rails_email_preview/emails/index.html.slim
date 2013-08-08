@@ -1,4 +1,5 @@
-h1 #{t 'rep.list_title'}
+h1
+  | #{t 'rep.list_title'}
 
 - previews_group = proc do |m|
   - capture do
@@ -14,3 +15,10 @@ h1 #{t 'rep.list_title'}
     .col-sm-6.col-lg-6
       - classes.each do |class_name|
         = previews_group.call(class_name)
+
+hr
+
+p.text-center.text-small.text-info
+  | #{total_emails} emails in #{@preview_class_names.length} mailers
+  br
+  a href="https://github.com/glebm/rails_email_preview" target='_blank' REP #{RailsEmailPreview::VERSION}
