@@ -1,4 +1,4 @@
-# v0.2.4 .. 0.2.5
+# v0.2.4 .. 0.2.6
 
 * UI enhancements
 * CMS integration bug fixes
