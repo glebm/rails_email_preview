@@ -9,8 +9,8 @@ Preview:
 List:
 ![screenshot][rep-nav-screenshot]
 
-REP can use the application styles and comes with simple defaults (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
-*These screenshots are from [Zuigo](http://zuigo.com/), a platform to organize & discover events.*
+REP can use the application styles and comes with a [simple look][rep-show-default-screenshot] by default (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
+*These screenshots are from [Zuigo](http://zuigo.com/), a platform to organize & discover events; using REP default markup and app styles*
 
 How to
 -----
@@ -154,3 +154,4 @@ This project rocks and uses MIT-LICENSE.
 
   [rep-nav-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png "Email List Screenshot"
   [rep-show-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png "Show Email Screenshot"
+  [rep-show-default-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png "Show Email Screenshot (default styles)"
