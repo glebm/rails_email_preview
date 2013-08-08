@@ -129,7 +129,11 @@ REP allows you to customize some of the classes via `RailsEmailPreview.style`:
       column_class:          'col-%{n}'
     }
 
-You can render all REP views inside your own layout:
+E.g., to change column class from `col-` to `column-` everywhere where REP uses columns:
+
+    RailsEmailPreview.style[:column_class] = 'column-%{n}'
+
+If you want to really integrate REP, ou can render all its views inside your own layout (this will need styling to look nice if you don't use bootstrap):
 
     # # Use admin layout with REP:
     # RailsEmailPreview::ApplicationController.layout 'admin'
