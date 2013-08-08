@@ -116,7 +116,14 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 Views
 ---------------------
 
-REP allows you to customize some of the classes via `RailsEmailPreview.style`:
+You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):
+
+    # # Use admin layout with REP:
+    # RailsEmailPreview::ApplicationController.layout 'admin'
+    # # If you are using a custom layout, you will want to make app routes available to REP:
+    # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
+
+REP allows you to customize some of the element classes via `RailsEmailPreview.style`:
 
     {
       btn_default_class:     'btn btn-default',
@@ -133,14 +140,7 @@ E.g., to change column class from `col-` to `column-` everywhere where REP uses 
 
     RailsEmailPreview.style[:column_class] = 'column-%{n}'
 
-If you want to really integrate REP, ou can render all its views inside your own layout (this will need styling to look nice if you don't use bootstrap):
-
-    # # Use admin layout with REP:
-    # RailsEmailPreview::ApplicationController.layout 'admin'
-    # # If you are using a custom layout, you will want to make app routes available to REP:
-    # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
-
-You can add REP styles (some `.rep-` prefixed classes) with `@import 'rails_email_preview/layout'` in your SASS if you want them (note that they expect to be imported after bootstrap 3 styles).
+You can `//= require 'rails_email_preview/layout'` REP specific styles or `@import 'rails_email_preview/layout'` for SASS.
 
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
 e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks. 
