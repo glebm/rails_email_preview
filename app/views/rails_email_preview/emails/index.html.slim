@@ -2,7 +2,7 @@ h1 #{t 'rep.list_title'}
 
 - previews_group = proc do |m|
   - capture do
-    h2= m.underscore.sub(/(_mailer)?_preview$/, '').humanize
+    h2 = preview_class_human_name(m)
     ul.list-group
       - email_methods(m).each do |method|
         li.list-group-item
@@ -10,7 +10,7 @@ h1 #{t 'rep.list_title'}
             = method.to_s.humanize
 
 .row
-  - split_in_halves(@preview_class_names) { |c| email_methods(c).length } .each do |classes|
-    .col-sm-6
+  - split_in_halves(@preview_class_names) { |c| email_methods(c).length }.each do |classes|
+    .col-sm-6.col-lg-6
       - classes.each do |class_name|
         = previews_group.call(class_name)

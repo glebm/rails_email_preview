@@ -1,17 +1,4 @@
-ruby:
-  headers = I18n.with_locale @email_locale do
-    {
-      'Subject'  => @mail.subject || '(no subject)',
-      'From'     => @mail.from,
-      'Reply to' => @mail.reply_to,
-      'To'       => @mail.to,
-      'CC'       => @mail.cc,
-      'BCC'      => @mail.bcc
-    }.delete_if { |k, v| v.blank? }
-  end
-
-
-dl.inline-dl
-  - headers.each do |header, value|
-    dt = header
-    dd = format_header(value)
+dl.rep-headers-list.dl-horizontal
+  - headers_name_value.each do |name, value|
+    dt = name
+    dd = format_header value
