@@ -1,3 +1,7 @@
+# v0.2.7
+
+* config.style to customize classes in REP views
+
 # v0.2.4 .. 0.2.6
 
 * UI enhancements

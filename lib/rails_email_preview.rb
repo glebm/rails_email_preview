@@ -20,6 +20,19 @@ module RailsEmailPreview
   mattr_accessor :enable_send_email
   self.enable_send_email = true
 
+  # some easy visual settings
+  mattr_accessor :style
+  self.style = {
+      btn_default_class:     'btn btn-default',
+      btn_active_class:      'btn btn-primary active',
+      btn_group_class:       'btn-group',
+      list_group_class:      'list-group',
+      list_group_item_class: 'list-group-item',
+      panel_class:           'panel',
+      row_class:             'row',
+      column_class:          'col-%{n}'
+  }
+
   class << self
     def run_before_render(mail, preview_class_name, mailer_action)
       (defined?(@hooks) && @hooks[:before_render] || []).each do |block|
