@@ -112,6 +112,7 @@ When linking to REP pages you can pass `email_locale` to set the locale for rend
 If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add I18n.locale information when the mail job is scheduled 
 [with this initializer](https://gist.github.com/glebm/5725347).
 
+REP displays too many locales? Make sure to set `config.i18n.available_locales`, since it defaults to *all* locales in Rails.
 
 Views
 ---------------------
