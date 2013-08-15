@@ -30,7 +30,7 @@ module RailsEmailPreview
       list_group_item_class: 'list-group-item',
       panel_class:           'panel',
       row_class:             'row',
-      column_class:          'col-%{n}'
+      column_class:          'col-sm-%{n}'
   }
 
   class << self
