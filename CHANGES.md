@@ -1,3 +1,7 @@
+# v0.2.8
+
+bugs fixed, looks improved
+
 # v0.2.7
 
 * config.style to customize classes in REP views
