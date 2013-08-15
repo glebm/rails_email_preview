@@ -1,4 +1,4 @@
-Rails Email Preview 
+Rails Email Preview [![Gem Version](https://badge.fury.io/rb/rails_email_preview.png)](http://badge.fury.io/rb/rails_email_preview)
 ================================
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
