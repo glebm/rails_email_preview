@@ -6,6 +6,8 @@ require 'rails_email_preview/delivery_handler'
 
 require 'slim'
 require 'slim-rails'
+require 'sass'
+require 'sass-rails'
 require 'request_store'
 
 module RailsEmailPreview
