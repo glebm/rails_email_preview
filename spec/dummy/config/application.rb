@@ -1,9 +1,11 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'sprockets/railtie'
 
 Bundler.require(*Rails.groups)
-require "rails_email_preview"
+require 'rails_email_preview'
 
 module Dummy
   class Application < Rails::Application

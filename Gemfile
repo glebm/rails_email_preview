@@ -4,7 +4,6 @@ gemspec
 
 group :development, :test do
   gem 'capybara', '>= 0.4.0'
-  gem 'sqlite3'
   gem 'rspec', '2.12.0' #, git: 'https://github.com/rspec/rspec'
   gem 'rspec-rails' #, git: 'https://github.com/rspec/rspec-rails'
   gem 'poltergeist', git: 'https://github.com/jonleighton/poltergeist'

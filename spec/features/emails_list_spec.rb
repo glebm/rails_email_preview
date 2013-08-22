@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'emails list' do
   it 'shows emails' do
     visit rails_email_preview.rep_root_path
-    [I18n.t('rep.list_title'), 'Auth', 'Email confirmation', 'Newsletter', 'Weekly newsletter', '2 emails in 2 mailers'].each do |text|
+    [I18n.t('rep.list_title'), 'Auth', 'Email confirmation', 'Newsletter', 'Weekly newsletter', '4 emails in 2 mailers'].each do |text|
       expect(page).to have_content text
     end
   end

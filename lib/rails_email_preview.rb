@@ -9,6 +9,7 @@ require 'slim-rails'
 require 'sass'
 require 'sass-rails'
 require 'request_store'
+require 'turbolinks'
 
 module RailsEmailPreview
 
@@ -30,7 +31,7 @@ module RailsEmailPreview
       btn_group_class:       'btn-group',
       list_group_class:      'list-group',
       list_group_item_class: 'list-group-item',
-      panel_class:           'panel',
+      panel_class:           'panel panel-default',
       row_class:             'row',
       column_class:          'col-sm-%{n}'
   }
