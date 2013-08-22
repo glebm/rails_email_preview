@@ -1,8 +1,8 @@
 language: ruby
 rvm:
   - 2.0.0
-  - 1.9.3
   - jruby
+  - 1.9.3
   - rbx-19mode
 
 env:
@@ -10,5 +10,5 @@ env:
     - TRAVIS=1
 matrix:
   allow_failures:
-    - rvm: jruby
+    - rvm: 1.9.3
     - rvm: rbx-19mode

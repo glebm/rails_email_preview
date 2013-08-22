@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'email show' do
-  url_args = {mail_class: 'auth_mailer_preview', mail_action: 'email_confirmation'}
+  let(:url_args) { {mail_class: 'auth_mailer_preview', mail_action: 'email_confirmation'} }
   it 'shows email' do
     visit rails_email_preview.rep_email_path(url_args)
     expect(page).to have_content('Dummy Email Confirmation')
