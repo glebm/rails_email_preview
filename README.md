@@ -120,7 +120,7 @@ Views
 You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):
 
     # # Use admin layout with REP:
-    # RailsEmailPreview::ApplicationController.layout 'admin'
+    # RailsEmailPreview::EmailsController.layout 'admin'
     # # If you are using a custom layout, you will want to make app routes available to REP:
     # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
 
