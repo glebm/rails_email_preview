@@ -5,6 +5,9 @@ rvm:
   - jruby
   - rbx-19mode
 
+env:
+  global:
+    - TRAVIS=1
 matrix:
   allow_failures:
     - rvm: jruby
