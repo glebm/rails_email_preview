@@ -1,3 +1,8 @@
+# v0.2.9
+
+updated bootstrap, turbolinks
+internal: tests + screenshots in spec/screenshots/ after each test run
+
 # v0.2.8
 
 bugs fixed, looks improved
