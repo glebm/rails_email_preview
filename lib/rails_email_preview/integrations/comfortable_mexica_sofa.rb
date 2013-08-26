@@ -45,6 +45,7 @@ module RailsEmailPreview
       # Will also render an "✎ Edit text" link if used from
       def cms_email_snippet(snippet_id = self.cms_email_id)
         snippet_id = "email-#{snippet_id}"
+        return '' unless Cms::Snippet.where(identifier: snippet_id).exists?
         site       = Cms::Site.find_by_locale(I18n.locale)
 
         # Fallback default locale: (# prefill)
