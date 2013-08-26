@@ -2,7 +2,7 @@
 ruby:
   snippet = @snippet || @record.is_a?(Cms::Snippet) && @record
   if snippet
-    p = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa.rep_email_params_from_snippet(snippet)
+    p = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa.rep_email_params_from_snippet(snippet) || {}
     show_url = rails_email_preview.rep_raw_email_url(p.merge part_type: 'text/html')
   end
 javascript:
