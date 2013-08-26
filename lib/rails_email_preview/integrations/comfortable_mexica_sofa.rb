@@ -17,7 +17,7 @@ module RailsEmailPreview
       #      cms_email_subject(name: "Alice") #=> "Welcome, Alice!"
       def cms_email_subject(interpolation = {})
         snippet_id = "email-#{cms_email_id}"
-        return '' unless Cms::Snippet.where(identifier: snippet_id).exists?
+        return '(no subject)' unless Cms::Snippet.where(identifier: snippet_id).exists?
         [I18n.locale, I18n.default_locale].compact.each do |locale|
           site    = Cms::Site.find_by_locale(locale)
           snippet = site.snippets.find_by_identifier(snippet_id)
@@ -45,15 +45,17 @@ module RailsEmailPreview
       # Will also render an "✎ Edit text" link if used from
       def cms_email_snippet(snippet_id = self.cms_email_id)
         snippet_id = "email-#{snippet_id}"
-        return '' unless Cms::Snippet.where(identifier: snippet_id).exists?
-        site       = Cms::Site.find_by_locale(I18n.locale)
-
-        # Fallback default locale: (# prefill)
-        unless (content = cms_snippet_content(snippet_id, site).presence)
-          default_site     = Cms::Site.find_by_locale(I18n.default_locale)
-          fallback_content = cms_snippet_content(snippet_id, default_site).presence
+        if Cms::Snippet.where(identifier: snippet_id).exists?
+          site       = Cms::Site.find_by_locale(I18n.locale)
+          # Fallback default locale: (# prefill)
+          unless (content = cms_snippet_content(snippet_id, site).presence)
+            default_site     = Cms::Site.find_by_locale(I18n.default_locale)
+            fallback_content = cms_snippet_content(snippet_id, default_site).presence
+          end
+          result = (content || fallback_content).to_s
+        else
+          result = ''
         end
-        result = (content || fallback_content).to_s
 
         # If rendering in preview from admin, add edit/create lnk
         if cms_email_edit_link?
@@ -75,10 +77,8 @@ module RailsEmailPreview
                        })
                      end
 
-          result = safe_join ["<table class='rep-edit-link'><tr><td>".html_safe,
-                              cms_edit_email_snippet_link(cms_path),
-                              "</td></tr></table>".html_safe,
-                              "\n\n", result]
+          result = safe_join ["<table class='rep-edit-link'><tr><td>".html_safe, cms_edit_email_snippet_link(cms_path),
+                              "</td></tr></table>".html_safe, "\n\n", result]
         end
         result
       end
