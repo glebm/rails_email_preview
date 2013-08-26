@@ -48,7 +48,7 @@ module RailsEmailPreview
     end
 
     def inline_main_app_routes!
-      ::RailsEmailPreview::ApplicationController.helper ::RailsEmailPreview::MainAppRouteDelegator
+      ::RailsEmailPreview::EmailsController.helper ::RailsEmailPreview::MainAppRouteDelegator
     end
 
     def setup
