@@ -17,6 +17,7 @@ module RailsEmailPreview
       #      cms_email_subject(name: "Alice") #=> "Welcome, Alice!"
       def cms_email_subject(interpolation = {})
         snippet_id = "email-#{cms_email_id}"
+        return '' unless Cms::Snippet.where(identifier: snippet_id).exists?
         [I18n.locale, I18n.default_locale].compact.each do |locale|
           site    = Cms::Site.find_by_locale(locale)
           snippet = site.snippets.find_by_identifier(snippet_id)
