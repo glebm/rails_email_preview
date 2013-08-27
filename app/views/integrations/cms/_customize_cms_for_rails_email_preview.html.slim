@@ -3,32 +3,33 @@ ruby:
   snippet = @snippet || @record.is_a?(Cms::Snippet) && @record
   if snippet
     p = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa.rep_email_params_from_snippet(snippet)
-    show_url = p ? "" : rails_email_preview.rep_email_url(p.merge part_type: 'text/html')
+    show_url = rails_email_preview.rep_raw_email_url(p.merge part_type: 'text/html') unless p.nil?
   end
 
-javascript:
-  jQuery(function($) {
-    if (window.parent && /email/.test(parent.location.href)) {
-      // Hide nav:
-      $('.left-column,.right-column').hide();
-      $('.center-column').css('margin', 0);
-      $('.page-header h2').html(
-        "Editing email" +
-        " <a class='btn btn-primary' href='#{show_url}'>#{t 'rep.view_link'}</a>"
-      )
+- unless show_url.blank?
+  javascript:
+    jQuery(function($) {
+      if (window.parent && /email/.test(parent.location.href)) {
+        // Hide nav:
+        $('.left-column,.right-column').hide();
+        $('.center-column').css('margin', 0);
+        $('.page-header h2').html(
+          "Editing email" +
+          " <a class='btn btn-primary' href='#{show_url}'>#{t 'rep.view_link'}</a>"
+        )
 
-      // Snippet form:
-      var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.control-group'); };
+        // Snippet form:
+        var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.control-group'); };
 
-      // retext labels
-      control('label').find('.control-label').text("Subject");
-      control('content').find('.control-label').text("Body");
+        // retext labels
+        control('label').find('.control-label').text("Subject");
+        control('content').find('.control-label').text("Body");
 
-      // hide identifier and categories
-      control('identifier').hide();
-      control('category_ids').hide()
+        // hide identifier and categories
+        control('identifier').hide();
+        control('category_ids').hide()
 
-      // Do not mess with identifier
-      $('[data-slug]').removeAttr('data-slug');
-    }
-  });
+        // Do not mess with identifier
+        $('[data-slug]').removeAttr('data-slug');
+      }
+    });
