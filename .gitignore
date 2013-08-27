@@ -3,6 +3,8 @@ Gemfile.lock
 .idea/
 .rvmrc
 .bundle/
+.ruby-version
+.ruby-gemset
 log/*.log
 pkg/
 spec/dummy/db/*.sqlite3
