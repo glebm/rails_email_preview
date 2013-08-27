@@ -89,7 +89,7 @@ module RailsEmailPreview
 
       def self.rep_email_params_from_snippet(snippet)
         id_prefix = 'email-'
-        return unless snippet && snippet.identifier.starts_with?(id_prefix)
+        return unless snippet && snippet.identifier && snippet.identifier.starts_with?(id_prefix)
         mailer_cl, act = snippet.identifier[id_prefix.length..-1].split('-')
         mailer_cl += '_preview'
         { mail_class: mailer_cl,
