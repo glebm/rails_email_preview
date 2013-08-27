@@ -26,11 +26,10 @@ require 'rails_email_preview'
 # RailsEmailPreview.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
 #
 # # Render REP inside a custom layout (set to 'application' to use app layout, default is REP's own layout)
-# RailsEmailPreview::EmailsController.layout 'admin'
+# # This will also make application routes accessible from within REP
+# RailsEmailPreview.layout = 'admin'
 
 Rails.application.config.to_prepare do
-  # # If you use a *custom layout*, make route helpers available to REP:
-  # RailsEmailPreview.inline_main_app_routes!
 
   # Auto-load preview classes from:
   RailsEmailPreview.preview_classes = Dir[Rails.root.join 'app/mailer_previews/*_preview.rb'].map { |p|

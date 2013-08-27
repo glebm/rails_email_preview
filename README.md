@@ -119,10 +119,8 @@ Views
 
 You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):
 
-    # # Use admin layout with REP:
-    # RailsEmailPreview::EmailsController.layout 'admin'
-    # # If you are using a custom layout, you will want to make app routes available to REP:
-    # Rails.application.config.to_prepare { RailsEmailPreview.inline_main_app_routes! }
+    # Use admin layout with REP (this will also make app routes accessible within REP):
+    RailsEmailPreview.layout = 'admin'
 
 REP allows you to customize some of the element classes via `RailsEmailPreview.style`:
 
@@ -150,7 +148,7 @@ Authentication & authorization
 ------------------------------
 
 You can specify the parent controller for REP controller, and it will inherit all before filters.
-Note that this must be placed before any other references to REP application controller in the initializer:
+Note that this must be placed before any other references to REP application controller in the initializer (and before `layout=` call):
 
     RailsEmailPreview.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
 

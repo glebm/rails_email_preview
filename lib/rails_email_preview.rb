@@ -37,6 +37,16 @@ module RailsEmailPreview
   }
 
   class << self
+    def layout=(layout)
+      [RailsEmailPreview::ApplicationController, RailsEmailPreview::EmailsController].each { |ctrl| ctrl.layout layout }
+      if layout && layout !~ %r(^rails_email_preview/)
+        # inline application routes if using an app layout
+        Rails.application.config.to_prepare {
+          RailsEmailPreview.inline_main_app_routes!
+        }
+      end
+    end
+
     def run_before_render(mail, preview_class_name, mailer_action)
       (defined?(@hooks) && @hooks[:before_render] || []).each do |block|
         block.call(mail, preview_class_name, mailer_action)
@@ -48,7 +58,10 @@ module RailsEmailPreview
     end
 
     def inline_main_app_routes!
-      ::RailsEmailPreview::EmailsController.helper ::RailsEmailPreview::MainAppRouteDelegator
+      unless @inlined_routes
+        ::RailsEmailPreview::EmailsController.helper ::RailsEmailPreview::MainAppRouteDelegator
+        @inlined_routes = true
+      end
     end
 
     def setup

@@ -1,8 +1,8 @@
 module WithLayout
   def with_layout(layout)
-    RailsEmailPreview::EmailsController.layout layout
+    RailsEmailPreview.layout = layout
     yield
   ensure
-    RailsEmailPreview::EmailsController.layout nil
+    RailsEmailPreview.layout = nil
   end
 end
