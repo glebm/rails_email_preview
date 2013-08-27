@@ -13,17 +13,15 @@ require 'rails_email_preview'
 #
 #  # do not show Send Email button
 #  config.enable_send_email = false
+#
+#  # You can specify a controller for RailsEmailPreview::ApplicationController to inherit from:
+#  config.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
 #end
 
 #= REP + Comfortable Mexican Sofa integration
 #
 # # enable comfortable_mexican_sofa integration:
 # require 'rails_email_preview/integrations/comfortable_mexica_sofa'
-
-#= Application-specific (layout, permissions, customizations)
-#
-# # You can specify a controller for RailsEmailPreview::ApplicationController to inherit from:
-# RailsEmailPreview.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
 
 Rails.application.config.to_prepare do
   # Render REP inside a custom layout (set to 'application' to use app layout, default is REP's own layout)
