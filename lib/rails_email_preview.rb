@@ -38,12 +38,12 @@ module RailsEmailPreview
 
   class << self
     def layout=(layout)
-      [RailsEmailPreview::ApplicationController, RailsEmailPreview::EmailsController].each { |ctrl| ctrl.layout layout }
-      if layout && layout !~ %r(^rails_email_preview/)
-        # inline application routes if using an app layout
-        Rails.application.config.to_prepare {
+      Rails.application.config.to_prepare do
+        [RailsEmailPreview::ApplicationController, RailsEmailPreview::EmailsController].each { |ctrl| ctrl.layout layout }
+        if layout && layout !~ %r(^rails_email_preview/)
+          # inline application routes if using an app layout
           RailsEmailPreview.inline_main_app_routes!
-        }
+        end
       end
     end
 
