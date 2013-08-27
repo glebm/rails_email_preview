@@ -1,3 +1,8 @@
+# v0.2.10
+
+simplified setting custom layout with `layout=`
+bugfixes
+
 # v0.2.9
 
 updated bootstrap, turbolinks
