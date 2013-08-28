@@ -19,7 +19,7 @@ module RailsEmailPreview
   # auto-loading configured in initializer
   mattr_accessor :preview_classes
 
-  # send email button (experimental, false by default)
+  # send email button
   mattr_accessor :enable_send_email
   self.enable_send_email = true
 
