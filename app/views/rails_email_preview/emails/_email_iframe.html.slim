@@ -1,18 +1,30 @@
 javascript:
-  function iFrameLoad(id){
-    var resize = function(id) {
-      var el = document.getElementById(id),
-          w = el.parentNode.clientWidth,
-          h = el.contentWindow.document.body.scrollHeight;
-      el.height = (h) + "px";
-      el.width  = (w) + "px";
+  (function(doc){
+    var rep = window.rep = window['rep'] || {
+       resizeIframe: function(id) {
+          var el = doc.getElementById(id),
+              w = el.parentNode.clientWidth,
+              h = el.contentWindow.document.body.scrollHeight;
+          el.height = (h) + "px";
+          el.width  = (w) + "px";
+        },
+        iframeLoad: function(id){
+          document.getElementById('loading-el').style.display = 'none';
+          setTimeout(function() { rep.resizeIframe(id); rep.loaded = true; });
+        },
+        resizeAttached: false
     };
-    document.getElementById('loading-el').style.display = 'none';
-    setTimeout(function() { resize(id) });
-  }
+    rep.loaded = false;
+    if (!rep.resizeAttached) {
+      window.addEventListener('resize', function() {
+        if (rep.loaded) rep.resizeIframe('src-iframe');
+      });
+      rep.resizeAttached = true
+    }
+  })(document)
 
 pre#loading-el.lead
   i.icon-spinner.icon-spin
   |  Loading...
 iframe#src-iframe[src=rails_email_preview.rep_raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(email_locale: @email_locale))
-  width="100%" height=1 onLoad="iFrameLoad('src-iframe')" style="border:none;padding:0;margin:0"]
+  width="100%" height=1 onLoad="rep.iframeLoad('src-iframe')" style="border:none;padding:0;margin:0"]
