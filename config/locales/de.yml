@@ -10,7 +10,7 @@ de:
       in: "in"
       loading: "Lade..."
     test_deliver:
-      no_delivery_method: "Bitte setze "config.action_mailer.delivery_method" um E-Mails in der „%{environment}“ Umgebung zu senden."
+      no_delivery_method: "Bitte setze 'config.action_mailer.delivery_method' um E-Mails in der „%{environment}“ Umgebung zu senden."
       provide_email: "An welche Adresse senden?"
       sent_notice: "Senden an %{address} mit %{delivery_method}"
   layouts:
