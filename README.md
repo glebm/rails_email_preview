@@ -18,7 +18,7 @@ How to
 Add to Gemfile
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.10'
+gem 'rails_email_preview', '~> 0.2.12'
 ```
 
 REP handles setup for you:
@@ -127,6 +127,8 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 [with this initializer](https://gist.github.com/glebm/5725347).
 
 REP displays too many locales? Make sure to set `config.i18n.available_locales`, since it defaults to *all* locales in Rails.
+
+REP's own UI is fully localized, available locales are: en, de.
 
 Views
 ---------------------
