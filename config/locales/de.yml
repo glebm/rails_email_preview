@@ -1,0 +1,33 @@
+de:
+  rep:
+    base:
+      email:
+        one: "1 E-Mail"
+        other: "%{count} E-Mails"
+      mailer:
+        one: "1 Mailer"
+        other: "%{count} Mailer"
+      in: "in"
+      loading: "Lade..."
+    test_deliver:
+      no_delivery_method: "Bitte setze "config.action_mailer.delivery_method" um E-Mails in der „%{environment}“ Umgebung zu senden."
+      provide_email: "An welche Adresse senden?"
+      sent_notice: "Senden an %{address} mit %{delivery_method}"
+  layouts:
+    rails_email_preview:
+      application:
+        head_title: "E-Mails - REP"
+  rails_email_preview:
+    emails:
+      index:
+        list_title: "Anwendungs E-Mails"
+      show:
+        breadcrumb_list: "E-Mails"
+      send_form:
+        send_are_you_sure: "Diese Aktion wird diese E-Mail wirklich versenden. Bist du sicher?"
+        send_btn: "Senden an"
+        send_recipient_placeholder: "E-Mails"
+  integrations:
+    cms:
+      edit_email: "E-Mail bearbeiten"
+      view_link: "Anzeigen"
