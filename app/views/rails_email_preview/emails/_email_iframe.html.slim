@@ -25,6 +25,6 @@ javascript:
 
 pre#loading-el.lead
   i.icon-spinner.icon-spin
-  |  Loading...
+  |  #{t 'rep.base.loading'}
 iframe#src-iframe[src=rails_email_preview.rep_raw_email_url(params.slice(:mail_class, :mail_action, :part_type).merge(email_locale: @email_locale))
   width="100%" height=1 onLoad="rep.iframeLoad('src-iframe')" style="border:none;padding:0;margin:0"]

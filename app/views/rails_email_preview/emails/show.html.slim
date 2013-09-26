@@ -2,7 +2,7 @@
   div class=rep_row_class
     .pull-left
       ul.breadcrumb
-        li: a href=rails_email_preview.rep_emails_url(email_locale: @email_locale) #{t 'rep.breadcrumb_list'}
+        li: a href=rails_email_preview.rep_emails_url(email_locale: @email_locale) #{t '.breadcrumb_list'}
         li.active: a href=(request.url) = current_email_name
 
   div class=rep_style[:panel_class]

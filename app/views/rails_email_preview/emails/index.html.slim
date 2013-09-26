@@ -1,5 +1,5 @@
 h1
-  | #{t 'rep.list_title'}
+  | #{t '.list_title'}
 
 - previews_group = proc do |m|
   - capture do
@@ -19,6 +19,6 @@ div class=rep_row_class
 hr
 
 p.text-center.text-small.text-info
-  | #{total_emails} emails in #{@preview_class_names.length} mailers
+  | #{t 'rep.base.email', count: total_emails} #{t 'rep.base.in'} #{t 'rep.base.mailer', count: @preview_class_names.length }
   br
   a href="https://github.com/glebm/rails_email_preview" target='_blank' REP #{RailsEmailPreview::VERSION}
