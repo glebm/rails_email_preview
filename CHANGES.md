@@ -1,6 +1,6 @@
 # v0.2.11 - v0.2.12(unreleased)
 
-* german translation thanks to @bashctl
+* german translation thanks to @baschtl
 * email iframe resizes on window resize
 * bugfixes
 
