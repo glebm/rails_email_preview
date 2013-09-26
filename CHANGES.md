@@ -6,13 +6,13 @@
 
 # v0.2.10
 
-simplified setting custom layout with `layout=`
-bugfixes
+* simplified setting custom layout with `layout=`
+* bugfixes
 
 # v0.2.9
 
-updated bootstrap, turbolinks
-internal: tests + screenshots in spec/screenshots/ after each test run
+* updated bootstrap, turbolinks
+* internal: tests + screenshots in spec/screenshots/ after each test run
 
 # v0.2.8
 
