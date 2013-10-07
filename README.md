@@ -1,4 +1,4 @@
-Rails Email Preview [![Build Status](https://travis-ci.org/glebm/rails_email_preview.png)](https://travis-ci.org/glebm/rails_email_preview) [![Gem Version](https://badge.fury.io/rb/rails_email_preview.png)](http://badge.fury.io/rb/rails_email_preview)
+Rails Email Preview [![Build Status](https://travis-ci.org/glebm/rails_email_preview.png)](https://travis-ci.org/glebm/rails_email_preview) [![Gem Version](https://badge.fury.io/rb/rails_email_preview.png)](http://badge.fury.io/rb/rails_email_preview) [![Code Climate](https://codeclimate.com/github/glebm/rails_email_preview.png)](https://codeclimate.com/github/glebm/rails_email_preview)
 ================================
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
