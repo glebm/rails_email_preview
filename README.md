@@ -199,3 +199,7 @@ This project rocks and uses MIT-LICENSE.
   [rep-nav-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png "Email List Screenshot"
   [rep-show-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png "Show Email Screenshot"
   [rep-show-default-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png "Show Email Screenshot (default styles)"
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/glebm/rails_email_preview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
