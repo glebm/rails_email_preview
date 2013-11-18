@@ -1,3 +1,8 @@
+## v0.2.13
+
+* clean up dependencies
+* squell compatibility
+
 ## v0.2.11 .. v0.2.12
 
 * german translation thanks to @baschtl
