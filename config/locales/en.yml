@@ -29,5 +29,6 @@ en:
         send_recipient_placeholder: "Email"
   integrations:
     cms:
-      edit_email: "Editing email"
-      view_link: "View"
+      customize_cms_for_rails_email_preview:
+        edit_email: "Editing email"
+        view_link: "View"

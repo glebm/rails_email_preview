@@ -32,6 +32,7 @@ module RailsEmailPreview
       list_group_class:      'list-group',
       list_group_item_class: 'list-group-item',
       panel_class:           'panel panel-default',
+      panel_body_class:      'panel-body',
       row_class:             'row',
       column_class:          'col-sm-%{n}'
   }

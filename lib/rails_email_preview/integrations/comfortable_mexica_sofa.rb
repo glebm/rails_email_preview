@@ -61,20 +61,22 @@ module RailsEmailPreview
         if cms_email_edit_link?
           snippet = site.snippets.find_by_identifier(snippet_id)
 
+          route_name = respond_to?(:new_cms_admin_site_snippet_path) ? :cms_admin_site_snippet : :admin_cms_site_snippet
+
 
           cms_path = if snippet
                        unless content
                          fallback_snippet     = default_site.snippets.find_by_identifier(snippet_id)
                          prefill_from_default = {label: fallback_snippet.label, content: fallback_snippet.content}
                        end
-                       edit_cms_admin_site_snippet_path(site_id: site.id, id: snippet.id,
-                                                        snippet: prefill_from_default || nil)
+                       send :"edit_#{route_name}_path", site_id: site.id, id: snippet.id, snippet: prefill_from_default || nil
                      else
-                       new_cms_admin_site_snippet_path(site_id: site.id, snippet: {
-                           label:        "#{snippet_id.sub('-', ' / ').humanize}",
-                           identifier:   snippet_id,
-                           category_ids: [site.categories.find_by_label('email').try(:id)]
-                       })
+                       send :"new_#{route_name}_path", site_id: site.id,
+                            snippet:                            {
+                                label:        "#{snippet_id.sub('-', ' / ').humanize}",
+                                identifier:   snippet_id,
+                                category_ids: [site.categories.find_by_label('email').try(:id)]
+                            }
                      end
 
           result = safe_join ["<table class='rep-edit-link'><tr><td>".html_safe, cms_edit_email_snippet_link(cms_path),
@@ -106,4 +108,4 @@ ActionMailer::Base.module_eval do
 end
 
 require 'comfortable_mexican_sofa'
-ComfortableMexicanSofa::ViewHooks.add :header, 'integrations/cms/customize_cms_for_rails_email_preview'
+ComfortableMexicanSofa::ViewHooks.add :navigation, 'integrations/cms/customize_cms_for_rails_email_preview'
