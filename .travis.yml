@@ -3,7 +3,7 @@ rvm:
   - 2.0.0
   - jruby
   - 1.9.3
-  - rbx-19mode
+  - rbx
 
 env:
   global:
@@ -11,4 +11,4 @@ env:
 matrix:
   allow_failures:
     - rvm: 1.9.3
-    - rvm: rbx-19mode
+    - rvm: rbx
