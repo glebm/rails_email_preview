@@ -2,6 +2,10 @@ source "http://rubygems.org"
 
 gemspec
 
+platform :rbx do
+  gem 'rubysl', '~> 2.0'
+end
+
 group :development, :test do
   gem 'capybara', '>= 0.4.0'
   gem 'rspec', '2.12.0' #, git: 'https://github.com/rspec/rspec'
