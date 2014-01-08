@@ -23,7 +23,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   # render actual email content
   def show_raw
     I18n.with_locale @email_locale do
-      @mail = preview_mail(edit_links: (@part_type == 'text/html'))
+      @mail = preview_mail(edit_links: (@part_type == 'text/html' || @part_type == 'text/plain'))
       RailsEmailPreview.run_before_render(@mail, @preview_class.name, @mail_action)
       if @part_type == 'raw'
         body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
