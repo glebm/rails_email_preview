@@ -9,7 +9,7 @@ module RailsEmailPreview
       # ModerationMailer#approve -> "moderation_mailer-approve"
       def cms_email_id
         mailer = respond_to?(:controller) ? controller : self
-        "#{mailer.class.name.underscore}-#{action_name}"
+        [mailer.class.name.underscore, action_name, cms_content_type_string].compact.join('-')
       end
 
       # Will return snippet title interpolated with passed variables
@@ -39,6 +39,14 @@ module RailsEmailPreview
       # show edit link?
       def cms_email_edit_link?
         RequestStore.store[:rep_edit_links]
+      end
+
+      def cms_content_type_string(content_type = formats.first)
+        if content_type == :html
+          nil
+        else
+          content_type
+        end
       end
 
       # Will return snippet content, passing through Kramdown
@@ -92,11 +100,14 @@ module RailsEmailPreview
       def self.rep_email_params_from_snippet(snippet)
         id_prefix = 'email-'
         return unless snippet && snippet.identifier && snippet.identifier.starts_with?(id_prefix)
-        mailer_cl, act = snippet.identifier[id_prefix.length..-1].split('-')
+        mailer_cl, act, part_type = snippet.identifier[id_prefix.length..-1].split('-')
+
+        part_type = part_type == 'text' ? 'text/plain' : part_type
         mailer_cl += '_preview'
         { mail_class: mailer_cl,
           mail_action: act,
-          email_locale: snippet.site.locale}
+          email_locale: snippet.site.locale,
+          part_type: part_type }
       end
     end
   end
