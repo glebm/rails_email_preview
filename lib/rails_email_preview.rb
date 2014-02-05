@@ -19,6 +19,9 @@ module RailsEmailPreview
   # auto-loading configured in initializer
   mattr_accessor :preview_classes
 
+  # default email locale
+  mattr_accessor :default_email_locale
+
   # send email button
   mattr_accessor :enable_send_email
   self.enable_send_email = true

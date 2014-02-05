@@ -77,7 +77,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   def set_email_preview_locale
-    @email_locale = (params[:email_locale] || I18n.default_locale).to_s
+    @email_locale = (params[:email_locale] || RailsEmailPreview.default_email_locale || I18n.default_locale).to_s
   end
 
   private
