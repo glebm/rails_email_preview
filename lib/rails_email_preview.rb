@@ -41,6 +41,11 @@ module RailsEmailPreview
   }
 
   class << self
+    def preview_classes=(classes)
+      @preview_classes = classes
+      RailsEmailPreview::Preview.load_all(classes)
+    end
+
     def layout=(layout)
       [::RailsEmailPreview::ApplicationController, ::RailsEmailPreview::EmailsController].each { |ctrl| ctrl.layout layout }
       if layout && layout !~ %r(^rails_email_preview/)
@@ -49,9 +54,9 @@ module RailsEmailPreview
       end
     end
 
-    def run_before_render(mail, preview_class_name, mailer_action)
+    def run_before_render(mail, preview)
       (defined?(@hooks) && @hooks[:before_render] || []).each do |block|
-        block.call(mail, preview_class_name, mailer_action)
+        block.call(mail, preview)
       end
     end
 

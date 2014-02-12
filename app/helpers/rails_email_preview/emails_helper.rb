@@ -1,7 +1,4 @@
 module RailsEmailPreview::EmailsHelper
-  def current_email_name
-    "#{preview_class_human_name}: #{@mail_action.to_s.humanize}"
-  end
 
   def preview_class_human_name(preview_class = @preview_class)
     preview_class.to_s.underscore.sub(/(_mailer)?_preview$/, '').humanize
@@ -44,10 +41,6 @@ module RailsEmailPreview::EmailsHelper
     else
       value.to_s
     end
-  end
-
-  def email_methods(m)
-    m.constantize.instance_methods(false).map(&:to_s).sort
   end
 
   def total_emails

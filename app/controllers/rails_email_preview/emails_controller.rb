@@ -5,17 +5,18 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   # list screen
   def index
-    @preview_class_names = (RailsEmailPreview.preview_classes || []).map { |klass| klass.is_a?(String) ? klass : klass.name }.sort
+    @previews = ::RailsEmailPreview::Preview.all
+    @previews_by_class = ::RailsEmailPreview::Preview.all_by_preview_class
   end
 
   # preview screen
   def show
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
-      if @preview_class.respond_to?(:new)
+      if @preview.respond_to?(:preview_mail)
         @mail = preview_mail
       else
-        raise ArgumentError.new("#{@preview_class} is not a preview class, does not respond_to?(:new)")
+        raise ArgumentError.new("#{@preview} is not a preview class, does not respond_to?(:preview_mail)")
       end
     end
   end
@@ -24,7 +25,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   def show_raw
     I18n.with_locale @email_locale do
       @mail = preview_mail(edit_links: (@part_type == 'text/html'))
-      RailsEmailPreview.run_before_render(@mail, @preview_class.name, @mail_action)
+      RailsEmailPreview.run_before_render(@mail, @preview)
       if @part_type == 'raw'
         body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
       else
@@ -72,8 +73,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   def preview_mail(opt = {})
     RequestStore.store[:rep_edit_links] = true if opt[:edit_links]
-    mail = @preview_class.new.send(@mail_action)
-    mail
+    @preview.preview_mail
   end
 
   def set_email_preview_locale
@@ -83,10 +83,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   private
 
   def load_preview_class
-    @preview_class = (RailsEmailPreview.preview_classes || []).find { |pc|
-      (pc.is_a?(String) ? pc : pc.name).underscore == params[:mail_class]
-    }
-    @preview_class = @preview_class.constantize if @preview_class.is_a?(String)
+    @preview     = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
     @mail_action = params[:mail_action]
     @part_type   = params[:part_type] || 'text/html'
   end

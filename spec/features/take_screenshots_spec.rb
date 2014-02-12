@@ -7,7 +7,7 @@ unless ENV['TRAVIS']
     end
 
     it 'show email page' do
-      visit rails_email_preview.rep_email_path('auth_mailer_preview', 'email_confirmation')
+      visit rails_email_preview.rep_email_path(preview_id: 'auth_mailer_preview-email_confirmation')
       screenshot! 'show'
     end
   end
