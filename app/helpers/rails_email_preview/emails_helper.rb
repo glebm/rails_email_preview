@@ -1,9 +1,5 @@
 module RailsEmailPreview::EmailsHelper
 
-  def preview_class_human_name(preview_class = @preview_class)
-    preview_class.to_s.underscore.sub(/(_mailer)?_preview$/, '').humanize
-  end
-
   def change_locale_attr(locale)
     {href:  rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)),
      class: rep_btn_class(@email_locale == locale.to_s)}
@@ -41,10 +37,6 @@ module RailsEmailPreview::EmailsHelper
     else
       value.to_s
     end
-  end
-
-  def total_emails
-    @total_emails ||= @preview_class_names.sum { |p| email_methods(p).length }
   end
 
   def split_in_halves(elements, &weight)
