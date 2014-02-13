@@ -1,5 +1,5 @@
 div class=rep_btn_group_class
-  - I18n.available_locales.each do |locale|
+  - @preview.locales.each do |locale|
     -# href, active class from change_locale_attr(locale)
     a.btn *change_locale_attr(locale)
       = locale_name(locale)

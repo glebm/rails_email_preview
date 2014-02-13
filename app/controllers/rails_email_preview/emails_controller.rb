@@ -84,7 +84,6 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   def load_preview_class
     @preview     = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
-    @mail_action = params[:mail_action]
     @part_type   = params[:part_type] || 'text/html'
   end
 end

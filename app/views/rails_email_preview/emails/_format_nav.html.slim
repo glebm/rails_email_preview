@@ -1,5 +1,5 @@
 div class=rep_btn_group_class
-  - { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}.each do |mime, label|
-    a.btn-xs *change_format_attr(mime)
-      = label
+  - @preview.formats.each do |format|
+    a.btn-xs *change_format_attr(format)
+      = format_label format
 

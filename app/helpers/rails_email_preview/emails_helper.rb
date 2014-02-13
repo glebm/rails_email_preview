@@ -1,5 +1,11 @@
 module RailsEmailPreview::EmailsHelper
 
+  MIME_LABELS = { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}
+
+  def format_label(mime_type)
+    MIME_LABELS[mime_type]
+  end
+
   def change_locale_attr(locale)
     {href:  rails_email_preview.rep_email_url(params.merge(part_type: @part_type, email_locale: locale)),
      class: rep_btn_class(@email_locale == locale.to_s)}

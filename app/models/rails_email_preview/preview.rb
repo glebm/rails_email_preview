@@ -7,6 +7,14 @@ module RailsEmailPreview
       attr.each { |k, v| self.send "#{k}=", v }
     end
 
+    def locales
+      I18n.available_locales
+    end
+
+    def formats
+      %w(text/html text/plain raw)
+    end
+
     def preview_mail
       preview_class_name.constantize.new.send(preview_method)
     end
