@@ -31,8 +31,7 @@ RUBY
       end
 
       def mailer_methods(mailer_class_name)
-        mailer_class = mailer_class_name.constantize
-        mailer_class.instance_methods(false).map do |m|
+        ::RailsEmailPreview::Preview.mail_methods(mailer_class_name.constantize).map do |m|
 <<-RUBY
   def #{m}
     #{mailer_class_name}.#{m.to_s} #{mailer_class.instance_method(m).parameters.map(&:second) * ', '}
