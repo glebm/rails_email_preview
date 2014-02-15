@@ -57,7 +57,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
-  def mail_body(preview, part_type, edit_links: (part_type == 'text/html'))
+  def mail_body(preview, part_type, edit_links = (part_type == 'text/html'))
     RequestStore.store[:rep_edit_links] = true if edit_links
     mail = preview.preview_mail
     RailsEmailPreview.run_before_render(mail, preview)
