@@ -1,0 +1,15 @@
+doctype html
+= "\n"
+html
+  head
+    css:
+      #message_body, #raw_message {
+        font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+        word-break: break-word;
+      }
+
+    = yield(:head)
+  body
+    #content.container
+      = render 'layouts/rails_email_preview/flash_notices'
+      = yield

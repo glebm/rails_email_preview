@@ -1,6 +1,6 @@
 class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationController
   include ERB::Util
-  before_filter :load_preview_class, except: :index
+  before_filter :load_preview, except: :index
   before_filter :set_email_preview_locale
 
   # list screen
@@ -14,7 +14,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
       if @preview.respond_to?(:preview_mail)
-        @mail = preview_mail
+        @mail = @preview.preview_mail
       else
         raise ArgumentError.new("#{@preview} is not a preview class, does not respond_to?(:preview_mail)")
       end
@@ -22,24 +22,10 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   # render actual email content
-  def show_raw
+  def show_body
     I18n.with_locale @email_locale do
-      @mail = preview_mail(edit_links: (@part_type == 'text/html'))
-      RailsEmailPreview.run_before_render(@mail, @preview)
-      if @part_type == 'raw'
-        body = "<pre id='raw_message'>#{html_escape(@mail.to_s)}</pre>"
-      else
-        if @mail.multipart?
-          body_part = (@part_type =~ /html/ ? @mail.html_part : @mail.text_part)
-        else
-          body_part = @mail
-        end
-        body = body_part.body
-        if body_part.content_type =~ /plain/
-          body = "<pre id='message_body'>#{body}</body>"
-        end
-      end
-      render text: body, layout: false
+      @mail_body = mail_body(@preview, @part_type)
+      render :show_body, layout: 'rails_email_preview/email'
     end
   end
 
@@ -71,9 +57,22 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
-  def preview_mail(opt = {})
-    RequestStore.store[:rep_edit_links] = true if opt[:edit_links]
-    @preview.preview_mail
+  def mail_body(preview, part_type, edit_links: (part_type == 'text/html'))
+    RequestStore.store[:rep_edit_links] = true if edit_links
+    mail = preview.preview_mail
+    RailsEmailPreview.run_before_render(mail, preview)
+    return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
+
+    body_part = if mail.multipart?
+                  (part_type =~ /html/ ? mail.html_part : mail.text_part)
+                else
+                  mail
+                end
+    if body_part.content_type =~ /plain/
+      "<pre id='message_body'>#{html_escape(body_part.body.to_s)}</pre>".html_safe
+    else
+      body_part.body.to_s.html_safe
+    end
   end
 
   def set_email_preview_locale
@@ -82,7 +81,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   private
 
-  def load_preview_class
+  def load_preview
     @preview     = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
     @part_type   = params[:part_type] || 'text/html'
   end
