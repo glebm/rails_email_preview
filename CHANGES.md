@@ -1,3 +1,8 @@
+## v0.2.15
+
+* minor bugfixes
+* UI improvements
+
 ## v0.2.13 .. v0.2.14
 
 * clean up dependencies
