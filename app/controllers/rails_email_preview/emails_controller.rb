@@ -36,7 +36,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       return
     end
     I18n.with_locale @email_locale do
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview.preview_mail(true), to: address, cc: nil, bcc: nil)
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(@preview.preview_mail(true), to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
     end
     if !(delivery_method = Rails.application.config.action_mailer.delivery_method)
