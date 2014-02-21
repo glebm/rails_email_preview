@@ -36,7 +36,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       return
     end
     I18n.with_locale @email_locale do
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview_mail, to: address, cc: nil, bcc: nil)
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview.preview_mail(true), to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
     end
     if !(delivery_method = Rails.application.config.action_mailer.delivery_method)
@@ -57,14 +57,10 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
-  def preview_mail
-    preview.preview_mail
-    RailsEmailPreview.run_before_render(mail, preview)
-  end
-
   def mail_body(preview, part_type, edit_links = (part_type == 'text/html'))
     RequestStore.store[:rep_edit_links] = true if edit_links
-    mail = preview_mail
+    mail = preview.preview_mail(true)
+
     return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
 
     body_part = if mail.multipart?
