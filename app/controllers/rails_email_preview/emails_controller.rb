@@ -57,10 +57,14 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
+  def preview_mail
+    preview.preview_mail
+    RailsEmailPreview.run_before_render(mail, preview)
+  end
+
   def mail_body(preview, part_type, edit_links = (part_type == 'text/html'))
     RequestStore.store[:rep_edit_links] = true if edit_links
-    mail = preview.preview_mail
-    RailsEmailPreview.run_before_render(mail, preview)
+    mail = preview_mail
     return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
 
     body_part = if mail.multipart?
