@@ -9,7 +9,7 @@ platform :rbx do
 end
 
 group :development, :test do
-  gem 'i18n-tasks'
+  gem 'i18n-tasks', '>= 0.3.3'
   gem 'capybara', '>= 0.4.0'
   gem 'rspec', '2.12.0' #, git: 'https://github.com/rspec/rspec'
   gem 'rspec-rails' #, git: 'https://github.com/rspec/rspec-rails'
