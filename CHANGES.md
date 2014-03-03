@@ -1,3 +1,7 @@
+## v0.2.17
+
+* Fix preview generator
+
 ## v0.2.15 .. v0.2.16
 
 * minor bugfixes
