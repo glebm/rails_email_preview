@@ -16,4 +16,5 @@ group :development, :test do
   gem 'poltergeist', git: 'https://github.com/jonleighton/poltergeist'
   # a debugger that works with MRI 2.0.0
   gem 'byebug', platforms: :ruby_20
+  gem 'coveralls', require: false
 end
