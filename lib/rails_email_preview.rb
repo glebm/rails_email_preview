@@ -16,8 +16,11 @@ module RailsEmailPreview
   mattr_accessor :parent_controller
   self.parent_controller = '::ApplicationController'
 
-  # auto-loading configured in initializer
+  # preview class names
   mattr_accessor :preview_classes
+
+  # UI locale
+  mattr_accessor :locale
 
   # default email locale
   mattr_accessor :default_email_locale

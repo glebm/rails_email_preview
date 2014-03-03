@@ -72,7 +72,7 @@ rails_email_preview.rep_root_url
 # list of emails (same as root):
 rails_email_preview.rep_emails_url
 # email show:
-rails_email_preview.rep_email_url(mail_class: "user_mailer", mail_action: "welcome")
+rails_email_preview.rep_email_url('user_mailer-welcome')
 ```
 
 Send Emails
@@ -128,7 +128,13 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 
 REP displays too many locales? Make sure to set `config.i18n.available_locales`, since it defaults to *all* locales in Rails.
 
-REP's own UI is fully localized, available locales are: en, de.
+User interface is available in English and German (Danke, @baschtl).
+You can set the language in `config.to_prepare` section of the initializer, default is English.
+
+```ruby
+# config/initializers/rails_email_preview.rb
+RailsEmailPreview.locale = :de
+```
 
 Views
 ---------------------

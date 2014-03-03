@@ -1,6 +1,7 @@
 class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationController
   include ERB::Util
   before_filter :load_preview, except: :index
+  around_filter :set_locale
   before_filter :set_email_preview_locale
 
   # list screen
@@ -79,6 +80,16 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     @email_locale = (params[:email_locale] || RailsEmailPreview.default_email_locale || I18n.default_locale).to_s
   end
 
+  def set_locale
+    config_locale = RailsEmailPreview.locale || :en
+    begin
+      locale_was  = I18n.locale
+      I18n.locale = config_locale
+      yield
+    ensure
+      I18n.locale = locale_was
+    end
+  end
   private
 
   def load_preview
