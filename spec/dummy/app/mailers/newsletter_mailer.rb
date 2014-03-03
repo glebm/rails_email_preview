@@ -5,4 +5,7 @@ class NewsletterMailer < ApplicationMailer
   def monthly_newsletter(email)
     mail to: email
   end
+  def quarterly_newsletter(email)
+    mail to: email
+  end
 end

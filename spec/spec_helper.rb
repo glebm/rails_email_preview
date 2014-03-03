@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'fileutils'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
@@ -16,14 +17,18 @@ poltergeist_opts = {
 }
 Capybara.register_driver(:poltergeist) { |app| Capybara::Poltergeist::Driver.new(app, poltergeist_opts) }
 
-RSpec.configure do
+RSpec.configure do |config|
   Capybara.configure do |capy|
     capy.javascript_driver = :poltergeist
     capy.run_server        = true
     capy.server_port       = 7000
   end
-  include SaveScreenshots
-  include WithLayout
+  config.include SaveScreenshots
+  config.include WithLayout
+
+  config.around(:each) do |ex|
+    Dir.chdir(Rails.root) { ex.run }
+  end
 end
 
 Rails.backtrace_cleaner.remove_silencers!
