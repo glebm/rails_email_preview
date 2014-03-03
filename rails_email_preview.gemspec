@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
 
   s.summary = 'Preview emails in browser (rails engine)'
-  s.description = 'Rails engine to preview, test send, and edit application email in browser. i18n support, premailer integration, and more.'
+  s.description = 'A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.'
 
 
   s.files = Dir['{app,lib,config}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'Gemfile', 'README.md']
