@@ -2,8 +2,12 @@
 # Configure Rails Environment
 ENV['RAILS_ENV'] = ENV['RACK_ENV'] = 'test'
 unless defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
-  require 'coveralls'
-  Coveralls.wear! 'rails'
+  begin
+    require 'coveralls'
+    Coveralls.wear! 'rails'
+  rescue LoadError
+    false
+  end
 end
 
 require File.expand_path("../dummy/config/environment.rb", __FILE__)

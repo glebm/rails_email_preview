@@ -20,5 +20,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
+  s.add_development_dependency 'i18n-tasks', '>= 0.3.7'
+  s.add_development_dependency 'capybara', '>= 0.4.0'
+  s.add_development_dependency 'rspec', '>= 2.12.0'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'poltergeist'
+
   s.version = RailsEmailPreview::VERSION
 end
