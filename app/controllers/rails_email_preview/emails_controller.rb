@@ -85,7 +85,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     begin
       locale_was  = I18n.locale
       I18n.locale = config_locale
-      yield
+      yield if block_given?
     ensure
       I18n.locale = locale_was
     end
