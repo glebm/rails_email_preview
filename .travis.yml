@@ -5,7 +5,10 @@ rvm:
   - jruby
   - 1.9.3
   - rbx
-
+gemfile:
+  - spec/gemfiles/Gemfile-rails-3-2
+  # rails 4:
+  - spec/gemfiles/Gemfile-rails-4-0
 env:
   global:
     - TRAVIS=1
