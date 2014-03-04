@@ -1,3 +1,8 @@
+## v0.2.18
+
+* UI language is now set to :en by default, to avoid #32
+* Rails 3 compatibility issues fixed
+
 ## v0.2.17
 
 * Fix preview generator
