@@ -41,6 +41,15 @@ module RailsEmailPreview
         RequestStore.store[:rep_edit_links]
       end
 
+      def cms_snippet_render_method
+        [
+            # Newer CMS
+            :cms_snippet_render,
+            # Older CMS
+            :cms_snippet_content
+        ].detect { |m| respond_to? m }
+      end
+
       # Will return snippet content, passing through Kramdown
       # Will also render an "✎ Edit text" link if used from
       def cms_email_snippet(snippet_id = self.cms_email_id)
@@ -48,9 +57,10 @@ module RailsEmailPreview
         site       = Cms::Site.find_by_locale(I18n.locale.to_s)
         if Cms::Snippet.where(identifier: snippet_id).exists?
           # Fallback default locale: (# prefill)
-          unless (content = cms_snippet_content(snippet_id, site).presence)
+          content = send(cms_snippet_render_method, snippet_id, site)
+          unless content.present?
             default_site     = Cms::Site.find_by_locale(I18n.default_locale.to_s)
-            fallback_content = cms_snippet_content(snippet_id, default_site).presence
+            fallback_content = send(cms_snippet_render_method, snippet_id, default_site).presence
           end
           result = (content || fallback_content).to_s
         else
