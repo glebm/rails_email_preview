@@ -103,6 +103,7 @@ module RailsEmailPreview
         id_prefix = 'email-'
         return unless snippet && snippet.identifier && snippet.identifier.starts_with?(id_prefix)
         mailer_cl, act = snippet.identifier[id_prefix.length..-1].split('-')
+        act = act.sub(/_email\Z/, '') if act.end_with?('_email')
         { preview_id: "#{mailer_cl}_preview-#{act}",
           email_locale: snippet.site.locale }
       end
