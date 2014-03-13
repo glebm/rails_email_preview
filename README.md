@@ -18,7 +18,7 @@ How to
 Add to Gemfile
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.16'
+gem 'rails_email_preview', '~> 0.2.19'
 ```
 
 REP handles setup for you:

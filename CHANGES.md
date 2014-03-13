@@ -1,3 +1,7 @@
+## v0.2.19
+
+* Fixes for CMS integration
+
 ## v0.2.18
 
 * UI language is now set to :en by default, to avoid #32
