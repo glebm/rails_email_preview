@@ -81,7 +81,10 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   def set_locale
-    config_locale = RailsEmailPreview.locale || :en
+    config_locale = RailsEmailPreview.locale
+    if !I18n.available_locales.map(&:to_s).include?(config_locale.to_s)
+      config_locale = :en
+    end
     begin
       locale_was  = I18n.locale
       I18n.locale = config_locale
