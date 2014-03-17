@@ -1,3 +1,7 @@
+## v0.2.20
+
+* REP will fall back to :en if its set locale is not in the list of available locales
+
 ## v0.2.19
 
 * Fixes for CMS integration
