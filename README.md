@@ -1,4 +1,4 @@
-# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge][gem] [![Code Climate][codeclimate-badge]][codeclimate]
+# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge]][gem] [![Code Climate][codeclimate-badge]][codeclimate]
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
