@@ -1,5 +1,4 @@
-Rails Email Preview [![Build Status](https://travis-ci.org/glebm/rails_email_preview.png)](https://travis-ci.org/glebm/rails_email_preview) [![Gem Version](https://badge.fury.io/rb/rails_email_preview.png)](http://badge.fury.io/rb/rails_email_preview) [![Code Climate](https://codeclimate.com/github/glebm/rails_email_preview.png)](https://codeclimate.com/github/glebm/rails_email_preview)
-================================
+# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge][gem] [![Code Climate][codeclimate-badge]][codeclimate]
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
@@ -12,8 +11,7 @@ List:
 REP can use the application styles and comes with [a bootstrap 3 theme][rep-show-default-screenshot] by default (default markup for [twbs/bootstrap](twbs/bootstrap) 3).
 *These screenshots are from [Zuigo](http://zuigo.com/), a platform to organize & discover events; using REP default markup and app styles*
 
-How to
------
+## How to
 
 Add to Gemfile
 
@@ -61,8 +59,7 @@ end
 ```
 
 
-Routing
--------
+## Routing
 
 You can access REP urls like this:
 
@@ -75,8 +72,7 @@ rails_email_preview.rep_emails_url
 rails_email_preview.rep_email_url('user_mailer-welcome')
 ```
 
-Send Emails
--------------------
+## Send Emails
 
 You can send emails via REP. This is especially useful when testing with limited clients (Blackberry, Outlook, etc.).
 This will use the environment's mailer settings, but the handler will `perform_deliveries`.
@@ -86,8 +82,7 @@ Uncomment this line in the initializer to disable sending test emails:
 config.enable_send_email = false
 ```
 
-Email editing 
--------------
+## Email editing
 
 You can use [comfortable_mexican_sofa](https://github.com/comfy/comfortable-mexican-sofa) for storing and editing emails.
 REP comes with an integration for it -- see [CMS Guide](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa).
@@ -95,16 +90,14 @@ REP comes with an integration for it -- see [CMS Guide](https://github.com/glebm
 [![screenshot](https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-edit-sofa.png)](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa)
 
 
-Premailer
----------------------
+## Premailer
 
 [Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
 Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
-I18n
--------------
+## I18n
 
 REP expects emails to use current `I18n.locale`:
 
@@ -136,8 +129,7 @@ You can set the language in `config.to_prepare` section of the initializer, defa
 RailsEmailPreview.locale = :de
 ```
 
-Views
----------------------
+## Views
 
 You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):
 
@@ -174,8 +166,7 @@ You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
 e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks. 
 
-Authentication & authorization
-------------------------------
+## Authentication & authorization
 
 You can specify the parent controller for REP controller, and it will inherit all before filters.
 Note that this must be placed before any other references to REP application controller in the initializer (and before `layout=` call):
@@ -207,5 +198,11 @@ This project rocks and uses MIT-LICENSE.
   [rep-show-default-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png "Show Email Screenshot (default styles)"
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/glebm/rails_email_preview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+[travis]: http://travis-ci.org/glebm/rails_email_preview
+[travis-badge]: http://img.shields.io/travis/glebm/rails_email_preview.svg
+[gem]: https://rubygems.org/gems/rails_email_preview
+[gem-badge]: http://img.shields.io/gem/v/rails_email_preview.svg
+[codeclimate]: https://codeclimate.com/github/glebm/rails_email_preview
+[codeclimate-badge]: http://img.shields.io/codeclimate/github/glebm/rails_email_preview.svg
+[coveralls]: https://coveralls.io/r/glebm/rails_email_preview
+[coveralls-badge]: http://img.shields.io/coveralls/glebm/rails_email_preview.svg
