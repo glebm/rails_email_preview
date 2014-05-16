@@ -15,25 +15,8 @@ module RailsEmailPreview
       %w(text/html text/plain raw)
     end
 
-    def process_attachments(mail)
-      attachments_dir = RailsEmailPreview.attachments_dir
-      
-      if mail.attachments.any?
-        FileUtils.mkdir_p(attachments_dir)
-        mail.attachments.each do |attachment|
-          filename = attachment.filename.gsub(/[^\w.]/, '_')
-          path = File.join(attachments_dir, filename)
-
-          unless File.exists?(path) # true if other parts have already been rendered
-            File.open(path, 'wb') { |f| f.write(attachment.body.raw_source) }
-          end
-        end
-      end
-    end
-
     def preview_mail(run_hooks = false)
       preview_class_name.constantize.new.send(preview_method).tap do |mail|
-        process_attachments(mail)
         RailsEmailPreview.run_before_render(mail, self) if run_hooks
       end
     end

@@ -33,8 +33,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   def show_attachment
     @mail = @preview.preview_mail
     attachment = @mail.attachments.find { |a| a.filename == "#{params[:filename]}.#{request.format.symbol}" }
-    filepath = File.join(RailsEmailPreview.attachments_dir, attachment.filename)
-    send_data File.read(filepath)
+    send_data attachment.body.raw_source
   end
 
   def test_deliver
@@ -68,6 +67,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   def mail_body(preview, part_type, edit_links = (part_type == 'text/html'))
     RequestStore.store[:rep_edit_links] = true if edit_links
     mail = preview.preview_mail(true)
+    
     return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
 
     body_part = if mail.multipart?
@@ -82,7 +82,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       body_content = body_part.body.to_s
 
       mail.attachments.each do |attachment|
-        web_url = rails_email_preview.rep_raw_email_attachment_path(params[:preview_id], attachment.filename)
+        web_url = rails_email_preview.rep_raw_email_attachment_url(params[:preview_id], attachment.filename)
         body_content.gsub!(attachment.url, web_url)
       end
 

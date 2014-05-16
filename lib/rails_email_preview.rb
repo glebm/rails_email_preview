@@ -29,9 +29,6 @@ module RailsEmailPreview
   mattr_accessor :enable_send_email
   self.enable_send_email = true
 
-  mattr_accessor :attachments_dir
-  self.attachments_dir = File.join('tmp', 'rails_email_preview', 'attachments')
-
   # some easy visual settings
   mattr_accessor :style
   self.style = {
