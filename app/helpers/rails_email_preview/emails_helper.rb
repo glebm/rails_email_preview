@@ -24,15 +24,23 @@ module RailsEmailPreview::EmailsHelper
     end
   end
 
+  def attachment_links
+    @mail.attachments.map do |attachment|
+      url = rails_email_preview.rep_raw_email_attachment_path(params[:preview_id], attachment.filename)
+      link_to(attachment.filename, url)
+    end.join('').html_safe
+  end
+
   def headers_name_value
     I18n.with_locale @email_locale do
       {
-          'Subject'  => @mail.subject || '(no subject)',
-          'From'     => @mail.from,
-          'Reply to' => @mail.reply_to,
-          'To'       => @mail.to,
-          'CC'       => @mail.cc,
-          'BCC'      => @mail.bcc
+          'Subject'     => @mail.subject || '(no subject)',
+          'From'        => @mail.from,
+          'Reply to'    => @mail.reply_to,
+          'To'          => @mail.to,
+          'CC'          => @mail.cc,
+          'BCC'         => @mail.bcc,
+          'Attachments' => attachment_links
       }.delete_if { |k, v| v.blank? }
     end
   end
