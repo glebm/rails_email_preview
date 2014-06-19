@@ -16,7 +16,7 @@ REP can use the application styles and comes with [a bootstrap 3 theme][rep-show
 Add to Gemfile
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.19'
+gem 'rails_email_preview', '~> 0.2.21'
 ```
 
 REP handles setup for you:

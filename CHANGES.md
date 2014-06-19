@@ -1,3 +1,8 @@
+## v0.2.21
+
+* Feature: Attachments. Thanks, @rzane!
+* CMS 1.12 compatibility
+
 ## v0.2.20
 
 * REP will fall back to :en if its set locale is not in the list of available locales
