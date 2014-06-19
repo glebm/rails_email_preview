@@ -5,21 +5,21 @@
 module RailsEmailPreview
   module Integrations
     module ComfortableMexicanSofa
-      # returns CMS identifier for the current email
+      # @return [String] CMS identifier for the current email
       # ModerationMailer#approve -> "moderation_mailer-approve"
       def cms_email_id
         mailer = respond_to?(:controller) ? controller : self
         "#{mailer.class.name.underscore}-#{action_name}"
       end
 
-      # Will return snippet title interpolated with passed variables
-      #   E.g, for snippet with title "Welcome, %{name}!"
+      # @return [String] Snippet title interpolated with passed variables
+      #   Example, snippet has title "Welcome, %{name}!":
       #      cms_email_subject(name: "Alice") #=> "Welcome, Alice!"
       def cms_email_subject(interpolation = {})
         snippet_id = "email-#{cms_email_id}"
-        return '(no subject)' unless Cms::Snippet.where(identifier: snippet_id).exists?
+        return '(no subject)' unless cms_snippet_class.where(identifier: snippet_id).exists?
         [I18n.locale, I18n.default_locale].compact.each do |locale|
-          site    = Cms::Site.find_by_locale(locale.to_s)
+          site    = cms_site_class.find_by_locale(locale.to_s)
           snippet = site.snippets.find_by_identifier(snippet_id)
           next unless snippet.try(:content).present?
 
@@ -41,72 +41,109 @@ module RailsEmailPreview
         RequestStore.store[:rep_edit_links]
       end
 
-      def cms_snippet_render_method
-        [
-            # Newer CMS
-            :cms_snippet_render,
-            # Older CMS
-            :cms_snippet_content
-        ].detect { |m| respond_to? m }
+      def cms_email_edit_link(site, default_site, snippet_id)
+        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.new(
+            label:      "#{snippet_id.sub('-', ' / ').humanize}",
+            identifier: snippet_id,
+            site:       site
+        )
+        p         = {site_id: site.id}
+        edit_path = if snippet
+                      p[:id] = snippet.id
+                      if snippet.content.blank? && default_site && (default_snippet = default_site.snippets.find_by_identifier(snippet_id))
+                        p[:snippet] = {
+                            content: default_snippet.content
+                        }
+                        p[:snippet][:label] = default_snippet.label unless snippet.label.present?
+                      end
+                      send :"edit_#{cms_admin_site_snippet_route}_path", p
+                    else
+                      p[:snippet] = {
+                          label:        snippet.label,
+                          identifier:   snippet.identifier,
+                          category_ids: [site.categories.find_by_label('email').try(:id)]
+                      }
+                      send :"new_#{cms_admin_site_snippet_route}_path", p
+                    end
+        <<-HTML.strip.html_safe
+          <table class='rep-edit-link'><tr><td>
+            #{cms_edit_email_snippet_link(edit_path)}
+          </td></tr></table>
+        HTML
       end
 
-      # Will return snippet content, passing through Kramdown
-      # Will also render an "✎ Edit text" link if used from
+      # @return [String] Snippet content, passed through Kramdown.
+      # Also renders an "✎ Edit" link inside the email when called from preview
       def cms_email_snippet(snippet_id = self.cms_email_id)
-        snippet_id = "email-#{snippet_id}"
-        site       = Cms::Site.find_by_locale(I18n.locale.to_s)
-        if Cms::Snippet.where(identifier: snippet_id).exists?
-          # Fallback default locale: (# prefill)
+        snippet_id   = "email-#{snippet_id}"
+        site         = cms_site_class.find_by_locale(I18n.locale.to_s)
+        default_site = cms_site_class.find_by_locale(I18n.default_locale.to_s)
+
+        if cms_snippet_class.where(identifier: snippet_id).exists?
+          # Prefill from default locale if no content
           content = send(cms_snippet_render_method, snippet_id, site)
-          unless content.present?
-            default_site     = Cms::Site.find_by_locale(I18n.default_locale.to_s)
-            fallback_content = send(cms_snippet_render_method, snippet_id, default_site).presence
-          end
-          result = (content || fallback_content).to_s
+          result = (content.presence || send(cms_snippet_render_method, snippet_id, default_site)).to_s
         else
           result = ''
         end
 
-        # If rendering in preview from admin, add edit/create lnk
+        # If rendering in preview from admin, add edit/create link
         if cms_email_edit_link?
-          snippet = site.snippets.find_by_identifier(snippet_id)
-
-          route_name = respond_to?(:new_cms_admin_site_snippet_path) ? :cms_admin_site_snippet : :admin_cms_site_snippet
-
-
-          cms_path = if snippet
-                       unless content
-                         fallback_snippet     = default_site.snippets.find_by_identifier(snippet_id)
-                         prefill_from_default = {label: fallback_snippet.label, content: fallback_snippet.content}
-                       end
-                       send :"edit_#{route_name}_path", site_id: site.id, id: snippet.id, snippet: prefill_from_default || nil
-                     else
-                       send :"new_#{route_name}_path", site_id: site.id,
-                            snippet:                            {
-                                label:        "#{snippet_id.sub('-', ' / ').humanize}",
-                                identifier:   snippet_id,
-                                category_ids: [site.categories.find_by_label('email').try(:id)]
-                            }
-                     end
-
-          result = safe_join ["<table class='rep-edit-link'><tr><td>".html_safe, cms_edit_email_snippet_link(cms_path),
-                              "</td></tr></table>".html_safe, "\n\n", result]
+          result = safe_join [cms_email_edit_link(site, default_site, snippet_id), result], "\n\n"
         end
         result
       end
 
       def cms_edit_email_snippet_link(path)
-        link_to(RailsEmailPreview.edit_link_text, path, style: RailsEmailPreview.edit_link_style.html_safe, 'onClick' => '')
+        link_to(RailsEmailPreview.edit_link_text, path, style: RailsEmailPreview.edit_link_style.html_safe)
       end
 
       def self.rep_email_params_from_snippet(snippet)
         id_prefix = 'email-'
         return unless snippet && snippet.identifier && snippet.identifier.starts_with?(id_prefix)
         mailer_cl, act = snippet.identifier[id_prefix.length..-1].split('-')
-        act.sub! /_email\Z/, ''
-        { preview_id: "#{mailer_cl}_preview-#{act}",
-          email_locale: snippet.site.locale }
+        {preview_id:   "#{mailer_cl}_preview-#{act}",
+         email_locale: snippet.site.locale}
       end
+
+      module CmsVersionsCompatibility
+        def cms_admin_site_snippet_route
+          if respond_to?(:new_cms_admin_site_snippet_path)
+            # cms >= 1.11
+            :cms_admin_site_snippet
+          else
+            :admin_cms_site_snippet
+          end
+        end
+
+        def cms_snippet_class
+          if defined?(Comfy)
+            # cms >= 1.12
+            Comfy::Cms::Snippet
+          else
+            Cms::Snippet
+          end
+        end
+
+        def cms_site_class
+          if defined?(Comfy)
+            # cms >= 1.12
+            Comfy::Cms::Site
+          else
+            Cms::Site
+          end
+        end
+
+        def cms_snippet_render_method
+          [
+              # cms >= 1.11
+              :cms_snippet_render,
+              :cms_snippet_content
+          ].detect { |m| respond_to? m }
+        end
+      end
+      extend CmsVersionsCompatibility
+      include CmsVersionsCompatibility
     end
   end
 end

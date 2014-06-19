@@ -1,7 +1,8 @@
 -# When rendering inside rails_email_preview hide nav, and hide irrelevant things from the form
 ruby:
-  snippet = @snippet || @record.is_a?(Cms::Snippet) && @record
-  if snippet && (p = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa.rep_email_params_from_snippet(snippet))
+  adapter = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa
+  snippet = @snippet || (adapter.cms_snippet_class === @record && @record)
+  if snippet && (p = adapter.rep_email_params_from_snippet(snippet))
     show_url = rails_email_preview.rep_raw_email_url(p.merge part_type: 'text/html')
   end
   customize_form = show_url.present? || snippet && !snippet.persisted?
