@@ -42,7 +42,7 @@ module RailsEmailPreview
       end
 
       def cms_email_edit_link(site, default_site, snippet_id)
-        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.new(
+        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.create(
             label:      "#{snippet_id.sub('-', ' / ').humanize}",
             identifier: snippet_id,
             site:       site
