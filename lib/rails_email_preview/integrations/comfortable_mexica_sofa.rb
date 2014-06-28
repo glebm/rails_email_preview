@@ -108,9 +108,9 @@ module RailsEmailPreview
 
       module CmsVersionsCompatibility
         def cms_admin_site_snippet_route
-          if respond_to?(:new_cms_admin_site_snippet_path)
+          if respond_to?(:new_comfy_admin_cms_site_snippet_path)
             # cms >= 1.11
-            :cms_admin_site_snippet
+            :comfy_admin_cms_site_snippet
           else
             :admin_cms_site_snippet
           end
