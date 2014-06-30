@@ -1,0 +1,17 @@
+source "http://rubygems.org"
+
+gemspec path: '../..'
+
+gem 'rails', '~> 4.1.2'
+
+# Force sass-rails ~> 4.0.2 to avoid sprockets error
+# See rails/sass-rails#191 for more information
+gem 'sass-rails', '~> 4.0.2'
+
+platform :rbx do
+  gem 'rubysl', '~> 2.0'
+  gem 'rubysl-test-unit', '~> 2.0'
+  gem 'racc'
+end
+
+gem 'coveralls', group: :test, require: false
