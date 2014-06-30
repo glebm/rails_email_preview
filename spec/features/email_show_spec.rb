@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'email show' do
+describe 'email show', :type => :feature do
   let(:url_args) { {preview_id: 'auth_mailer_preview-email_confirmation'} }
   it 'shows email' do
     visit rails_email_preview.rep_email_path(url_args)

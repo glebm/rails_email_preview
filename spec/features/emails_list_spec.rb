@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'emails list' do
+describe 'emails list', :type => :feature do
   it 'shows emails' do
     visit rails_email_preview.rep_root_path
     [I18n.t('rails_email_preview.emails.index.list_title'), 'Auth', 'Email confirmation', 'Newsletter', 'Weekly newsletter', '4 emails in 2 mailers'].each do |text|

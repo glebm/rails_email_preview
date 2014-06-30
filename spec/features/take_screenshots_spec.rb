@@ -1,6 +1,6 @@
 require 'spec_helper'
 unless ENV['TRAVIS']
-  describe 'Take screenshots', driver: :poltergeist do
+  describe 'Take screenshots', type: :feature, driver: :poltergeist do
     it 'list page' do
       visit rails_email_preview.rep_root_path
       screenshot! 'list'
