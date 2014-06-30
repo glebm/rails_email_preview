@@ -11,4 +11,4 @@ platform :rbx do
 end
 
 # a debugger that works with MRI 2.0.0
-gem 'byebug', platforms: :ruby_20, groups: [:development, :test]
+gem 'byebug', platforms: :ruby_21, groups: [:development, :test]
