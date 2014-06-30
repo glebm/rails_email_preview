@@ -117,20 +117,20 @@ module RailsEmailPreview
         end
 
         def cms_snippet_class
-          if defined?(Comfy)
+          if defined?(::Comfy)
             # cms >= 1.12
-            Comfy::Cms::Snippet
+            ::Comfy::Cms::Snippet
           else
-            Cms::Snippet
+            ::Cms::Snippet
           end
         end
 
         def cms_site_class
-          if defined?(Comfy)
+          if defined?(::Comfy)
             # cms >= 1.12
-            Comfy::Cms::Site
+            ::Comfy::Cms::Site
           else
-            Cms::Site
+            ::Cms::Site
           end
         end
 
