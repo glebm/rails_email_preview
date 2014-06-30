@@ -1,14 +1,14 @@
 language: ruby
 rvm:
   - 2.1.0
-  - 2.0.0
   - jruby
   - 1.9.3
-  - rbx
+  - rbx-2
 gemfile:
   - spec/gemfiles/Gemfile-rails-3-2
   # rails 4:
   - spec/gemfiles/Gemfile-rails-4-0
+  - spec/gemfiles/Gemfile-rails-4-1
 env:
   global:
     - TRAVIS=1
