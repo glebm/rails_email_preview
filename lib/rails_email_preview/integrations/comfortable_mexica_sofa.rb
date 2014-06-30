@@ -42,7 +42,7 @@ module RailsEmailPreview
       end
 
       def cms_email_edit_link(site, default_site, snippet_id)
-        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.new(
+        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.create(
             label:      "#{snippet_id.sub('-', ' / ').humanize}",
             identifier: snippet_id,
             site:       site
@@ -108,9 +108,9 @@ module RailsEmailPreview
 
       module CmsVersionsCompatibility
         def cms_admin_site_snippet_route
-          if respond_to?(:new_cms_admin_site_snippet_path)
+          if respond_to?(:new_comfy_admin_cms_site_snippet_path)
             # cms >= 1.11
-            :cms_admin_site_snippet
+            :comfy_admin_cms_site_snippet
           else
             :admin_cms_site_snippet
           end
