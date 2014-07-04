@@ -48,7 +48,7 @@ module RailsEmailPreview
             site:       site
         )
         p         = {site_id: site.id}
-        edit_path = if snippet
+        edit_path = if snippet.persisted?
                       p[:id] = snippet.id
                       if snippet.content.blank? && default_site && (default_snippet = default_site.snippets.find_by_identifier(snippet_id))
                         p[:snippet] = {
