@@ -12,9 +12,11 @@ module RailsEmailPreview
         "#{mailer.class.name.underscore}-#{action_name}"
       end
 
+      # @param [Hash] interpolation subject interpolation values
       # @return [String] Snippet title interpolated with passed variables
-      #   Example, snippet has title "Welcome, %{name}!":
-      #      cms_email_subject(name: "Alice") #=> "Welcome, Alice!"
+      #
+      # For a snippet with title "Welcome, %{name}!"
+      #     cms_email_subject(name: "Alice") #=> "Welcome, Alice!"
       def cms_email_subject(interpolation = {})
         snippet_id = "email-#{cms_email_id}"
         return '(no subject)' unless cms_snippet_class.where(identifier: snippet_id).exists?
