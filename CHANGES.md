@@ -1,7 +1,6 @@
 ## v0.2.21
-
-* Feature: Attachments. Thanks, @rzane!
-* CMS 1.12 compatibility
+* **Attachments**. Thanks, @rzane!
+* CMS: 1.12 compatibility, better error messages.
 
 ## v0.2.20
 
