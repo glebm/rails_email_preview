@@ -1,34 +1,39 @@
+---
 en:
   rep:
     base:
       email:
-        one: "1 email"
+        one: 1 email
         other: "%{count} emails"
       mailer:
-        one: "1 mailer"
+        one: 1 mailer
         other: "%{count} mailers"
-      in: "in"
-      loading: "Loading..."
+      in: in
+      loading: Loading...
     test_deliver:
-      no_delivery_method: "Please set 'config.action_mailer.delivery_method' to send emails in '%{environment}' environment"
-      provide_email: "Send to which address?"
-      sent_notice: "Sent to %{address} via %{delivery_method}"
+      no_delivery_method: Please set 'config.action_mailer.delivery_method' to send
+        emails in '%{environment}' environment
+      provide_email: Send to which address?
+      sent_notice: Sent to %{address} via %{delivery_method}
   layouts:
     rails_email_preview:
       application:
-        head_title: "Emails - REP"
+        head_title: Emails - REP
   rails_email_preview:
     emails:
       index:
-        list_title: "Application Emails"
+        list_title: Application Emails
       show:
-        breadcrumb_list: "Emails"
+        breadcrumb_list: Emails
       send_form:
-        send_are_you_sure: "This will actually send this email. Are you sure?"
-        send_btn: "Send to"
-        send_recipient_placeholder: "Email"
+        send_are_you_sure: This will actually send this email. Are you sure?
+        send_btn: Send to
+        send_recipient_placeholder: Email
   integrations:
     cms:
+      errors:
+        site_missing: Please create a CMS site for %{locale} first. When using multiple
+          locales the site should be Mirrored.
       customize_cms_for_rails_email_preview:
-        edit_email: "Editing email"
-        view_link: "View"
+        edit_email: Editing email
+        view_link: View

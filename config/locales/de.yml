@@ -1,34 +1,41 @@
+---
 de:
   rep:
     base:
       email:
-        one: "1 E-Mail"
+        one: 1 E-Mail
         other: "%{count} E-Mails"
       mailer:
-        one: "1 Mailer"
+        one: 1 Mailer
         other: "%{count} Mailer"
-      in: "in"
-      loading: "Lade..."
+      in: in
+      loading: Lade...
     test_deliver:
-      no_delivery_method: "Bitte setze 'config.action_mailer.delivery_method' um E-Mails in der „%{environment}“ Umgebung zu senden."
-      provide_email: "An welche Adresse senden?"
-      sent_notice: "Senden an %{address} mit %{delivery_method}"
+      no_delivery_method: Bitte setze 'config.action_mailer.delivery_method' um E-Mails
+        in der „%{environment}“ Umgebung zu senden.
+      provide_email: An welche Adresse senden?
+      sent_notice: Senden an %{address} mit %{delivery_method}
   layouts:
     rails_email_preview:
       application:
-        head_title: "E-Mails - REP"
+        head_title: E-Mails - REP
   rails_email_preview:
     emails:
       index:
-        list_title: "Anwendungs E-Mails"
+        list_title: Anwendungs E-Mails
       show:
-        breadcrumb_list: "E-Mails"
+        breadcrumb_list: E-Mails
       send_form:
-        send_are_you_sure: "Diese Aktion wird diese E-Mail wirklich versenden. Bist du sicher?"
-        send_btn: "Senden an"
-        send_recipient_placeholder: "E-Mails"
+        send_are_you_sure: Diese Aktion wird diese E-Mail wirklich versenden. Bist
+          du sicher?
+        send_btn: Senden an
+        send_recipient_placeholder: E-Mails
   integrations:
     cms:
       customize_cms_for_rails_email_preview:
-        edit_email: "E-Mail bearbeiten"
-        view_link: "Anzeigen"
+        edit_email: E-Mail bearbeiten
+        view_link: Anzeigen
+      errors:
+        site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei
+          der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt
+          werden.
