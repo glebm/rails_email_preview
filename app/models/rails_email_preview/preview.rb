@@ -15,10 +15,12 @@ module RailsEmailPreview
       %w(text/html text/plain raw)
     end
 
-    def preview_mail(run_hooks = false, company_alias = nil)
-      preview_class_name.constantize.new.send(preview_method).tap do |mail|
+    def preview_mail(run_hooks = false, search_query_params = {})
+      preview_instance = preview_class_name.constantize.new
+      setup_instance_variables(preview_instance, search_query_params)
+
+      preview_instance.send(preview_method).tap do |mail|
         RailsEmailPreview.run_before_render(mail, self) if run_hooks
-        mail.instance_variable_set('@company', company_alias) if company_alias
       end
     end
 
@@ -69,6 +71,14 @@ module RailsEmailPreview
         @all.sort_by!(&:name)
         @all_by_preview_class = @all.group_by(&:preview_class_name)
       end
+    end
+
+    private
+
+    def setup_instance_variables(object, params)
+      unless params.empty?
+        params.each { |k,v| object.instance_variable_set("@#{k}", v) }
+      end      
     end
   end
 end
