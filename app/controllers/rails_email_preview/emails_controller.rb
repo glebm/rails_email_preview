@@ -15,7 +15,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
       if @preview.respond_to?(:preview_mail)
-        @mail = @preview.preview_mail
+        @mail = @preview.preview_mail(false, params[:company_alias])
       else
         raise ArgumentError.new("#{@preview} is not a preview class, does not respond_to?(:preview_mail)")
       end

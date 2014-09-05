@@ -15,9 +15,10 @@ module RailsEmailPreview
       %w(text/html text/plain raw)
     end
 
-    def preview_mail(run_hooks = false)
+    def preview_mail(run_hooks = false, company_alias = nil)
       preview_class_name.constantize.new.send(preview_method).tap do |mail|
         RailsEmailPreview.run_before_render(mail, self) if run_hooks
+        mail.set_instance_variable('@company', company_alias) if company_alias
       end
     end
 
