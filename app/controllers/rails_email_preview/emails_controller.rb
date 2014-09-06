@@ -12,6 +12,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   # preview screen
   def show
+    prevent_browser_caching
     I18n.with_locale @email_locale do
       @part_type = params[:part_type] || 'text/html'
       if @preview.respond_to?(:preview_mail)
@@ -67,7 +68,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   def mail_body(preview, part_type, edit_links = (part_type == 'text/html'))
     RequestStore.store[:rep_edit_links] = true if edit_links
     mail = preview.preview_mail(true)
-    
+
     return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
 
     body_part = if mail.multipart?

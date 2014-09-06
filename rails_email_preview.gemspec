@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
-  s.add_development_dependency 'i18n-tasks', '>= 0.5.2'
+  s.add_development_dependency 'i18n-tasks', '>= 0.7.5'
   s.add_development_dependency 'capybara', '>= 2.3.0'
   s.add_development_dependency 'rspec', '>= 3.0.0'
   s.add_development_dependency 'rspec-rails'
