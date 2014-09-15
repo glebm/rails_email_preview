@@ -9,4 +9,7 @@ platform :rbx do
   gem 'racc'
 end
 
+group :development do
+  gem 'puma'
+end
 gem 'byebug', platforms: :mri_21, groups: [:development, :test]

@@ -10,7 +10,7 @@ unless defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
   end
 end
 
-require File.expand_path("../dummy/config/environment.rb", __FILE__)
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rails'

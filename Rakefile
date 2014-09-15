@@ -17,3 +17,18 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
+
+desc 'Start development web server'
+task :dev do
+  require 'puma'
+  require 'rails/commands/server'
+  ENV['RACK_ENV'] = ENV['RAILS_ENV'] = 'development'
+  Dir.chdir 'spec/dummy'
+  Rack::Server.start(
+      environment: 'development',
+      Host: 'localhost',
+      Port: 9292,
+      config: 'config.ru',
+      server: 'puma'
+  )
+end

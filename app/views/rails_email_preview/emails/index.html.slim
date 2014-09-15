@@ -1,9 +1,9 @@
 h1 = t '.list_title'
 
 div class=rep_row_class
-  - split_in_halves(@previews_by_class.keys) { |c| @previews_by_class[c].length }.each do |classes|
+  - split_in_halves(@previews_by_class.values, &:length).each do |mailers_previews|
     div class=rep_col_class(6)
-      - classes.map { |c| @previews_by_class[c] }.each do |previews|
+      - mailers_previews.each do |previews|
         h2 = previews[0].group_name
         div class=rep_style[:list_group_class]
           - previews.each do |p|
