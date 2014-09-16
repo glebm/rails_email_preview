@@ -1,31 +1,50 @@
 javascript:
-  (function(doc){
-    var rep = window.rep = window['rep'] || {
-       resizeIframe: function(id) {
-          var el = doc.getElementById(id);
-          if (!el) return;
-          var w = el.parentNode.clientWidth,
-              h = el.contentWindow.document.body.scrollHeight;
-          el.height = (h) + "px";
-          el.width  = (w) + "px";
-        },
-        iframeLoad: function(id){
-          document.getElementById('loading-el').style.display = 'none';
-          setTimeout(function() { rep.resizeIframe(id); rep.loaded = true; });
-        },
-        resizeAttached: false
-    };
+  (function(doc) {
+    var rep = window['rep'] || (window['rep'] = { resizeAttached: false });
     rep.loaded = false;
+
+    function findIframe() {
+      return doc.getElementById('src-iframe');
+    }
+
+    function resizeIframe() {
+      var el = findIframe();
+      if (!el) {
+        rep.loaded = false;
+        return;
+      }
+      var iframeBody = el.contentWindow.document.body;
+      if (iframeBody) {
+        el.style.height = (getBodyHeight(iframeBody)) + "px";
+      }
+    }
+
+    function getBodyHeight(body) {
+      // browser compat
+      return Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
+    }
+
+    // This is only called back once the iframe has finished loading everything, including images
+    rep.iframeOnLoad = function() {
+      rep.loaded = true;
+      resizeIframe();
+    };
+
+    // Resize on window resize
     if (!rep.resizeAttached) {
       window.addEventListener('resize', function() {
-        if (rep.loaded) rep.resizeIframe('src-iframe');
-      });
+        if (rep.loaded) resizeIframe();
+      }, true);
       rep.resizeAttached = true
     }
   })(document);
 
-pre#loading-el.lead
-  i.icon-spinner.icon-spin
-  |  #{t 'rep.base.loading'}
-iframe#src-iframe[src=rails_email_preview.rep_raw_email_url(params.slice(:preview_id, :part_type).merge(email_locale: @email_locale))
-  width="100%" height=1 onLoad="rep.iframeLoad('src-iframe')" style="border:none;padding:0;margin:0"]
+
+div style='min-height: 80px; position: relative'
+  .progress style='position: absolute; z-index: -1; width: 100%; text-align: center'
+    .progress-bar.progress-bar-striped.active style='width:100%'
+      = t 'rep.base.loading'
+
+  iframe#src-iframe[
+    srcdoc=(@mail_body_html.to_str) seamless="seamless" onload='rep.iframeOnLoad()'
+    style='width:100%;border:none;padding:0;margin:0;height:0']

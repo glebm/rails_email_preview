@@ -1,6 +1,14 @@
 ---
 en:
   rep:
+    headers:
+      subject: Subject
+      from: From
+      to: To
+      reply_to: Reply to
+      cc: CC
+      bcc: BCC
+      attachments: Attachments
     base:
       email:
         one: 1 email

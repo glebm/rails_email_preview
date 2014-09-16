@@ -32,17 +32,15 @@ module RailsEmailPreview::EmailsHelper
   end
 
   def headers_name_value
-    I18n.with_locale @email_locale do
-      {
-          'Subject'     => @mail.subject || '(no subject)',
-          'From'        => @mail.from,
-          'Reply to'    => @mail.reply_to,
-          'To'          => @mail.to,
-          'CC'          => @mail.cc,
-          'BCC'         => @mail.bcc,
-          'Attachments' => attachment_links
-      }.delete_if { |k, v| v.blank? }
-    end
+    {
+        t('rep.headers.subject')     => @mail.subject || '(no subject)',
+        t('rep.headers.from')        => @mail.from,
+        t('rep.headers.reply_to')    => @mail.reply_to,
+        t('rep.headers.to')          => @mail.to,
+        t('rep.headers.cc')          => @mail.cc,
+        t('rep.headers.bcc')         => @mail.bcc,
+        t('rep.headers.attachments') => attachment_links
+    }.delete_if { |k, v| v.blank? }
   end
 
   def format_header(value)

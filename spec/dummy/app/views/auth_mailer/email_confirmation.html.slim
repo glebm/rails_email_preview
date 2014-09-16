@@ -1,5 +1,15 @@
 p #{t 'dummy.hello'} user, here is your confirmation token: #{@token}
-blockquote: a href='http://google.com/' Confirm email address
+
+blockquote style="border: 1px solid green"
+  a href='http://google.com/' Confirm email address
+
+ol
+  li If you are using Resque::Mailer or Devise::Async, you can automatically add I18n.locale information when the mail job is scheduled with this initializer.
+  li REP displays too many locales? Make sure to set config.i18n.available_locales, since it defaults to all locales in Rails.
+  li User interface is available in English and German (Danke, @baschtl). You can set the language in config.to_prepare section of the initializer, default is English.
+  li If you are using Resque::Mailer or Devise::Async, you can automatically add I18n.locale information when the mail job is scheduled with this initializer.
+  li REP displays too many locales? Make sure to set config.i18n.available_locales, since it defaults to all locales in Rails.
+  li User interface is available in English and German (Danke, @baschtl). You can set the language in config.to_prepare section of the initializer, default is English.
 
 p: em
   | Thanks for registering! Enjoy!

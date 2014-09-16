@@ -15,6 +15,14 @@ de:
         in der „%{environment}“ Umgebung zu senden.
       provide_email: An welche Adresse senden?
       sent_notice: Senden an %{address} mit %{delivery_method}
+    headers:
+      subject: Betreff
+      from: Aus
+      to: Zu
+      reply_to: Beantworten
+      cc: CC
+      bcc: BCC
+      attachments: Anhänge
   layouts:
     rails_email_preview:
       application:
