@@ -58,6 +58,26 @@ class UserMailerPreview
 end
 ```
 
+### Parameters as instance variables
+ 
+All parameters in serach query (after ?) will be avaiable in SomethingMailerPreview class. For example, if URL to mailer preview looks like:
+
+```ruby
+/emails/user_mailer_preview-welcome?company_id=1
+```
+
+the method welcome in UserMailerPreview have @company_id variable defined:
+
+```ruby
+class UserMailerPreview
+
+  def welcome
+    company = Company.find(@company_id)
+  end
+
+end
+```
+
 
 ## Routing
 

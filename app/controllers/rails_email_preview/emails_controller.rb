@@ -26,7 +26,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   end
 
   def show_attachment
-    @mail = @preview.preview_mail
+    @mail = preview_mail(false)
     attachment = @mail.attachments.find { |a| a.filename == "#{params[:filename]}.#{request.format.symbol}" }
     send_data attachment.body.raw_source
   end
@@ -38,7 +38,7 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       return
     end
     with_email_locale do
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(@preview.preview_mail(true), to: address, cc: nil, bcc: nil)
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview_mail(true), to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
     end
     if !(delivery_method = Rails.application.config.action_mailer.delivery_method)
@@ -70,9 +70,13 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
 
   def mail_and_body
     RequestStore.store[:rep_edit_links] = (@part_type == 'text/html')
-    mail = @preview.preview_mail(true)
+    mail = preview_mail(true)
     body = mail_body_content(mail, @part_type)
     [mail, body]
+  end
+
+  def preview_mail(run_handlers)
+    @preview.preview_mail(run_handlers, params.except(*request.path_parameters.keys))
   end
 
   def mail_body_content(mail, part_type)
