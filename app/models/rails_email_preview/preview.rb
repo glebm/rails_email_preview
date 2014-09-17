@@ -1,5 +1,5 @@
 module RailsEmailPreview
-  # This class represents an email preview
+  # Preview for one mailer method
   class Preview
     attr_accessor :id, :preview_class_name, :preview_method
 
@@ -43,7 +43,7 @@ module RailsEmailPreview
 
       alias_method :[], :find
 
-      attr_reader :all, :all_by_preview_class
+      attr_reader :all
 
       def mail_methods(mailer)
         mailer.public_instance_methods(false).map(&:to_s)
@@ -69,7 +69,6 @@ module RailsEmailPreview
           end
         end
         @all.sort_by!(&:name)
-        @all_by_preview_class = @all.group_by(&:preview_class_name)
       end
     end
 
@@ -78,7 +77,7 @@ module RailsEmailPreview
     def setup_instance_variables(object, params)
       unless params.empty?
         params.each { |k,v| object.instance_variable_set("@#{k}", v) }
-      end      
+      end
     end
   end
 end

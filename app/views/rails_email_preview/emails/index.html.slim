@@ -1,17 +1,20 @@
+ruby:
+  list     = @list
+  previews = @previews
+
 h1 = t '.list_title'
 
 div class=rep_row_class
-  - split_in_halves(@previews_by_class.values, &:length).each do |mailers_previews|
+  - list.columns do |groups|
     div class=rep_col_class(6)
-      - mailers_previews.each do |previews|
-        h2 = previews[0].group_name
+      - groups.each do |title, group_previews|
+        h2 = title
         div class=rep_style[:list_group_class]
-          - previews.each do |p|
-            a class=rep_style[:list_group_item_class] href=rails_email_preview.rep_email_url(preview_id: p.id, email_locale: @email_locale)
+          - group_previews.each do |p|
+            a class=rep_style[:list_group_item_class] href=rails_email_preview.rep_email_path(preview_id: p.id, email_locale: @email_locale)
               = p.method_name
-
 hr
 p.text-center.text-small.text-info
-  | #{t 'rep.base.email', count: @previews.length} #{t 'rep.base.in'} #{t 'rep.base.mailer', count: @previews_by_class.values.length }
+  | #{t 'rep.base.email', count: previews.length} #{t 'rep.base.in'} #{t 'rep.base.mailer', count: list.groups.length }
   br
   a href="https://github.com/glebm/rails_email_preview" target='_blank' REP #{RailsEmailPreview::VERSION}
