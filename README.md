@@ -67,7 +67,7 @@ end
 All parameters in the search query will be available to the preview class as instance variables.
 For example, if URL to mailer preview looks like:
 
-```ruby
+```
 /emails/user_mailer_preview-welcome?user_id=1
 ```
 
@@ -205,6 +205,20 @@ Rails.application.config.to_prepare do
     end
   end
 end
+```
+
+## Development
+
+Run the tests:
+
+```console
+$ rspec
+```
+
+Start a development web server on [localhost:9292](http://localhost:9292):
+
+```console
+$ rake dev
 ```
 
 This project rocks and uses MIT-LICENSE.
