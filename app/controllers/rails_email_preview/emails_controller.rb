@@ -53,6 +53,11 @@ module RailsEmailPreview
       end
     end
 
+    # Used by CMS integration to refetch header after editing
+    def headers
+      render partial: 'rails_email_preview/emails/headers', locals: {mail: mail_and_body.first}
+    end
+
     # Used by the CMS integration to provide a link back to Show inside the edit iframe
     def show_body
       prevent_browser_caching

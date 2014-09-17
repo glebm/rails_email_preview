@@ -1,4 +1,4 @@
 dl.rep-headers-list.dl-horizontal
-  - headers_name_value.each do |name, value|
+  - human_headers mail do |name, value|
     dt = name
-    dd = format_header value
+    dd = value

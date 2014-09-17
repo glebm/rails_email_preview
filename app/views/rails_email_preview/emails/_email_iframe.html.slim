@@ -28,6 +28,21 @@ javascript:
     rep.iframeOnLoad = function() {
       rep.loaded = true;
       resizeIframe();
+
+      // CMS refresh headers hook
+      if (rep.fetchHeadersOnNextLoad) {
+        rep.fetchHeadersOnNextLoad = false;
+        var headersView = doc.getElementById('email-headers'),
+            xhr = new XMLHttpRequest();
+        xhr.open('GET', headersView.getAttribute('data-url'), true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            headersView.innerHTML = xhr.responseText;
+          }
+        }
+      }
     };
 
     // Resize on window resize

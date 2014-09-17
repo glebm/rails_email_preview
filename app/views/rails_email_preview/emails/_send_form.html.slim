@@ -1,5 +1,5 @@
 .clearfix: .pull-right style="max-width: 250px"
-  = form_tag rails_email_preview.rep_test_deliver_url(params: params.except(*request.path_parameters.keys)), method: :post do
+  = form_tag rails_email_preview.rep_test_deliver_url(params: preview_params), method: :post do
     = hidden_field_tag :email_locale, @email_locale
     .input-group
       span.input-group-btn: button.btn.btn-danger type='submit' data-confirm=t('.send_are_you_sure') #{t('.send_btn')}
