@@ -1,13 +1,9 @@
 # -*- encoding : utf-8 -*-
 # Configure Rails Environment
 ENV['RAILS_ENV'] = ENV['RACK_ENV'] = 'test'
-unless defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
-  begin
-    require 'coveralls'
-    Coveralls.wear! 'rails'
-  rescue LoadError
-    false
-  end
+if ENV['TRAVIS'] && !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
 end
 
 require File.expand_path('../dummy/config/environment.rb', __FILE__)

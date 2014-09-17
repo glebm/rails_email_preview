@@ -9,7 +9,14 @@ platform :rbx do
   gem 'racc'
 end
 
+group :test, :development do
+  gem 'byebug', platform: :mri_21, require: false
+end
+
 group :development do
   gem 'puma'
 end
-gem 'byebug', platforms: :mri_21, groups: [:development, :test]
+
+group :test do
+  gem 'codeclimate-test-reporter', require: nil
+end

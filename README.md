@@ -1,4 +1,4 @@
-# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge]][gem] [![Code Climate][codeclimate-badge]][codeclimate]
+# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge]][gem] [![Code Climate][codeclimate-badge]][codeclimate] [![Test Coverage][coverage-badge]][coverage]
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
@@ -224,5 +224,5 @@ This project rocks and uses MIT-LICENSE.
 [gem-badge]: http://img.shields.io/gem/v/rails_email_preview.svg
 [codeclimate]: https://codeclimate.com/github/glebm/rails_email_preview
 [codeclimate-badge]: http://img.shields.io/codeclimate/github/glebm/rails_email_preview.svg
-[coveralls]: https://coveralls.io/r/glebm/rails_email_preview
-[coveralls-badge]: http://img.shields.io/coveralls/glebm/rails_email_preview.svg
+[coverage]: https://codeclimate.com/github/glebm/rails_email_preview
+[coverage-badge]: https://codeclimate.com/github/glebm/rails_email_preview/badges/coverage.svg
