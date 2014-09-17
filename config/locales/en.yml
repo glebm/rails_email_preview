@@ -19,8 +19,7 @@ en:
       in: in
       loading: Loading...
     test_deliver:
-      no_delivery_method: Please set 'config.action_mailer.delivery_method' to send
-        emails in '%{environment}' environment
+      no_delivery_method: Please set 'config.action_mailer.delivery_method' to send emails in '%{environment}' environment
       provide_email: Send to which address?
       sent_notice: Sent to %{address} via %{delivery_method}
   layouts:
@@ -40,8 +39,7 @@ en:
   integrations:
     cms:
       errors:
-        site_missing: Please create a CMS site for %{locale} first. When using multiple
-          locales the site should be Mirrored.
+        site_missing: Please create a CMS site for %{locale} first. When using multiple locales the site should be Mirrored.
       customize_cms_for_rails_email_preview:
         edit_email: Editing email
         view_link: View

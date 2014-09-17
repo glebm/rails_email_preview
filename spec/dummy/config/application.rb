@@ -10,7 +10,7 @@ require 'rails_email_preview'
 
 module Dummy
   class Application < Rails::Application
-    config.i18n.available_locales = [:es, :en, :de]
+    config.i18n.available_locales = [:es, :en, :de, :ru]
     config.i18n.default_locale = :en
 
     # Rails 3

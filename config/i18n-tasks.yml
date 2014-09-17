@@ -1,9 +1,10 @@
 base_locale: en
-locales: [en, de]
+locales: [en, de, ru]
 search:
   paths:
   - app/
   - lib/
-ignore_eq_base:
-  en,de:
-  - rep.base.in
+data:
+  yaml:
+    write:
+      line_width: -1

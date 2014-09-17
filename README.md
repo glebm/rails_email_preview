@@ -141,7 +141,7 @@ If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add 
 
 REP displays too many locales? Make sure to set `config.i18n.available_locales`, since it defaults to *all* locales in Rails.
 
-User interface is available in English and German (Danke, @baschtl).
+User interface is available in English, German (Danke, @baschtl), and Russian.
 You can set the language in `config.to_prepare` section of the initializer, default is English.
 
 ```ruby

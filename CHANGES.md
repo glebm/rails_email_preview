@@ -1,7 +1,8 @@
 ## v0.2.22
 
 * Preview parameters. Merged from @OlgaGr's fork, thank you!
-* Faster loading using srcdoc iframe attribute, new progress bar
+* Faster loading using `srcdoc` iframe attribute; new progress bar.
+* New language: Russian.
 
 ## v0.2.21
 

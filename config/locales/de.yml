@@ -11,8 +11,7 @@ de:
       in: in
       loading: Lade...
     test_deliver:
-      no_delivery_method: Bitte setze 'config.action_mailer.delivery_method' um E-Mails
-        in der „%{environment}“ Umgebung zu senden.
+      no_delivery_method: Bitte setze 'config.action_mailer.delivery_method' um E-Mails in der „%{environment}“ Umgebung zu senden.
       provide_email: An welche Adresse senden?
       sent_notice: Senden an %{address} mit %{delivery_method}
     headers:
@@ -34,8 +33,7 @@ de:
       show:
         breadcrumb_list: E-Mails
       send_form:
-        send_are_you_sure: Diese Aktion wird diese E-Mail wirklich versenden. Bist
-          du sicher?
+        send_are_you_sure: Diese Aktion wird diese E-Mail wirklich versenden. Bist du sicher?
         send_btn: Senden an
         send_recipient_placeholder: E-Mails
   integrations:
@@ -44,6 +42,4 @@ de:
         edit_email: E-Mail bearbeiten
         view_link: Anzeigen
       errors:
-        site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei
-          der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt
-          werden.
+        site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt werden.
