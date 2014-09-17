@@ -1,4 +1,10 @@
+## v0.2.22
+
+* Preview parameters. Merged from @OlgaGr's fork, thank you!
+* Faster loading using srcdoc iframe attribute, new progress bar
+
 ## v0.2.21
+
 * **Attachments**. Thanks, @rzane!
 * CMS: 1.12 compatibility, better error messages.
 

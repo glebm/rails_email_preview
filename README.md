@@ -16,7 +16,7 @@ REP can use the application styles, markup is compatible with [bootstrap 3][rep-
 Add to Gemfile
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.21'
+gem 'rails_email_preview', '~> 0.2.22'
 ```
 
 REP handles setup for you:
@@ -35,21 +35,21 @@ This last generator will add a stub for each of your emails, then you populate t
 # app/mailer_previews/user_mailer_preview.rb:
 class UserMailerPreview
   # preview methods should return Mail objects, e.g.:
-  def invitation        
+  def invitation
     UserMailer.invitation mock_user('Alice'), mock_user('Bob')
   end
-        
-  def welcome                
-    UserMailer.welcome mock_user                            
+
+  def welcome
+    UserMailer.welcome mock_user
   end
-  
+
   private
   # You can put all your mock helpers in a module
   # or you can use your factories / fabricators, just make sure you are not creating anythin
   def mock_user(name = 'Bill Gates')
     fake_id User.new(name: name, email: "user#{rand 100}@test.com")
   end
-  
+
   def fake_id(obj)
     # overrides the method on just this object
     obj.define_singleton_method(:id) { 123 + rand(100) }
@@ -59,22 +59,22 @@ end
 ```
 
 ### Parameters as instance variables
- 
-All parameters in serach query (after ?) will be avaiable in SomethingMailerPreview class. For example, if URL to mailer preview looks like:
+
+All parameters in the search query will be available to the preview class as instance variables.
+For example, if URL to mailer preview looks like:
 
 ```ruby
-/emails/user_mailer_preview-welcome?company_id=1
+/emails/user_mailer_preview-welcome?user_id=1
 ```
 
-the method welcome in UserMailerPreview have @company_id variable defined:
+The method `welcome` in `UserMailerPreview` have a `@user_id` instance variable defined:
 
 ```ruby
 class UserMailerPreview
-
   def welcome
-    company = Company.find(@company_id)
+    user = @user_id ? User.find(@user_id) : mock_company
+    UserMailer.welcome(user)
   end
-
 end
 ```
 
@@ -123,7 +123,7 @@ REP expects emails to use current `I18n.locale`:
 
 ```ruby
 # current locale
-AccountMailer.some_notification.deliver     
+AccountMailer.some_notification.deliver
 # different locale
 I18n.with_locale('es') { InviteMailer.send_invites.deliver }
 
@@ -136,7 +136,7 @@ rails_email_preview.root_url(email_locale: 'es')
 ```
 
 
-If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add I18n.locale information when the mail job is scheduled 
+If you are using `Resque::Mailer` or `Devise::Async`, you can automatically add I18n.locale information when the mail job is scheduled
 [with this initializer](https://gist.github.com/glebm/5725347).
 
 REP displays too many locales? Make sure to set `config.i18n.available_locales`, since it defaults to *all* locales in Rails.
@@ -184,7 +184,7 @@ RailsEmailPreview.style[:column_class] = 'column-%{n}'
 You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import 'rails_email_preview/layout'` for SASS).
 
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
-e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks. 
+e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks.
 
 ## Authentication & authorization
 
@@ -201,13 +201,13 @@ Alternatively, to have custom rules just for REP you can:
 Rails.application.config.to_prepare do
   RailsEmailPreview::ApplicationController.module_eval do
     before_filter :check_rep_permissions
-  
+
     private
     def check_rep_permissions
        render status: 403 unless current_user && can_manage_emails?(current_user)
     end
   end
-end 
+end
 ```
 
 
