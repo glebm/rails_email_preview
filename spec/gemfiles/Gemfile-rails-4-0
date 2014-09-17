@@ -13,4 +13,4 @@ platform :rbx do
   gem 'racc'
 end
 
-gem 'coveralls', group: :test, require: false
+gem 'codeclimate-test-reporter', group: :test, require: false

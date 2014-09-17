@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
 gemspec
 
@@ -15,8 +15,4 @@ end
 
 group :development do
   gem 'puma'
-end
-
-group :test do
-  gem 'codeclimate-test-reporter', require: false
 end
