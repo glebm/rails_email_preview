@@ -12,3 +12,7 @@ gemfile:
 env:
   global:
     - TRAVIS=1
+matrix:
+  allow_failures:
+    # https://github.com/rubinius/rubinius/issues/3050
+    - rbx: 2.2.10
