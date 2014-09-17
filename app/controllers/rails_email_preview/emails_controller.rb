@@ -5,15 +5,16 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
   before_filter :set_email_preview_locale
   helper_method :with_email_locale
 
-  # list screen
+  # List of emails
   def index
     @previews = ::RailsEmailPreview::Preview.all
     @previews_by_class = ::RailsEmailPreview::Preview.all_by_preview_class
   end
 
-  # preview screen
+  # Preview an email
   def show
     prevent_browser_caching
+    cms_edit_links!
     with_email_locale do
       @part_type = params[:part_type] || 'text/html'
       if @preview.respond_to?(:preview_mail)
@@ -25,12 +26,14 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
+  # Download attachment
   def show_attachment
-    @mail = preview_mail(false)
-    attachment = @mail.attachments.find { |a| a.filename == "#{params[:filename]}.#{request.format.symbol}" }
+    filename   = "#{params[:filename]}.#{request.format.symbol}"
+    attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
     send_data attachment.body.raw_source
   end
 
+  # Really deliver an email
   def test_deliver
     redirect_url = rails_email_preview.rep_email_url(params.slice(:preview_id, :email_locale))
     if (address = params[:recipient_email]).blank? || address !~ /@/
@@ -38,26 +41,28 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       return
     end
     with_email_locale do
-      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview_mail(true), to: address, cc: nil, bcc: nil)
+      delivery_handler = RailsEmailPreview::DeliveryHandler.new(preview_mail, to: address, cc: nil, bcc: nil)
       deliver_email!(delivery_handler.mail)
     end
-    if !(delivery_method = Rails.application.config.action_mailer.delivery_method)
-      redirect_to redirect_url, alert: t('rep.test_deliver.no_delivery_method', environment: Rails.env)
-    else
+    delivery_method = Rails.application.config.action_mailer.delivery_method
+    if delivery_method
       redirect_to redirect_url, notice: t('rep.test_deliver.sent_notice', address: address, delivery_method: delivery_method)
+    else
+      redirect_to redirect_url, alert: t('rep.test_deliver.no_delivery_method', environment: Rails.env)
     end
   end
 
-  # Used by the CMS integration to provide a link inside the iframe
+  # Used by the CMS integration to provide a link back to Show inside the edit iframe
   def show_body
     prevent_browser_caching
+    cms_edit_links!
     with_email_locale do
       _, body = mail_and_body
       render inline: body, layout: 'rails_email_preview/email'
     end
   end
 
-  protected
+  private
 
   def deliver_email!(mail)
     # support deliver! if present
@@ -68,17 +73,23 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
     end
   end
 
+  # Load mail and its body for preview
+  # @return [[Mail, String]] the mail object and its body
   def mail_and_body
-    RequestStore.store[:rep_edit_links] = (@part_type == 'text/html')
-    mail = preview_mail(true)
+    mail = preview_mail
     body = mail_body_content(mail, @part_type)
     [mail, body]
   end
 
-  def preview_mail(run_handlers)
+  # @param [Boolean] run_handlers whether to run the registered handlers for Mail object
+  # @return [Mail]
+  def preview_mail(run_handlers = true)
     @preview.preview_mail(run_handlers, params.except(*request.path_parameters.keys))
   end
 
+  # @param [Mail] mail
+  # @param ['html', 'plain', 'raw']
+  # @return [String] version of the email for HTML
   def mail_body_content(mail, part_type)
     return "<pre id='raw_message'>#{html_escape(mail.to_s)}</pre>".html_safe if part_type == 'raw'
 
@@ -123,7 +134,12 @@ class RailsEmailPreview::EmailsController < ::RailsEmailPreview::ApplicationCont
       I18n.locale = locale_was
     end
   end
-  private
+
+  # Let REP's `cms_email_snippet` know to render an Edit link
+  # Todo: Refactoring is welcome here
+  def cms_edit_links!
+    RequestStore.store[:rep_edit_links] = (@part_type == 'text/html')
+  end
 
   def load_preview
     @preview     = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
