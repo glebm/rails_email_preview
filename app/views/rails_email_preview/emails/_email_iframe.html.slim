@@ -52,11 +52,16 @@ javascript:
       }, true);
       rep.resizeAttached = true
     }
+
+    // Only show progress bar after some time to avoid flashing
+    setTimeout(function() {
+      doc.getElementById('email-progress-bar').style.display = 'block';
+    }, 200);
   })(document);
 
 
 div style='min-height: 400px; position: relative'
-  .progress style='position: absolute; z-index: -1; width: 100%; text-align: center'
+  #email-progress-bar.progress style='display: none; position: absolute; z-index: -1; width: 100%; text-align: center'
     .progress-bar.progress-bar-striped.active style='width:100%'
       = t 'rep.base.loading'
 

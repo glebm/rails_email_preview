@@ -1,6 +1,7 @@
 ## v0.2.22
 
-* Preview parameters. Merged from @OlgaGr's fork, thank you!
+* **Preview params** set from URL query. Thank you, @OlgaGr!
+* Routes now include locale and part type as segments (with defaults).
 * Faster loading using `srcdoc` iframe attribute; new progress bar.
 * New language: Russian.
 * Minor bugfixes.

@@ -1,4 +1,4 @@
-.pull-right style='max-width: 290px'
+.rep-send-to-wrapper style='max-width: 290px; display: inline-block'
   = form_tag rails_email_preview.rep_test_deliver_url(params: preview_params), method: :post do
     = hidden_field_tag :email_locale, @email_locale
     span.input-group.input-group-sm
