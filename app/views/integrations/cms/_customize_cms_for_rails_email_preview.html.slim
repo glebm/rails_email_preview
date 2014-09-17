@@ -3,7 +3,7 @@ ruby:
   adapter = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa
   snippet = @snippet || (adapter.cms_snippet_class === @record && @record)
   if snippet && (p = adapter.rep_email_params_from_snippet(snippet))
-    show_url = rails_email_preview.rep_raw_email_url(p.merge part_type: 'text/html')
+    show_url = rails_email_preview.rep_raw_email_url(p)
   end
   customize_form = show_url.present? || snippet && !snippet.persisted?
 
@@ -18,6 +18,9 @@ ruby:
         var showUrl = '#{show_url}';
 
         if (showUrl) {
+          var parentParams = parent.location.search;
+          if (!/\?/.test(showUrl)) showUrl += '?';
+          showUrl = showUrl.replace(/\?.*$/, parentParams);
           $('.page-header h2').html(
             "#{t '.edit_email'}" + " <a class='btn btn-primary' href='" + showUrl + "'>#{t '.view_link'}</a>");
         }
