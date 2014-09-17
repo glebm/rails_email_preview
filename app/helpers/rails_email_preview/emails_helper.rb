@@ -1,9 +1,9 @@
 module RailsEmailPreview::EmailsHelper
 
-  MIME_LABELS = { 'text/html' => 'HTML', 'text/plain' => 'Text', 'raw' => 'Raw'}
+  FORMAT_LABELS = { 'html' => 'HTML', 'plain' => 'Text', 'raw' => 'Raw'}
 
   def format_label(mime_type)
-    MIME_LABELS[mime_type]
+    FORMAT_LABELS[mime_type]
   end
 
   def change_locale_attr(locale)
@@ -11,9 +11,9 @@ module RailsEmailPreview::EmailsHelper
      class: rep_btn_class(@email_locale == locale.to_s)}
   end
 
-  def change_format_attr(mime)
-    {href: rails_email_preview.rep_email_path(preview_params.merge(part_type: mime)),
-     class: rep_btn_class(@part_type == mime)}
+  def change_format_attr(format)
+    {href: rails_email_preview.rep_email_path(preview_params.merge(part_type: format)),
+     class: rep_btn_class(@part_type == format)}
   end
 
   def locale_name(locale)

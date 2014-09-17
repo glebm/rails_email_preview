@@ -17,7 +17,6 @@ module RailsEmailPreview
       prevent_browser_caching
       cms_edit_links!
       with_email_locale do
-        @part_type = params[:part_type] || 'text/html'
         if @preview.respond_to?(:preview_mail)
           @mail, body     = mail_and_body
           @mail_body_html = render_to_string inline: body, layout: 'rails_email_preview/email'
@@ -144,12 +143,12 @@ module RailsEmailPreview
     # Let REP's `cms_email_snippet` know to render an Edit link
     # Todo: Refactoring is especially welcome here
     def cms_edit_links!
-      RequestStore.store[:rep_edit_links] = (@part_type == 'text/html')
+      RequestStore.store[:rep_edit_links] = (@part_type == 'html')
     end
 
     def load_preview
       @preview = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
-      @part_type = params[:part_type] || 'text/html'
+      @part_type = params[:part_type] || 'html'
     end
   end
 end

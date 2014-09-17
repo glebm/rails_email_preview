@@ -12,7 +12,7 @@ module RailsEmailPreview
     end
 
     def formats
-      %w(text/html text/plain raw)
+      %w(html plain raw)
     end
 
     def preview_mail(run_hooks = false, search_query_params = {})
