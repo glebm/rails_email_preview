@@ -6,6 +6,8 @@ describe 'email show', :type => :feature do
     visit rails_email_preview.rep_email_path(url_args)
     expect(page).to have_content('Dummy Email Confirmation')
     expect(page).to have_content I18n.t('rails_email_preview.emails.show.breadcrumb_list', locale: :en)
+    expect(page).to have_content 'Hook before headers_and_nav'
+    expect(page).to have_content 'Hook after headers_content'
   end
 
   it 'shows email in de' do

@@ -1,4 +1,5 @@
-span class=rep_btn_group_class
-  - @preview.locales.each do |locale|
-    a *change_locale_attr(locale)
-      = locale_name locale
+p
+  span class=rep_btn_group_class
+    - @preview.locales.each do |locale|
+      a *change_locale_attr(locale)
+        = locale_name locale

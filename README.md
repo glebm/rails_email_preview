@@ -67,20 +67,20 @@ end
 All parameters in the search query will be available to the preview class as instance variables.
 For example, if URL to mailer preview looks like:
 
-```
-/emails/user_mailer_preview-welcome?user_id=1
-```
+/emails/user_mailer_preview-welcome?**user_id=1**
 
 The method `welcome` in `UserMailerPreview` have a `@user_id` instance variable defined:
 
 ```ruby
 class UserMailerPreview
   def welcome
-    user = @user_id ? User.find(@user_id) : mock_company
+    user = @user_id ? User.find(@user_id) : mock_user
     UserMailer.welcome(user)
   end
 end
 ```
+
+Now you can preview or send the welcome email to a specific user.
 
 ### Routing
 
@@ -163,29 +163,32 @@ Rails.application.config.to_prepare do
 end
 ```
 
-REP also allows you to customize some of the element classes via `RailsEmailPreview.style`:
-
-```ruby
-RailsEmailPreview.style = {
-  btn_default_class:     'btn btn-default',
-  btn_active_class:      'btn btn-primary active',
-  btn_group_class:       'btn-group',
-  list_group_class:      'list-group',
-  list_group_item_class: 'list-group-item',
-  panel_class:           'panel',
-  row_class:             'row',
-  column_class:          'col-%{n}'
-}
-```
-
 You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import 'rails_email_preview/layout'` for SASS).
 
+REP also allows you to customize some of the element classes via [`RailsEmailPreview.style`](/blob/master/lib/rails_email_preview.rb#L34).
+
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
-e.g. `app/views/rails_email_preview/emails/index.html.slim`. *PRs accepted* if you need hooks.
+e.g. `app/views/rails_email_preview/emails/index.html.slim`.
+
+#### Hooks
+
+You can inject or replace UI selectively using view hooks. Register view hooks in the initializer:
+
+```ruby
+# Pass position (before, after, or replace) and render arguments:
+RailsEmailPreview.view_hooks.add_render :list, :before, partial: 'shared/hello'
+
+# Pass hook id and position (before, after, or replace):
+RailsEmailPreview.view_hooks.add :headers_content, :after do |mail:, preview:|
+  raw "<dt>ID</dt><dd>#{h mail.header['X-APP-EMAIL-ID']}</dd>"
+end
+```
+
+All available hooks can be found [here](/blob/master/lib/rails_email_preview/view_hooks.rb#L10).
 
 ### Authentication & authorization
 
-You can specify the parent controller for REP controller, and it will inherit all before filters.
+You can specify the parent controller for REP controller, and it will inherit all the before filters.
 Note that this must be placed before any other references to REP application controller in the initializer (and before `layout=` call):
 
 ```ruby

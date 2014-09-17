@@ -1,8 +1,13 @@
+## v0.2.23
+
+* **View hooks** to inject or replace UI selectively.
+* Fix regression in attachments caused by having a controller action named `headers` (name conflict).
+
 ## v0.2.22
 
 * **Preview params** set from URL query. Thank you, @OlgaGr!
 * Routes now include locale and part type as segments (with defaults).
-* Faster loading using `srcdoc` iframe attribute; new progress bar.
+* Faster loading using **srcdoc** iframe attribute; new progress bar.
 * New language: Russian.
 * Minor bugfixes.
 

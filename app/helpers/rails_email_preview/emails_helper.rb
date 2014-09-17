@@ -76,4 +76,25 @@ module RailsEmailPreview::EmailsHelper
   def rep_btn_group_class
     rep_style[:btn_group_class]
   end
+
+
+  def with_index_hook(key, &block)
+    render_hook key, list: @list, previews: @previews, &block
+  end
+
+  def with_show_hook(key, &block)
+    render_hook key, mail: @mail, preview: @preview, &block
+  end
+
+  def render_hook(key, args, &block)
+    view_hooks.render(key, args, self, &block)
+  end
+
+  def hook?(key)
+    view_hooks.for?(key)
+  end
+
+  def view_hooks
+    RailsEmailPreview.view_hooks
+  end
 end

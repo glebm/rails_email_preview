@@ -1,4 +1,6 @@
-dl.rep-headers-list.dl-horizontal
-  - human_headers mail do |name, value|
-    dt = name
-    dd = value
+= with_show_hook :headers do
+  dl.rep-headers-list.dl-horizontal
+    = with_show_hook :headers_content do
+      - human_headers mail do |name, value|
+        dt = name
+        dd = value

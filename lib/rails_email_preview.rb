@@ -3,6 +3,7 @@ require 'rails_email_preview/engine'
 require 'rails_email_preview/main_app_route_delegator'
 require 'rails_email_preview/version'
 require 'rails_email_preview/delivery_handler'
+require 'rails_email_preview/view_hooks'
 
 require 'slim'
 require 'slim-rails'
@@ -43,7 +44,10 @@ module RailsEmailPreview
       column_class:          'col-sm-%{n}'
   }
 
+  @view_hooks = RailsEmailPreview::ViewHooks.new
   class << self
+    # @return [RailsEmailPreview::ViewHooks]
+    attr_reader :view_hooks
     def preview_classes=(classes)
       @preview_classes = classes
       RailsEmailPreview::Preview.load_all(classes)

@@ -5,21 +5,9 @@
         li: a href=rails_email_preview.rep_emails_path(email_locale: @email_locale) #{t '.breadcrumb_list'}
         li.active: a href=(request.path) = @preview.name
 
-  div class=rep_style[:panel_class]
-    div class=rep_style[:panel_body_class]
-      div class=rep_style[:row_class]
-        -# From, To, Subject and other headers
-        #email-headers data-url=rails_email_preview.rep_email_headers_path(preview_params) class=rep_col_class(8)
-          = render 'rails_email_preview/emails/headers', mail: @mail
-        -# Locale, format and actions
-        .text-right class=rep_col_class(4)
-          .rep-email-options.text-right
-            - if I18n.available_locales.length > 1
-              p= render 'rails_email_preview/emails/i18n_nav'
-            p= render 'rails_email_preview/emails/format_nav'
-            - if RailsEmailPreview.enable_send_email
-              = render 'rails_email_preview/emails/send_form'
+  = with_show_hook :headers_and_nav do
+    = render 'rails_email_preview/emails/headers_and_nav'
 
-
-  -# actual email content, rendered in an iframe to prevent browser styles from interfering
-  = render 'rails_email_preview/emails/email_iframe'
+  = with_show_hook :email_body do
+    / actual email content, rendered in an iframe to prevent browser styles from interfering
+    = render 'rails_email_preview/emails/email_iframe'
