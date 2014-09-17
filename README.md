@@ -1,4 +1,4 @@
-# Rails Email Preview [![Build Status][travis-badge]][travis] [![Gem Version][gem-badge]][gem] [![Code Climate][codeclimate-badge]][codeclimate] [![Test Coverage][coverage-badge]][coverage]
+# Rails Email Preview [![Build Status][travis-badge]][travis] [![Test Coverage][coverage-badge]][coverage] [![Code Climate][codeclimate-badge]][codeclimate]
 
 A Rails Engine to preview plain text and html email in your browser. Compatible with Rails 3 and 4.
 
@@ -13,7 +13,7 @@ REP can use the application styles, markup is compatible with [bootstrap 3][rep-
 
 ## How to
 
-Add to Gemfile
+Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
 gem 'rails_email_preview', '~> 0.2.22'
