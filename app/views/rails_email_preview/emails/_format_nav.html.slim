@@ -1,5 +1,5 @@
-div class=rep_btn_group_class
+span class=rep_btn_group_class
   - @preview.formats.each do |format|
-    a.btn-xs *change_format_attr(format)
+    a *change_format_attr(format)
       = format_label format
 

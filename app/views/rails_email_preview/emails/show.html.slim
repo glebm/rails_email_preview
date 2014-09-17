@@ -12,13 +12,14 @@
         #email-headers data-url=rails_email_preview.rep_email_headers_path(preview_params) class=rep_col_class(8)
           = render 'rails_email_preview/emails/headers', mail: @mail
         -# Locale, format and actions
-        div class=rep_col_class(4)
-          ul.list-unstyled.text-right.rep-email-options
+        .text-right class=rep_col_class(4)
+          .rep-email-options.text-right
             - if I18n.available_locales.length > 1
-              li= render 'rails_email_preview/emails/i18n_nav'
+              p= render 'rails_email_preview/emails/i18n_nav'
+            p= render 'rails_email_preview/emails/format_nav'
             - if RailsEmailPreview.enable_send_email
-              li= render 'rails_email_preview/emails/send_form'
-            li= render 'rails_email_preview/emails/format_nav'
+              = render 'rails_email_preview/emails/send_form'
+
 
   -# actual email content, rendered in an iframe to prevent browser styles from interfering
   = render 'rails_email_preview/emails/email_iframe'

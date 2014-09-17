@@ -1,5 +1,4 @@
-div class=rep_btn_group_class
+span class=rep_btn_group_class
   - @preview.locales.each do |locale|
-    -# href, active class from change_locale_attr(locale)
-    a.btn *change_locale_attr(locale)
-      = locale_name(locale)
+    a *change_locale_attr(locale)
+      = locale_name locale

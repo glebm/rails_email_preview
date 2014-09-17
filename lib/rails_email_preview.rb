@@ -34,7 +34,7 @@ module RailsEmailPreview
   self.style = {
       btn_default_class:     'btn btn-default',
       btn_active_class:      'btn btn-primary active',
-      btn_group_class:       'btn-group',
+      btn_group_class:       'btn-group btn-group-sm',
       list_group_class:      'list-group',
       list_group_item_class: 'list-group-item',
       panel_class:           'panel panel-default',
