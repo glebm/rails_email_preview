@@ -1,3 +1,7 @@
+## v0.2.24
+
+* Fix regression: Rails 3 support.
+
 ## v0.2.23
 
 * **View hooks** to inject or replace UI selectively.
