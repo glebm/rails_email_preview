@@ -16,7 +16,7 @@ REP can use your application styles, markup is compatible with [bootstrap 3][rep
 Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.22'
+gem 'rails_email_preview', '~> 0.2.23'
 ```
 
 Add an initializer and the routes:
@@ -117,7 +117,7 @@ REP works with [Comfortable Mexican Sofa CMS](https://github.com/comfy/comfortab
 [Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
-Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
+Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
 ### I18n
 
@@ -165,14 +165,14 @@ end
 
 You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import 'rails_email_preview/layout'` for SASS).
 
-REP also allows you to customize some of the element classes via [`RailsEmailPreview.style`](/blob/master/lib/rails_email_preview.rb#L34).
+REP also allows you to customize some of the element classes via [`RailsEmailPreview.style`](/lib/rails_email_preview.rb#L34).
 
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
 e.g. `app/views/rails_email_preview/emails/index.html.slim`.
 
 #### Hooks
 
-You can inject or replace UI selectively using view hooks. Register view hooks in the initializer:
+You can add content around or replacing REP UI elements by registering view hooks in the initializer:
 
 ```ruby
 # Pass position (before, after, or replace) and render arguments:
@@ -184,7 +184,7 @@ RailsEmailPreview.view_hooks.add :headers_content, :after do |mail:, preview:|
 end
 ```
 
-All available hooks can be found [here](/blob/master/lib/rails_email_preview/view_hooks.rb#L10).
+All of the available hooks can be found [here](/lib/rails_email_preview/view_hooks.rb#L10).
 
 ### Authentication & authorization
 
