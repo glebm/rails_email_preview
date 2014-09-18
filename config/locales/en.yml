@@ -22,6 +22,8 @@ en:
       no_delivery_method: Please set 'config.action_mailer.delivery_method' to send emails in '%{environment}' environment
       provide_email: Send to which address?
       sent_notice: Sent to %{address} via %{delivery_method}
+    errors:
+      email_missing_format: Format missing
   layouts:
     rails_email_preview:
       application:

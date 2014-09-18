@@ -22,6 +22,8 @@ de:
       cc: CC
       bcc: BCC
       attachments: Anhänge
+    errors:
+      email_missing_format: Format fehlenden
   layouts:
     rails_email_preview:
       application:

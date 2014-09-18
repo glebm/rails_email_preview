@@ -103,7 +103,7 @@ module RailsEmailPreview
                   else
                     mail
                   end
-
+      return "<pre id='error'>#{html_escape(t('rep.errors.email_missing_format'))}</pre>" if !body_part
       if body_part.content_type =~ /plain/
         "<pre id='message_body'>#{html_escape(body_part.body.to_s)}</pre>".html_safe
       else
