@@ -39,9 +39,9 @@ module RailsEmailPreview::EmailsHelper
 
   def attachment_links(mail)
     mail.attachments.map do |attachment|
-      url = rails_email_preview.rep_raw_email_attachment_path(params[:preview_id], attachment.filename)
+      url = rails_email_preview.rep_raw_email_attachment_path(preview_params.merge(filename: attachment.filename))
       link_to(attachment.filename, url)
-    end.join('').html_safe
+    end.to_sentence.html_safe
   end
 
   def format_header_value(value)

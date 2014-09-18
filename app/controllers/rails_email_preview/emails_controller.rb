@@ -28,9 +28,9 @@ module RailsEmailPreview
 
     # Download attachment
     def show_attachment
-      filename   = "#{params[:filename]}.#{request.format.symbol}"
+      filename   = "#{params[:filename]}.#{params[:format]}"
       attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
-      send_data attachment.body.raw_source
+      send_data attachment.body.raw_source, filename: filename
     end
 
     # Really deliver an email
@@ -53,7 +53,7 @@ module RailsEmailPreview
     end
 
     # Used by CMS integration to refetch header after editing
-    def headers
+    def show_headers
       render partial: 'rails_email_preview/emails/headers', locals: {mail: mail_and_body.first}
     end
 
