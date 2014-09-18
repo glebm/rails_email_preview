@@ -28,8 +28,8 @@ module RailsEmailPreview
     # @example
     #   view_hooks.add_render :list, :before, partial: 'shared/hello'
     def add_render(id, pos, *render_args)
-      render_args = render_args.deep_dup
-      render_opts = render_args.extract_options!
+      render_args = render_args.dup
+      render_opts = render_args.extract_options!.dup
       add id, pos do |locals = {}|
         render *render_args, render_opts.merge(
             locals: (render_opts[:locals] || {}).merge(locals))
