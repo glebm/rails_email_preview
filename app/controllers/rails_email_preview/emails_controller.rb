@@ -26,13 +26,6 @@ module RailsEmailPreview
       end
     end
 
-    # Download attachment
-    def show_attachment
-      filename   = "#{params[:filename]}.#{params[:format]}"
-      attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
-      send_data attachment.body.raw_source, filename: filename
-    end
-
     # Really deliver an email
     def test_deliver
       redirect_url = rails_email_preview.rep_email_url(params.slice(:preview_id, :email_locale))
@@ -52,12 +45,19 @@ module RailsEmailPreview
       end
     end
 
-    # Used by CMS integration to refetch header after editing
+    # Download attachment
+    def show_attachment
+      filename   = "#{params[:filename]}.#{params[:format]}"
+      attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
+      send_data attachment.body.raw_source, filename: filename
+    end
+
+    # Render headers partial. Used by the CMS integration to refetch headers after editing.
     def show_headers
       render partial: 'rails_email_preview/emails/headers', locals: {mail: mail_and_body.first}
     end
 
-    # Used by the CMS integration to provide a link back to Show inside the edit iframe
+    # Render email body iframe HTML. Used by the CMS integration to provide a link back to Show from Edit.
     def show_body
       prevent_browser_caching
       cms_edit_links!
