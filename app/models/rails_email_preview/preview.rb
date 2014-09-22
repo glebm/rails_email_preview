@@ -15,9 +15,10 @@ module RailsEmailPreview
       %w(html plain raw)
     end
 
-    def preview_mail(run_hooks = false, search_query_params = {})
+    def preview_mail(run_hooks = false, search_query_params = {}, additional_params = {})
       preview_instance = preview_class_name.constantize.new
       setup_instance_variables(preview_instance, search_query_params)
+      setup_instance_variables(preview_instance, additional_params)
 
       preview_instance.send(preview_method).tap do |mail|
         RailsEmailPreview.run_before_render(mail, self) if run_hooks
