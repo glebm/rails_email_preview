@@ -103,7 +103,7 @@ module RailsEmailPreview
                   else
                     mail
                   end
-      return "<pre id='error'>#{html_escape(t('rep.errors.email_missing_format'))}</pre>" if !body_part
+      return "<pre id='error'>#{html_escape(t('rep.errors.email_missing_format', locale: @ui_locale))}</pre>" if !body_part
       if body_part.content_type =~ /plain/
         "<pre id='message_body'>#{html_escape(body_part.body.to_s)}</pre>".html_safe
       else
@@ -122,18 +122,20 @@ module RailsEmailPreview
       I18n.with_locale @email_locale, &block
     end
 
+    # Email content locale
     def set_email_preview_locale
       @email_locale = (params[:email_locale] || RailsEmailPreview.default_email_locale || I18n.default_locale).to_s
     end
 
+    # UI locale
     def set_locale
-      config_locale = RailsEmailPreview.locale
-      if !I18n.available_locales.map(&:to_s).include?(config_locale.to_s)
-        config_locale = :en
+      @ui_locale = RailsEmailPreview.locale
+      if !I18n.available_locales.map(&:to_s).include?(@ui_locale.to_s)
+        @ui_locale = :en
       end
       begin
         locale_was  = I18n.locale
-        I18n.locale = config_locale
+        I18n.locale = @ui_locale
         yield if block_given?
       ensure
         I18n.locale = locale_was
