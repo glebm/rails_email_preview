@@ -1,3 +1,8 @@
+## v0.2.25
+
+* Show attachment headers in the link's hover text (HTML title).
+* Faster loading via `DOMContentLoaded` on the iframe as opposed to `load`.
+
 ## v0.2.24
 
 * Fix regression: Rails 3 support.
