@@ -24,26 +24,32 @@ javascript:
       return Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
     }
 
-    // This is only called back once the iframe has finished loading everything, including images
-    rep.iframeOnLoad = function() {
+    function fetchHeaders() {
+      var headersView = doc.getElementById('email-headers'),
+              xhr = new XMLHttpRequest();
+      xhr.open('GET', headersView.getAttribute('data-url'), true);
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      xhr.send(null);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          headersView.innerHTML = xhr.responseText;
+        }
+      }
+    }
+
+    // Called from the iframe via window.parent
+    rep.iframeOnDOMContentLoaded = function () {
       rep.loaded = true;
       resizeIframe();
-
       // CMS refresh headers hook
       if (rep.fetchHeadersOnNextLoad) {
         rep.fetchHeadersOnNextLoad = false;
-        var headersView = doc.getElementById('email-headers'),
-            xhr = new XMLHttpRequest();
-        xhr.open('GET', headersView.getAttribute('data-url'), true);
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.send(null);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-            headersView.innerHTML = xhr.responseText;
-          }
-        }
+        fetchHeaders();
       }
     };
+
+    // This is only called back once the iframe has finished loading everything, including images
+    rep.iframeOnLoad = resizeIframe;
 
     // Resize on window resize
     if (!rep.resizeAttached) {

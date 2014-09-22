@@ -19,6 +19,8 @@ html
       body {
         background-color:white;
       }
+    javascript:
+      document.addEventListener('DOMContentLoaded', window.parent.rep.iframeOnDOMContentLoaded, true);
 
     = yield(:head)
   body
