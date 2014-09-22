@@ -20,8 +20,9 @@ javascript:
     }
 
     function getBodyHeight(body) {
-      // browser compat
-      return Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
+      // firefox sometimes returns the wrong value for all of these and needs a bit of extra height
+      return (/Firefox/.test(navigator.userAgent) ? 50 : 0) +
+        Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
     }
 
     function fetchHeaders() {
@@ -62,11 +63,11 @@ javascript:
     // Only show progress bar after some time to avoid flashing
     setTimeout(function() {
       doc.getElementById('email-progress-bar').style.display = 'block';
-    }, 200);
+    }, 350);
   })(document);
 
 
-div style='min-height: 400px; position: relative'
+div style='min-height: 450px; position: relative'
   #email-progress-bar.progress style='display: none; position: absolute; z-index: -1; width: 100%; text-align: center'
     .progress-bar.progress-bar-striped.active style='width:100%'
       = t 'rep.base.loading'
