@@ -26,7 +26,7 @@ module RailsEmailPreview
       ws    = xs.map(&weight)
       col_w = ws.sum / 2
       cur_w = 0
-      mid   = ws.find_index { |w| (cur_w += w) >= col_w + w }
+      mid   = ws.find_index { |w| (cur_w += w) >= col_w + w } || [ws.length - 1, 0].max
       [xs.first(mid), xs.from(mid)]
     end
 
