@@ -7,8 +7,9 @@ module RailsEmailPreview
     end
 
     def columns(&block)
+      return to_enum(:columns) unless block_given?
       split_in_halves(groups) { |_k, v| v.length }.each do |column_groups|
-        block.call(column_groups)
+        block.yield(column_groups)
       end
     end
 
