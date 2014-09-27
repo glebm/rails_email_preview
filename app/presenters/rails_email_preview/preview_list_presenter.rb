@@ -24,7 +24,7 @@ module RailsEmailPreview
     def split_in_halves(xs, &weight)
       xs    = xs.to_a
       ws    = xs.map(&weight)
-      col_w = ws.sum / 2
+      col_w = (ws.sum + 1) / 2
       cur_w = 0
       mid   = ws.find_index { |w| (cur_w += w) >= col_w + w } || [ws.length - 1, 0].max
       [xs.first(mid), xs.from(mid)]
