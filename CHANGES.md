@@ -1,3 +1,8 @@
+## v0.2.26
+
+* Fix an issue with preview list [#47](https://github.com/glebm/rails_email_preview/issues/47).
+* Fix a number of minor issues.
+
 ## v0.2.25
 
 * Show attachment headers in the link's hover text (HTML title).
