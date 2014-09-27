@@ -61,9 +61,6 @@ module RailsEmailPreview
       template.safe_join(parts, '')
     end
 
-    # Find available hooks with simple static analysis of the gem's views
-    # @return [Array<String>] return hook names
-
     private
 
     def render_providers(providers, locals, template)
