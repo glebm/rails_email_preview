@@ -8,6 +8,8 @@ module RailsEmailPreview
     # All valid hooks and their argument names
     SCHEMA    = {
         list:            args[:index],
+        breadcrumb:      args[:show],
+        breadcrumb_content: args[:show],
         headers_and_nav: args[:show],
         headers:         args[:show],
         headers_content: args[:show],

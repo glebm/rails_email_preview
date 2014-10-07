@@ -1,8 +1,8 @@
 .rep-email-show#email-show
-  div class=rep_row_class
-    .pull-left
-      ul.breadcrumb
-        li: a href=rails_email_preview.rep_emails_path(email_locale: @email_locale) #{t '.breadcrumb_list'}
+  = with_show_hook :breadcrumb do
+    ol.breadcrumb
+      = with_show_hook :breadcrumb_content do
+        li: a href=rails_email_preview.rep_emails_path(email_locale: @email_locale) = t '.breadcrumb_list'
         li.active: a href=(request.path) = @preview.name
 
   = with_show_hook :headers_and_nav do
