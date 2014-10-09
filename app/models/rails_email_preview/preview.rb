@@ -36,9 +36,15 @@ module RailsEmailPreview
       @group_name ||= preview_class_name.to_s.underscore.sub(/(_mailer)?_preview$/, '').humanize
     end
 
+    def set_variables(object, params)
+      setup_instance_variables(object, params)
+    end
+
     class << self
-      def find(email_id)
-        @by_id[email_id]
+      def find(email_id, params={})
+        preview = @by_id[email_id]
+        preview.set_variables(preview, params)
+        preview
       end
 
       alias_method :[], :find
