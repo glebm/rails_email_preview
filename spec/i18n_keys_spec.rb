@@ -1,8 +1,7 @@
 require 'spec_helper'
+require 'i18n/tasks'
 
-# require 'i18n/tasks'
-
-xdescribe 'Translation keys'  do
+describe 'Translation keys'  do
   let(:i18n) { I18n::Tasks::BaseTask.new }
 
   around(:each) do |e|

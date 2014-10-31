@@ -20,8 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
-  # Temporarily disable i18n-tasks due to JRuby 1.7.15 issue https://github.com/jruby/jruby/issues/1995
-  # s.add_development_dependency 'i18n-tasks', '>= 0.7.6'
+  s.add_development_dependency 'i18n-tasks', '>= 0.7.6'
   s.add_development_dependency 'capybara', '>= 2.3.0'
   s.add_development_dependency 'rspec', '>= 3.0.0'
   s.add_development_dependency 'rspec-rails'
