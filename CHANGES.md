@@ -1,3 +1,8 @@
+## v0.2.27
+
+* Improve CMS compatibility
+* New hook: breadcrumb
+
 ## v0.2.26
 
 * Fix an issue with preview list [#47](https://github.com/glebm/rails_email_preview/issues/47).
