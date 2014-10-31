@@ -122,8 +122,7 @@ module RailsEmailPreview
         end
 
         def cms_snippet_class
-          if defined?(::Comfy)
-            # cms >= 1.12
+          if cms_version_gte?('1.12.0')
             ::Comfy::Cms::Snippet
           else
             ::Cms::Snippet
@@ -131,8 +130,7 @@ module RailsEmailPreview
         end
 
         def cms_site_class
-          if defined?(::Comfy)
-            # cms >= 1.12
+          if cms_version_gte?('1.12.0')
             ::Comfy::Cms::Site
           else
             ::Cms::Site
@@ -145,6 +143,11 @@ module RailsEmailPreview
               :cms_snippet_render,
               :cms_snippet_content
           ].detect { |m| respond_to? m }
+        end
+
+        private
+        def cms_version_gte?(version)
+          (::ComfortableMexicanSofa::VERSION.split('.').map(&:to_i) <=> version.split('.').map(&:to_i)) >= 0
         end
       end
       extend CmsVersionsCompatibility
