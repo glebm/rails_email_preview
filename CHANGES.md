@@ -1,3 +1,7 @@
+## v0.2.28
+
+* CMS beta compatibility
+
 ## v0.2.27
 
 * Improve CMS compatibility
