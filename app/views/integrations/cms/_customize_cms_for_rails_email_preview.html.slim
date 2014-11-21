@@ -27,7 +27,7 @@ ruby:
         }
 
         // Snippet form:
-        var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.control-group'); };
+        var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.form-group,.control-group'); };
 
         // retext labels
         control('label').find('.control-label').text("Subject");
