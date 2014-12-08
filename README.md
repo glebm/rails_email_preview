@@ -49,7 +49,7 @@ class UserMailerPreview
 
   private
   # You can put all your mock helpers in a module
-  # or you can use your factories / fabricators, just make sure you are not creating anythin
+  # or you can use your factories / fabricators, just make sure you are not creating anything
   def mock_user(name = 'Bill Gates')
     fake_id User.new(name: name, email: "user#{rand 100}@test.com")
   end
