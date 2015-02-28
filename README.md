@@ -16,7 +16,7 @@ REP can use your application styles, markup is compatible with [bootstrap 3][rep
 Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.28'
+gem 'rails_email_preview', '~> 0.2.29'
 ```
 
 Add an initializer and the routes:

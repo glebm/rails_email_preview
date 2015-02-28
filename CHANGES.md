@@ -1,3 +1,8 @@
+## v0.2.29
+
+* Latest CMS compatibility
+* Rails 4.2: avoid deprecation warnings
+
 ## v0.2.28
 
 * CMS beta compatibility
