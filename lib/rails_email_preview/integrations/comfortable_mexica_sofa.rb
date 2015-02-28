@@ -21,7 +21,7 @@ module RailsEmailPreview
         snippet_id = "email-#{cms_email_id}"
         return '(no subject)' unless cms_snippet_class.where(identifier: snippet_id).exists?
         [I18n.locale, I18n.default_locale].compact.each do |locale|
-          site    = cms_site_class.find_by_locale(locale.to_s)
+          site = cms_site_class.find_by_locale(locale.to_s)
           unless site
             raise "rails_email_preview: #{t 'integrations.cms.errors.site_missing', locale: locale}"
           end
@@ -47,7 +47,7 @@ module RailsEmailPreview
       end
 
       def cms_email_edit_link(site, default_site, snippet_id)
-        snippet  = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.new(
+        snippet   = site.snippets.find_by_identifier(snippet_id) || cms_snippet_class.new(
             label:      "#{snippet_id.sub('-', ' / ').humanize}",
             identifier: snippet_id,
             site:       site
@@ -56,7 +56,7 @@ module RailsEmailPreview
         edit_path = if snippet.persisted?
                       p[:id] = snippet.id
                       if snippet.content.blank? && default_site && (default_snippet = default_site.snippets.find_by_identifier(snippet_id))
-                        p[:snippet] = {
+                        p[:snippet]         = {
                             content: default_snippet.content
                         }
                         p[:snippet][:label] = default_snippet.label unless snippet.label.present?
@@ -87,7 +87,7 @@ module RailsEmailPreview
         if cms_snippet_class.where(identifier: snippet_id).exists?
           # Prefill from default locale if no content
           content = send(cms_snippet_render_method, snippet_id, site)
-          result = (content.presence || send(cms_snippet_render_method, snippet_id, default_site)).to_s
+          result  = (content.presence || send(cms_snippet_render_method, snippet_id, default_site)).to_s
         else
           result = ''
         end
@@ -113,8 +113,7 @@ module RailsEmailPreview
 
       module CmsVersionsCompatibility
         def cms_admin_site_snippet_route
-          if respond_to?(:new_comfy_admin_cms_site_snippet_path)
-            # cms >= 1.11
+          if cms_version_gte?('1.11.0')
             :comfy_admin_cms_site_snippet
           else
             :admin_cms_site_snippet
@@ -138,11 +137,11 @@ module RailsEmailPreview
         end
 
         def cms_snippet_render_method
-          [
-              # cms >= 1.11
-              :cms_snippet_render,
-              :cms_snippet_content
-          ].detect { |m| respond_to? m }
+          if cms_version_gte?('1.12.0')
+            :cms_snippet_render
+          else
+            :cms_snippet_content
+          end
         end
 
         private
@@ -150,8 +149,10 @@ module RailsEmailPreview
           (::ComfortableMexicanSofa::VERSION.split('.').map(&:to_i) <=> version.split('.').map(&:to_i)) >= 0
         end
       end
+
       extend CmsVersionsCompatibility
       include CmsVersionsCompatibility
+      include ::Comfy::CmsHelper if cms_version_gte?('1.12.4')
     end
   end
 end
