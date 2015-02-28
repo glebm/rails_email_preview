@@ -70,8 +70,11 @@ module RailsEmailPreview
     private
 
     def deliver_email!(mail)
-      # support deliver! if present
-      if mail.respond_to?(:deliver!)
+      if mail.respond_to?(:deliver_now!)
+        # Rails 4.2+
+        mail.deliver_now!
+      elsif mail.respond_to?(:deliver!)
+        # support deliver! if present (resque-mailer etc)
         mail.deliver!
       else
         mail.deliver
