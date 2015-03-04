@@ -17,3 +17,5 @@ env:
 matrix:
   allow_failures:
   - rvm: rbx-2
+  exclude:
+  - {rvm: 2.2, gemfile: spec/gemfiles/Gemfile-rails-3-2}
