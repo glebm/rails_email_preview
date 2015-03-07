@@ -3,7 +3,11 @@
 ENV['RAILS_ENV'] = ENV['RACK_ENV'] = 'test'
 if ENV['TRAVIS'] && !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
   require 'codeclimate-test-reporter'
-  CodeClimate::TestReporter.start
+  if CodeClimate::TestReporter.run?
+    require 'simplecov'
+    SimpleCov.add_filter 'spec/gemfiles/vendor/bundle'
+    CodeClimate::TestReporter.start
+  end
 end
 
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
