@@ -1,4 +1,5 @@
 language: ruby
+script: "bundle exec rspec --exclude-pattern 'spec/gemfiles/vendor/**/*'"
 rvm:
   - 2.2.1
   - jruby

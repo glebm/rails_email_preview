@@ -1,12 +1,17 @@
 # -*- encoding : utf-8 -*-
 # Configure Rails Environment
 ENV['RAILS_ENV'] = ENV['RACK_ENV'] = 'test'
-if ENV['TRAVIS'] && !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
-  require 'codeclimate-test-reporter'
-  if CodeClimate::TestReporter.run?
+if !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
+  if ENV['TRAVIS']
+    require 'codeclimate-test-reporter'
+    if CodeClimate::TestReporter.run?
+      require 'simplecov'
+      SimpleCov.add_filter 'spec/gemfiles/vendor/bundle'
+      CodeClimate::TestReporter.start
+    end
+  else
     require 'simplecov'
-    SimpleCov.add_filter 'spec/gemfiles/vendor/bundle'
-    CodeClimate::TestReporter.start
+    SimpleCov.start
   end
 end
 
