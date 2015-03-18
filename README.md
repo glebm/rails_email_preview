@@ -117,7 +117,7 @@ REP works with [Comfortable Mexican Sofa CMS](https://github.com/comfy/comfortab
 [Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
 
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
-Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
+Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
 ### I18n
 
