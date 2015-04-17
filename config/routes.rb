@@ -5,7 +5,7 @@ RailsEmailPreview::Engine.routes.draw do
           constraints: {email_locale: /#{I18n.available_locales.map(&Regexp.method(:escape)) * '|'}/},
           defaults: {email_locale: I18n.default_locale.to_s} do
       get '/' => :index, as: :rep_emails
-      scope path: ':preview_id', constraints: {preview_id: /\w*\/?\w+-\w+/} do
+      scope path: ':preview_id', constraints: {preview_id: /\w+-\w+/} do
         scope '(:part_type)',
               constraints: {part_type: /html|plain|raw/},
               defaults: {part_type: 'html'} do

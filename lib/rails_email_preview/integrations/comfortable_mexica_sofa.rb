@@ -9,7 +9,7 @@ module RailsEmailPreview
       # ModerationMailer#approve -> "moderation_mailer-approve"
       def cms_email_id
         mailer = respond_to?(:controller) ? controller : self
-        "#{mailer.class.name.underscore}-#{action_name}"
+        "#{mailer.class.name.underscore.gsub('/','_')}-#{action_name}"
       end
 
       # @param [Hash] interpolation subject interpolation values
