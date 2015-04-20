@@ -102,7 +102,7 @@ module RailsEmailPreview
       def cms_edit_email_snippet_link(path)
         link_to path, style: RailsEmailPreview.edit_link_style.html_safe, class: 'btn btn-default pull-right' do
           RailsEmailPreview.edit_link_text
-          content_tag :i, class: 'glyphicon glyphicon-pencil'
+          content_tag :i, nil, class: 'glyphicon glyphicon-pencil'
         end
       end
 
