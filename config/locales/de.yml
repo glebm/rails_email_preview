@@ -42,7 +42,6 @@ de:
     cms:
       customize_cms_for_rails_email_preview:
         edit_email: E-Mail bearbeiten
-        edit_email_html: '<i class="glyphicon glyphicon-pencil"></i>&nbsp;E-Mail bearbeiten'
         view_link: Anzeigen
       errors:
         site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt werden.

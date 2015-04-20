@@ -86,6 +86,7 @@ module RailsEmailPreview
   # = Editing settings
   # edit link is rendered inside an iframe, so these options are provided for simple styling
   mattr_accessor :edit_link_text
+  self.edit_link_text = '✎'
   mattr_accessor :edit_link_style
   self.edit_link_style = <<-CSS.strip.gsub(/\n+/m, ' ')
   -webkit-appearance: none;
@@ -148,5 +149,7 @@ module RailsEmailPreview
   white-space: nowrap;
   word-spacing: 0px;
   writing-mode: lr-tb;
+  text-decoration: none;
+  float: right;
   CSS
 end
