@@ -31,7 +31,7 @@ en:
   rails_email_preview:
     emails:
       index:
-        list_title: Application Emails
+        list_title: Emails
       show:
         breadcrumb_list: Emails
       send_form:
