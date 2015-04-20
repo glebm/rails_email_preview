@@ -71,7 +71,7 @@ module RailsEmailPreview
                       send :"new_#{cms_admin_site_snippet_route}_path", p
                     end
         <<-HTML.strip.html_safe
-          <table class='rep-edit-link'><tr><td>
+          <table class='rep-edit-link' style="width: 100%;"><tr><td>
             #{cms_edit_email_snippet_link(edit_path)}
           </td></tr></table>
         HTML
