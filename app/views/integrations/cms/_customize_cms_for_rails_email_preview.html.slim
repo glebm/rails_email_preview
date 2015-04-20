@@ -42,7 +42,7 @@ ruby:
         $('[data-slug]').removeAttr('data-slug');
         
         // Handle cancel link
-        $('input[type=submit]').attr('href', '#{back_url}')
+        $('input[type=submit]').next('a').attr('href', '#{back_url}')
       });
 
       // Schedule headers view refresh on next load
