@@ -4,6 +4,7 @@ ruby:
   snippet = @snippet || (adapter.cms_snippet_class === @record && @record)
   if snippet && (p = adapter.rep_email_params_from_snippet(snippet))
     show_url = rails_email_preview.rep_raw_email_url(p)
+    back_url = rails_email_preview.rep_email_url(p)
   end
   customize_form = show_url.present? || snippet && !snippet.persisted?
 
@@ -39,6 +40,9 @@ ruby:
 
         // Do not mess with identifier
         $('[data-slug]').removeAttr('data-slug');
+        
+        // Handle cancel link
+        $('input[type=submit]').attr('href', '#{back_url}')
       });
 
       // Schedule headers view refresh on next load
