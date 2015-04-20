@@ -19,7 +19,7 @@ en:
       in: in
       loading: Loading...
     test_deliver:
-      no_delivery_method: Please set 'config.action_mailer.delivery_method' to send emails in '%{environment}' environment
+      no_delivery_method: "Please set 'config.action_mailer.delivery_method' to send emails in '%{environment}' environment"
       provide_email: Send to which address?
       sent_notice: Sent to %{address} via %{delivery_method}
     errors:
@@ -31,7 +31,7 @@ en:
   rails_email_preview:
     emails:
       index:
-        list_title: Application Emails
+        list_title: Emails
       show:
         breadcrumb_list: Emails
       send_form:

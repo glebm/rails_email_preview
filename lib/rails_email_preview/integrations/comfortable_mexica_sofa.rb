@@ -9,7 +9,7 @@ module RailsEmailPreview
       # ModerationMailer#approve -> "moderation_mailer-approve"
       def cms_email_id
         mailer = respond_to?(:controller) ? controller : self
-        "#{mailer.class.name.underscore}-#{action_name}"
+        "#{mailer.class.name.underscore.gsub('/','_')}-#{action_name}"
       end
 
       # @param [Hash] interpolation subject interpolation values
@@ -61,7 +61,7 @@ module RailsEmailPreview
                         }
                         p[:snippet][:label] = default_snippet.label unless snippet.label.present?
                       end
-                      send :"edit_#{cms_admin_site_snippet_route}_path", p
+                      send :"edit_#{cms_admin_site_snippet_route}_url", p
                     else
                       p[:snippet] = {
                           label:        snippet.label,
@@ -71,7 +71,7 @@ module RailsEmailPreview
                       send :"new_#{cms_admin_site_snippet_route}_path", p
                     end
         <<-HTML.strip.html_safe
-          <table class='rep-edit-link'><tr><td>
+          <table class='rep-edit-link' style="width: 100%;"><tr><td>
             #{cms_edit_email_snippet_link(edit_path)}
           </td></tr></table>
         HTML

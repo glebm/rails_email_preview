@@ -86,16 +86,70 @@ module RailsEmailPreview
   # = Editing settings
   # edit link is rendered inside an iframe, so these options are provided for simple styling
   mattr_accessor :edit_link_text
-  self.edit_link_text = '✎ Edit Text'
+  self.edit_link_text = '✎'
   mattr_accessor :edit_link_style
   self.edit_link_style = <<-CSS.strip.gsub(/\n+/m, ' ')
-  display: block;
-  font-family: Monaco, Helvetica, sans-serif;
-  color: #7a4b8a;
-  border: 2px dashed #7a4b8a;
-  font-size: 20px;
-  padding: 8px 12px;
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+  -webkit-appearance: none;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.14902) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: none;
+  -webkit-writing-mode: horizontal-tb;
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(255, 255, 255) 0px, rgb(224, 224, 224) 100%);
+  background-repeat: repeat-x;
+  border-bottom-color: rgb(204, 204, 204);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(204, 204, 204);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(204, 204, 204);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(204, 204, 204);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-shadow: rgba(255, 255, 255, 0.14902) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px;
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  height: 34px;
+  letter-spacing: normal;
+  line-height: 20px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  text-align: center;
+  text-indent: 0px;
+  text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+  text-transform: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-spacing: 0px;
+  writing-mode: lr-tb;
+  text-decoration: none;
+  float: right;
   CSS
 end
