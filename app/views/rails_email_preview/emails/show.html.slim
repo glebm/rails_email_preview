@@ -1,4 +1,4 @@
-unless params[:layout] == 'hidden'
+- unless params[:layout] == 'hidden'
   div class="page-header"
     h2 = @preview.name
 
@@ -8,6 +8,6 @@ unless params[:layout] == 'hidden'
     = with_show_hook :email_body do
       / actual email content, rendered in an iframe to prevent browser styles from interfering
       = render 'rails_email_preview/emails/email_iframe'
-else
+- else
   = with_show_hook :email_body do
     = render 'rails_email_preview/emails/email_iframe'
