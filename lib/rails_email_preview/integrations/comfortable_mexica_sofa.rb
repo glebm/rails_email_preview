@@ -101,7 +101,7 @@ module RailsEmailPreview
 
       def cms_edit_email_snippet_link(path)
         link_to path, style: RailsEmailPreview.edit_link_style.try(:html_safe), class: 'btn btn-default pull-right' do
-          I18n.t('integrations.cms.customize_cms_for_rails_email_preview.edit_email_html')
+          I18n.t('integrations.cms.customize_cms_for_rails_email_preview.edit_email_html').html_safe
         end
       end
 
