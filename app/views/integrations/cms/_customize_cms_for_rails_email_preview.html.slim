@@ -41,8 +41,8 @@ ruby:
         // Do not mess with identifier
         $('[data-slug]').removeAttr('data-slug');
         
-        // Handle cancel link
-        $('input[type=submit]').next('a').attr('href', '#{back_url}')
+        // Remove cancel link
+        $('input[type=submit]').next('a').remove();
       });
 
       // Schedule headers view refresh on next load
