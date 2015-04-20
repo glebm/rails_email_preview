@@ -86,6 +86,6 @@ module RailsEmailPreview
   # = Editing settings
   # edit link is rendered inside an iframe, so these options are provided for simple styling
   mattr_accessor :edit_link_text
-  self.edit_link_text = I18n.t('integrations.cms.customize_cms_for_rails_email_preview.edit_email')
+  self.edit_link_text = I18n.t('integrations.cms.customize_cms_for_rails_email_preview.edit_email_html')
   mattr_accessor :edit_link_style
 end
