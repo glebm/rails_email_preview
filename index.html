@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Rails Email Preview by glebm</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/glebm/rails_email_preview">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/glebm/rails_email_preview/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/glebm/rails_email_preview/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Rails Email Preview</h1>
+          <p>Preview and edit app mailer templates in Rails.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/glebm">glebm</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="rails-email-preview----" class="anchor" href="#rails-email-preview----" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rails Email Preview <a href="http://travis-ci.org/glebm/rails_email_preview"><img src="http://img.shields.io/travis/glebm/rails_email_preview.svg" alt="Build Status"></a> <a href="https://codeclimate.com/github/glebm/rails_email_preview"><img src="https://codeclimate.com/github/glebm/rails_email_preview/badges/coverage.svg" alt="Test Coverage"></a> <a href="https://codeclimate.com/github/glebm/rails_email_preview"><img src="http://img.shields.io/codeclimate/github/glebm/rails_email_preview.svg" alt="Code Climate"></a> <a href="https://gitter.im/glebm/rails_email_preview?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a>
+</h1>
+
+<p>Preview email in the browser with this Rails engine. Compatible with Rails 3 and 4.</p>
+
+<p>Preview:
+<img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png" alt="screenshot" title="Show Email Screenshot"></p>
+
+<p>List:
+<img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png" alt="screenshot" title="Email List Screenshot"></p>
+
+<p>REP can use your application styles, markup is compatible with <a href="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png" title="Show Email Screenshot (default styles)">bootstrap 3</a> by default.
+<em>These screenshots are using a custom Bootstrap theme</em></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add <a href="https://rubygems.org/gems/rails_email_preview"><img src="http://img.shields.io/gem/v/rails_email_preview.svg" alt="Gem Version"></a> to Gemfile:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>rails_email_preview<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 0.2.29<span class="pl-pds">'</span></span></pre></div>
+
+<p>Add an initializer and the routes:</p>
+
+<div class="highlight highlight-console"><pre>$ <span class="pl-s1">rails g rails_email_preview:install</span></pre></div>
+
+<p>Generate preview classes and method stubs in app/mailer_previews/</p>
+
+<div class="highlight highlight-console"><pre>$ <span class="pl-s1">rails g rails_email_preview:update_previews</span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>The last generator above will add a stub for each of your emails, then you populate the stubs with mock data:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># app/mailer_previews/user_mailer_preview.rb:</span>
+<span class="pl-k">class</span> <span class="pl-en">UserMailerPreview</span>
+  <span class="pl-c"># preview methods should return Mail objects, e.g.:</span>
+  <span class="pl-k">def</span> <span class="pl-en">invitation</span>
+    <span class="pl-c1">UserMailer</span>.invitation mock_user(<span class="pl-s"><span class="pl-pds">'</span>Alice<span class="pl-pds">'</span></span>), mock_user(<span class="pl-s"><span class="pl-pds">'</span>Bob<span class="pl-pds">'</span></span>)
+  <span class="pl-k">end</span>
+
+  <span class="pl-k">def</span> <span class="pl-en">welcome</span>
+    <span class="pl-c1">UserMailer</span>.welcome mock_user
+  <span class="pl-k">end</span>
+
+  <span class="pl-k">private</span>
+  <span class="pl-c"># You can put all your mock helpers in a module</span>
+  <span class="pl-c"># or you can use your factories / fabricators, just make sure you are not creating anything</span>
+  <span class="pl-k">def</span> <span class="pl-en">mock_user</span>(<span class="pl-smi">name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Bill Gates<span class="pl-pds">'</span></span>)
+    fake_id <span class="pl-c1">User</span>.<span class="pl-k">new</span>(<span class="pl-c1">name:</span> name, <span class="pl-c1">email:</span> <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pse">#{</span><span class="pl-s1">rand <span class="pl-c1">100</span></span><span class="pl-pse"><span class="pl-s1">}</span></span>@test.com<span class="pl-pds">"</span></span>)
+  <span class="pl-k">end</span>
+
+  <span class="pl-k">def</span> <span class="pl-en">fake_id</span>(<span class="pl-smi">obj</span>)
+    <span class="pl-c"># overrides the method on just this object</span>
+    obj.define_singleton_method(<span class="pl-c1">:id</span>) { <span class="pl-c1">123</span> <span class="pl-k">+</span> rand(<span class="pl-c1">100</span>) }
+    obj
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<h3>
+<a id="parameters-as-instance-variables" class="anchor" href="#parameters-as-instance-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters as instance variables</h3>
+
+<p>All parameters in the search query will be available to the preview class as instance variables.
+For example, if URL to mailer preview looks like:</p>
+
+<p>/emails/user_mailer_preview-welcome?<strong>user_id=1</strong></p>
+
+<p>The method <code>welcome</code> in <code>UserMailerPreview</code> have a <code>@user_id</code> instance variable defined:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">UserMailerPreview</span>
+  <span class="pl-k">def</span> <span class="pl-en">welcome</span>
+    user <span class="pl-k">=</span> <span class="pl-smi">@user_id</span> <span class="pl-k">?</span> <span class="pl-c1">User</span>.find(<span class="pl-smi">@user_id</span>) : mock_user
+    <span class="pl-c1">UserMailer</span>.welcome(user)
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>Now you can preview or send the welcome email to a specific user.</p>
+
+<h3>
+<a id="routing" class="anchor" href="#routing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Routing</h3>
+
+<p>You can access REP urls like this:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># engine root:</span>
+rails_email_preview.rep_root_url
+<span class="pl-c"># list of emails (same as root):</span>
+rails_email_preview.rep_emails_url
+<span class="pl-c"># email show:</span>
+rails_email_preview.rep_email_url(<span class="pl-s"><span class="pl-pds">'</span>user_mailer-welcome<span class="pl-pds">'</span></span>)</pre></div>
+
+<h3>
+<a id="sending-emails" class="anchor" href="#sending-emails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sending Emails</h3>
+
+<p>You can send emails via REP. This is especially useful when testing with limited clients (Blackberry, Outlook, etc.).
+This will use the environment's mailer settings, but the handler will <code>perform_deliveries</code>.
+Uncomment this line in the initializer to disable sending test emails:</p>
+
+<div class="highlight highlight-ruby"><pre>config.enable_send_email <span class="pl-k">=</span> <span class="pl-c1">false</span></pre></div>
+
+<h3>
+<a id="editing-emails" class="anchor" href="#editing-emails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Editing Emails</h3>
+
+<p>Emails can be stored in the database and edited in the browser.
+REP works with <a href="https://github.com/comfy/comfortable-mexican-sofa">Comfortable Mexican Sofa CMS</a> to achieve this -- see the <a href="https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa">CMS Guide</a> to learn more.</p>
+
+<p><a href="https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa"><img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-edit-sofa.png" alt="screenshot"></a></p>
+
+<h3>
+<a id="premailer" class="anchor" href="#premailer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Premailer</h3>
+
+<p><a href="https://github.com/alexdunae/premailer">Premailer</a> automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.</p>
+
+<p>To integrate Premailer with your Rails app you can use either <a href="https://github.com/ndbroadbent/actionmailer_inline_css">actionmailer_inline_css</a> or <a href="https://github.com/fphilipe/premailer-rails">premailer-rails</a>.
+Simply uncomment the relevant options in <a href="https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb">the initializer</a>. <em>initializer is generated during <code>rails g rails_email_preview:install</code></em></p>
+
+<h3>
+<a id="i18n" class="anchor" href="#i18n" aria-hidden="true"><span class="octicon octicon-link"></span></a>I18n</h3>
+
+<p>REP expects emails to use current <code>I18n.locale</code>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># current locale</span>
+<span class="pl-c1">AccountMailer</span>.some_notification.deliver
+<span class="pl-c"># different locale</span>
+<span class="pl-c1">I18n</span>.with_locale(<span class="pl-s"><span class="pl-pds">'</span>es<span class="pl-pds">'</span></span>) <span class="pl-k">do</span>
+  <span class="pl-c1">InviteMailer</span>.send_invites.deliver
+<span class="pl-k">end</span></pre></div>
+
+<p>If you are using <code>Resque::Mailer</code> or <code>Devise::Async</code>, you can automatically remember <code>I18n.locale</code> when the mail job is scheduled
+<a href="https://gist.github.com/glebm/5725347">with this initializer</a>.</p>
+
+<p>When linking to REP pages you can pass <code>email_locale</code> to set the locale for rendering:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># will render email in Spanish:</span>
+rails_email_preview.root_url(<span class="pl-c1">email_locale:</span> <span class="pl-s"><span class="pl-pds">'</span>es<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>REP displays too many locales? Make sure to set <code>config.i18n.available_locales</code>, since it defaults to <em>all</em> locales in Rails.</p>
+
+<p>User interface is available in English, German (Danke, <a href="https://github.com/baschtl" class="user-mention">@baschtl</a>), and Russian.
+You can set the language in <code>config.to_prepare</code> section of the initializer, default is English.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># config/initializers/rails_email_preview.rb</span>
+<span class="pl-c1">RailsEmailPreview</span>.locale <span class="pl-k">=</span> <span class="pl-c1">:de</span></pre></div>
+
+<h3>
+<a id="views" class="anchor" href="#views" aria-hidden="true"><span class="octicon octicon-link"></span></a>Views</h3>
+
+<p>You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c1">Rails</span>.application.config.to_prepare <span class="pl-k">do</span>
+  <span class="pl-c"># Use admin layout with REP (this will also make app routes accessible within REP):</span>
+  <span class="pl-c1">RailsEmailPreview</span>.layout <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>admin<span class="pl-pds">'</span></span>
+<span class="pl-k">end</span></pre></div>
+
+<p>You can <code>//= require 'rails_email_preview/layout'</code> REP-specific styles (<code>@import 'rails_email_preview/layout'</code> for SASS).</p>
+
+<p>REP also allows you to customize some of the element classes via <a href="/lib/rails_email_preview.rb#L34"><code>RailsEmailPreview.style</code></a>.</p>
+
+<p>You can also override any individual view by placing a file with the same path in your project's <code>app/views</code>,
+e.g. <code>app/views/rails_email_preview/emails/index.html.slim</code>.</p>
+
+<h4>
+<a id="hooks" class="anchor" href="#hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hooks</h4>
+
+<p>You can add content around or replacing REP UI elements by registering view hooks in the initializer:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># Pass position (before, after, or replace) and render arguments:</span>
+<span class="pl-c1">RailsEmailPreview</span>.view_hooks.add_render <span class="pl-c1">:list</span>, <span class="pl-c1">:before</span>, <span class="pl-c1">partial:</span> <span class="pl-s"><span class="pl-pds">'</span>shared/hello<span class="pl-pds">'</span></span>
+
+<span class="pl-c"># Pass hook id and position (before, after, or replace):</span>
+<span class="pl-c1">RailsEmailPreview</span>.view_hooks.add <span class="pl-c1">:headers_content</span>, <span class="pl-c1">:after</span> <span class="pl-k">do </span>|<span class="pl-smi">mail</span>:, <span class="pl-smi">preview</span>:|
+  raw <span class="pl-s"><span class="pl-pds">"</span>&lt;dt&gt;ID&lt;/dt&gt;&lt;dd&gt;<span class="pl-pse">#{</span><span class="pl-s1">h mail.header[<span class="pl-s"><span class="pl-pds">'</span>X-APP-EMAIL-ID<span class="pl-pds">'</span></span>]</span><span class="pl-pse"><span class="pl-s1">}</span></span>&lt;/dd&gt;<span class="pl-pds">"</span></span>
+<span class="pl-k">end</span></pre></div>
+
+<p>All of the available hooks can be found <a href="/lib/rails_email_preview/view_hooks.rb#L10">here</a>.</p>
+
+<h3>
+<a id="authentication--authorization" class="anchor" href="#authentication--authorization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication &amp; authorization</h3>
+
+<p>You can specify the parent controller for REP controller, and it will inherit all the before filters.
+Note that this must be placed before any other references to REP application controller in the initializer (and before <code>layout=</code> call):</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c1">RailsEmailPreview</span>.parent_controller <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Admin::ApplicationController<span class="pl-pds">'</span></span> <span class="pl-c"># default: '::ApplicationController'</span></pre></div>
+
+<p>Alternatively, to have custom rules just for REP you can:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c1">Rails</span>.application.config.to_prepare <span class="pl-k">do</span>
+  <span class="pl-c1">RailsEmailPreview</span>::<span class="pl-c1">ApplicationController</span>.module_eval <span class="pl-k">do</span>
+    before_filter <span class="pl-c1">:check_rep_permissions</span>
+
+    <span class="pl-k">private</span>
+    <span class="pl-k">def</span> <span class="pl-en">check_rep_permissions</span>
+       render <span class="pl-c1">status:</span> <span class="pl-c1">403</span> <span class="pl-k">unless</span> current_user <span class="pl-k">&amp;&amp;</span> can_manage_emails?(current_user)
+    <span class="pl-k">end</span>
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<h2>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<p>Run the tests:</p>
+
+<div class="highlight highlight-console"><pre>$ <span class="pl-s1">rspec</span></pre></div>
+
+<p>Start a development web server on <a href="http://localhost:9292">localhost:9292</a>:</p>
+
+<div class="highlight highlight-console"><pre>$ <span class="pl-s1">rake dev</span></pre></div>
+
+<p>This project rocks and uses MIT-LICENSE.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
