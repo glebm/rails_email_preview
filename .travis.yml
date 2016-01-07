@@ -1,14 +1,13 @@
 language: ruby
-script: "bundle exec rspec --exclude-pattern 'spec/gemfiles/vendor/**/*'"
 rvm:
-  - "2.2.1"
+  - 2.3.0
   - jruby
   - rbx
 gemfile:
-  - spec/gemfiles/Gemfile-rails-3-2
-  - spec/gemfiles/Gemfile-rails-4-0
-  - spec/gemfiles/Gemfile-rails-4-1
-  - spec/gemfiles/Gemfile-rails-4-2
+  - spec/gemfiles/rails_3_2.gemfile
+  - spec/gemfiles/rails_4_0.gemfile
+  - spec/gemfiles/rails_4_1.gemfile
+  - spec/gemfiles/rails_4_2.gemfile
 git:
   submodules: false
 env:
@@ -20,9 +19,8 @@ matrix:
   allow_failures:
   - rvm: rbx
   exclude:
-  - rvm: 2.2.1
-    gemfile: spec/gemfiles/Gemfile-rails-3-2
-cache:
-  bundler: true
-  directories:
-  - spec/gemfiles/vendor
+  - rvm: 2.3.0
+    gemfile: spec/gemfiles/rails_3_2.gemfile
+sudo: false
+cache: bundler
+bundler_args: --path ../../vendor/bundle --without debug

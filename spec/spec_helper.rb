@@ -6,7 +6,6 @@ if !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
     require 'codeclimate-test-reporter'
     if CodeClimate::TestReporter.run?
       require 'simplecov'
-      SimpleCov.add_filter 'spec/gemfiles/vendor/bundle'
       CodeClimate::TestReporter.start
     end
   else

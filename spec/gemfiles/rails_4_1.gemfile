@@ -8,9 +8,4 @@ gem 'rails', '~> 4.1.2'
 # See rails/sass-rails#191 for more information
 gem 'sass-rails', '~> 4.0.2'
 
-platform :rbx do
-  gem 'rubysl', '~> 2.0'
-  gem 'racc'
-end
-
-gem 'codeclimate-test-reporter', group: :test, require: false
+eval_gemfile './shared.gemfile'
