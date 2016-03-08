@@ -84,15 +84,15 @@ module RailsEmailPreview
     # Load mail and its body for preview
     # @return [[Mail, String]] the mail object and its body
     def mail_and_body
-      mail = preview_mail
+      mail = preview_mail(true, {:browser_preview => true})
       body = mail_body_content(mail, @part_type)
       [mail, body]
     end
 
     # @param [Boolean] run_handlers whether to run the registered handlers for Mail object
     # @return [Mail]
-    def preview_mail(run_handlers = true)
-      @preview.preview_mail(run_handlers, params.except(*request.path_parameters.keys))
+    def preview_mail(run_handlers = true, additional_params = {})
+      @preview.preview_mail(run_handlers, params.except(*request.path_parameters.keys), additional_params)
     end
 
     # @param [Mail] mail
