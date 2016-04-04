@@ -7,7 +7,6 @@ $rep-gray-light: #a6b2bb !default
 $rep-gray-lighter: #f1f3f4 !default
 
 $rep-breadcrumb-bg: $rep-gray-lighter !default
-$rep-breadcrumb-active-color: $rep-gray-light !default
 
 $rep-grid-gutter: 30px !default
 $rep-grid-breakpoint-sm: 768px !default
@@ -87,16 +86,15 @@ $rep-text-color-secondary: #263238
   font-size: $rep-font-size-nav
   list-style: none
   background-color: $rep-breadcrumb-bg
-  &__breadcrumb
+.rep--breadcrumbs__breadcrumb
+  display: inline-block
+  + ::before
     display: inline-block
-    + ::before
-      display: inline-block
-      padding: 0 0.5em
-      color: $rep-gray-light
-      content: "/"
-  &__breadcrumb-active
-    display: inline-block
-    color: $rep-breadcrumb-active-color
+    padding: 0 0.5em
+    color: $rep-gray-light
+    content: "/"
+.rep--breadcrumbs__breadcrumb-active
+  display: inline-block
 
 .rep--headers-list
   margin: 0
