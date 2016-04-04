@@ -33,7 +33,7 @@ module RailsEmailPreview
     end
 
     def group_name
-      @group_name ||= preview_class_name.to_s.underscore.sub(/(_mailer)?_preview$/, '').humanize
+      @group_name ||= preview_class_name.to_s.underscore.gsub('/', ': ').sub(/(_mailer)?_preview$/, '').humanize
     end
 
     class << self
@@ -57,7 +57,7 @@ module RailsEmailPreview
 
           mail_methods(preview_class).sort.each do |preview_method|
             mailer_method = preview_method
-            id            = "#{preview_class_name.underscore}-#{mailer_method}"
+            id            = "#{preview_class_name.underscore.gsub('/', '__')}-#{mailer_method}"
 
             email = new(
                 id:                 id,

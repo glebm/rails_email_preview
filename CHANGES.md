@@ -1,3 +1,8 @@
+## v0.2.30 (unreleased)
+
+* Compatibility with namespaced email classes.
+* Spanish translation. Thanks, @epergo!
+
 ## v0.2.29
 
 * Latest CMS compatibility
