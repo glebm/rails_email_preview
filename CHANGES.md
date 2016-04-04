@@ -1,6 +1,11 @@
+## v0.2.31
+
+* Compatibility with namespaced email classes in the CMS.
+
 ## v0.2.30
 
-* Compatibility with namespaced email classes. [#61](https://github.com/glebm/rails_email_preview/issues/61).
+* Compatibility with namespaced email classes.
+* Change Sass stylesheets extensions from `.sass` to `.css.sass`. [#61](https://github.com/glebm/rails_email_preview/issues/61).
 * Spanish translation. Thanks, @epergo!
 
 ## v0.2.29
