@@ -2,21 +2,22 @@
 
 Preview email in the browser with this Rails engine. Compatible with Rails 3 and 4.
 
-Preview:
+An email review:
+
 ![screenshot][rep-show-screenshot]
 
-List:
+The list of all email previews:
+
 ![screenshot][rep-nav-screenshot]
 
-REP can use your application styles, markup is compatible with [bootstrap 3][rep-show-default-screenshot] by default.
-*These screenshots are using a custom Bootstrap theme*
+REP comes with two themes: a simple standalone theme, and a theme that uses [Bootstrap 3][rep-show-default-screenshot].
 
 ## Installation
 
 Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
-gem 'rails_email_preview', '~> 0.2.31'
+gem 'rails_email_preview', '~> 1.0.0'
 ```
 
 Add an initializer and the routes:
@@ -154,7 +155,9 @@ RailsEmailPreview.locale = :de
 
 ### Views
 
-You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):
+By default REP views will render inside its own layout.
+
+To render all REP views inside your app layout, first set the layout to use in the initializer:
 
 ```ruby
 Rails.application.config.to_prepare do
@@ -163,9 +166,28 @@ Rails.application.config.to_prepare do
 end
 ```
 
-You can `//= require 'rails_email_preview/layout'` REP-specific styles (`@import 'rails_email_preview/layout'` for SASS).
+Then, import REP styles into your `application.css.scss`:
 
-REP also allows you to customize some of the element classes via [`RailsEmailPreview.style`](/lib/rails_email_preview.rb#L34).
+```scss
+@import "rails_email_preview/application";
+```
+
+Alternatively, if you are using Bootstrap 3, `@import "rails_email_preview/application"`, and add the following
+to the initializer:
+
+```ruby
+config.style.merge!(
+    btn_active_class_modifier: 'active',
+    btn_danger_class:          'btn btn-danger',
+    btn_default_class:         'btn btn-default',
+    btn_group_class:           'btn-group btn-group-sm',
+    btn_primary_class:         'btn btn-primary',
+    form_control_class:        'form-control',
+    list_group_class:          'list-group',
+    list_group_item_class:     'list-group-item',
+    row_class:                 'row',
+)
+```
 
 You can also override any individual view by placing a file with the same path in your project's `app/views`,
 e.g. `app/views/rails_email_preview/emails/index.html.slim`.

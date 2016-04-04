@@ -1,0 +1,36 @@
+<%
+  list = @list
+  previews = @previews
+%>
+
+<div class="rep--main-container">
+  <h1><%= t '.list_title' %></h1>
+
+  <%= with_index_hook :list do %>
+    <div class="<%= rep_style[:row_class] %>">
+      <% list.columns do |groups| %>
+        <div class="rep--email-list-half">
+          <% groups.each do |title, group_previews| %>
+            <h2><%= title %></h2>
+            <div class="<%= rep_style[:list_group_class] %>">
+              <% group_previews.each do |p| %>
+                <a class="<%= rep_style[:list_group_item_class] %>"
+                   href="<%= rails_email_preview.rep_email_path(preview_id: p.id, email_locale: @email_locale) %>">
+                  <%= p.method_name %>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <hr/>
+  <p class="rep--footer">
+    <%= t 'rep.base.email', count: previews.length %> <%= t 'rep.base.in' %> <%= t 'rep.base.mailer', count: list.groups.length %>
+    <br/>
+    <a href="https://github.com/glebm/rails_email_preview" target="_blank">
+      REP <%= RailsEmailPreview::VERSION %>
+    </a>
+  </p>
+</div>

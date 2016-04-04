@@ -1,0 +1,4 @@
+<p><span class="<%= rep_btn_group_class %>">
+<% @preview.formats.each do |format| %><%= content_tag :a, format_label(format), change_format_attr(format) -%><% end %>
+</span></p>
+

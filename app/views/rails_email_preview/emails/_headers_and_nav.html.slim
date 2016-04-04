@@ -1,8 +1,0 @@
-div class=rep_style[:panel_class]
-  div class=rep_style[:panel_body_class]
-    div class=rep_style[:row_class]
-      #email-headers data-url=rails_email_preview.rep_email_headers_path(preview_params) class=rep_col_class(8)
-        / content updated by JS on demand from the iframe
-        = render 'rails_email_preview/emails/headers', mail: @mail
-      .text-right class=rep_col_class(4)
-        = render 'nav'

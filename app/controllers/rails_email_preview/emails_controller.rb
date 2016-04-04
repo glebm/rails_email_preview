@@ -5,6 +5,7 @@ module RailsEmailPreview
     around_filter :set_locale
     before_filter :set_email_preview_locale
     helper_method :with_email_locale
+    helper_method :preview_params
 
     # List of emails
     def index
@@ -19,7 +20,7 @@ module RailsEmailPreview
       with_email_locale do
         if @preview.respond_to?(:preview_mail)
           @mail, body     = mail_and_body
-          @mail_body_html = render_to_string inline: body, layout: 'rails_email_preview/email'
+          @mail_body_html = render_to_string(inline: body, layout: 'rails_email_preview/email')
         else
           raise ArgumentError.new("#{@preview} is not a preview class, does not respond_to?(:preview_mail)")
         end
@@ -47,14 +48,17 @@ module RailsEmailPreview
 
     # Download attachment
     def show_attachment
-      filename   = "#{params[:filename]}.#{params[:format]}"
-      attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
-      send_data attachment.body.raw_source, filename: filename
+      with_email_locale do
+        filename   = "#{params[:filename]}.#{params[:format]}"
+        attachment = preview_mail(false).attachments.find { |a| a.filename == filename }
+        send_data attachment.body.raw_source, filename: filename
+      end
     end
 
     # Render headers partial. Used by the CMS integration to refetch headers after editing.
     def show_headers
-      render partial: 'rails_email_preview/emails/headers', locals: {mail: mail_and_body.first}
+      mail = with_email_locale { mail_and_body.first }
+      render partial: 'rails_email_preview/emails/headers', locals: {mail: mail}
     end
 
     # Render email body iframe HTML. Used by the CMS integration to provide a link back to Show from Edit.
@@ -68,6 +72,10 @@ module RailsEmailPreview
     end
 
     private
+
+    def preview_params
+      params.except(*(request.path_parameters.keys - [:email_locale]))
+    end
 
     def deliver_email!(mail)
       if mail.respond_to?(:deliver_now!)
@@ -92,7 +100,7 @@ module RailsEmailPreview
     # @param [Boolean] run_handlers whether to run the registered handlers for Mail object
     # @return [Mail]
     def preview_mail(run_handlers = true)
-      @preview.preview_mail(run_handlers, params.except(*request.path_parameters.keys))
+      @preview.preview_mail(run_handlers, preview_params)
     end
 
     # @param [Mail] mail

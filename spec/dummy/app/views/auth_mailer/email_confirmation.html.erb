@@ -1,0 +1,30 @@
+<%= image_tag self.attachments['cat.png'].url, width: '200px', style: 'float: right' %>
+<p><%= t 'dummy.hello' %> user, here is your confirmation token: <%= @token %></p>
+
+<blockquote style="border: 1px solid green">
+  <a href='http://google.com/'>Confirm email address</a>
+</blockquote>
+
+<p><em>Thredded</em> is a Rails 4.1+ forum/messageboard engine. Its goal is to be as simple and feature rich as possible.</p>
+
+<p>Some of the features currently in Thredded:</p>
+
+<ul>
+  <li>Markdown post formatting (by default).</li>
+  <li>(Un)read posts tracking.</li>
+  <li>Email notifications, @-mentions, per-messageboard notification settings.</li>
+  <li>Private group messaging.</li>
+  <li>Full-text search using the database.</li>
+  <li>Pinned and locked topics.</li>
+  <li>List of currently online users, for all forums and per-messageboard.</li>
+  <li>Flexible permissions system.</li>
+  <li>Lightweight default theme configurable via Sass.</li>
+</ul>
+
+<p>Planned features:</p>
+
+<ul>
+  <li>Flexible moderation system with per-messageboard settings. #45</li>
+</ul>
+
+<p><em>Thanks for registering! Enjoy!</em></p>

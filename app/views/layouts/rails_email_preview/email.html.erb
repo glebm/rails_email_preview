@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    #message_body, #raw_message {
+      font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      word-break: break-word;
+    }
+
+    #error {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+      color: #a94442;
+    }
+
+    body {
+      background-color: white;
+    }
+  </style>
+  <script>document.addEventListener('DOMContentLoaded', window.parent.rep.iframeOnDOMContentLoaded, true);</script>
+</head>
+<body>
+<div id="content" class="container">
+<%= yield %></div>
+</body>
+</html>

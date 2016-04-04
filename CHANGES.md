@@ -1,3 +1,41 @@
+## v1.0.0
+
+**Breaking**: REP now uses a lightweight default theme with no dependencies by default.
+
+If you are using REP with the Bootstrap 3 theme, here are the configuration changes you need to make:
+
+* `@import "rails_email_preview/bootstrap3"` instead of `rails_email_preview/application`.
+* Add the following styles configuration to your REP initializer:
+  
+  ```ruby
+  config.style.merge!(
+      btn_active_class_modifier: 'active',
+      btn_danger_class:          'btn btn-danger',
+      btn_default_class:         'btn btn-default',
+      btn_group_class:           'btn-group btn-group-sm',
+      btn_primary_class:         'btn btn-primary',
+      form_control_class:        'form-control',
+      list_group_class:          'list-group',
+      list_group_item_class:     'list-group-item',
+      row_class:                 'row',
+  )
+  ```
+
+The following REP internal class names have changed:
+
+* `.rep-email-options` is now `.rep--email-options`.
+* `.rep-headers-list` is now `.rep--headers-list`.
+* `.rep-email-show` is now `.rep--email-show`.
+* `.breadcrumb` is now `.rep--breadcrumbs`.
+* `.breadcrumb .active` is now `.rep--breadcrumbs__active`.
+* `.rep-send-to-wrapper` is gone, but now there is `.rep--send-to-form`.
+
+All REP views are now wrapped in a `div` with the `rep--main-container` class. 
+
+REP no longer depends on slim and slim-rails.
+
+Fixed minor email locale handling bugs in navigation and the CMS integration.
+
 ## v0.2.31
 
 * Compatibility with namespaced email classes in the CMS.

@@ -1,0 +1,68 @@
+// Bootstrap 3 theme for Rails Email Preview
+
+.rep--email-headers
+  @extend .col-md-8
+
+.rep--email-nav-container
+  @extend .col-md-4
+
+.rep--email-list-half
+  @extend .col-md-6
+
+.rep--headers-list
+  dt
+    color: $gray-dark
+    @media (min-width: $screen-sm-min)
+      float: left
+      clear: left
+      margin-right: 0.45em
+      text-align: right
+      width: 100px
+      &::after
+        content: ":"
+  dd
+    width: auto
+    margin-left: 0
+    margin-bottom: 0.3em
+
+.rep--email-options
+  text-align: right
+
+.rep--breadcrumbs
+  @extend .breadcrumb
+
+.rep--breadcrumbs__breadcrumb-active
+  color: $breadcrumb-active-color
+
+.rep--panel
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .125)
+  padding: 15px
+  margin-bottom: 20px
+
+.rep--send-to-form
+  display: block
+  white-space: nowrap
+  padding-bottom: 4px
+  button, [type="email"]
+    display: inline-block
+    &:focus, &:active
+      z-index: 2
+  button
+    line-height: 1.3
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+  [type="email"]
+    max-width: 140px
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+
+.rep--footer
+  text-align: center
+  color: $state-info-text
+
+.rep--email-headers
+  +make-sm-column(8)
+.rep--email-nav-container
+  +make-sm-column(4)
+.rep--email-list-half
+  +make-sm-column(6)

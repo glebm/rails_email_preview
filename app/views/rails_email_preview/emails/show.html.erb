@@ -1,0 +1,23 @@
+<%- # Using ERB for this template to have precise control of tag indentation for correct rendering of raw and text.  -%>
+<div class="rep--main-container">
+  <div id="email-show" class="rep--email-show">
+    <%= with_show_hook :breadcrumb do %>
+      <ol class="rep--breadcrumbs">
+        <%= with_show_hook :breadcrumb_content do %>
+          <li class="rep--breadcrumbs__breadcrumb">
+            <a href="<%= rails_email_preview.rep_emails_path(email_locale: @email_locale) %>"><%= t '.breadcrumb_list' %></a>
+          </li><li class="rep--breadcrumbs__breadcrumb-active"><a href="<%= request.path %>"><%= @preview.name %></a></li>
+        <% end %>
+      </ol>
+    <% end %>
+
+    <%= with_show_hook :headers_and_nav do %>
+      <%= render 'rails_email_preview/emails/headers_and_nav' %>
+    <% end %>
+
+    <%= with_show_hook :email_body do %>
+      <%- # actual email content, rendered in an iframe to prevent browser styles from interfering   -%>
+      <%= render 'rails_email_preview/emails/email_iframe' %>
+    <% end %>
+  </div>
+</div>

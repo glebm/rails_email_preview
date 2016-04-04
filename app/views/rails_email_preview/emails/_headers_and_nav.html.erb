@@ -1,0 +1,12 @@
+<div class="rep--panel">
+  <div class="<%= rep_style[:row_class] %>">
+    <div id="email-headers" class="rep--email-headers"
+         data-url="<%= rails_email_preview.rep_email_headers_path(preview_params) %>">
+      <%# content updated by JS on demand from the iframe %>
+      <%= render 'rails_email_preview/emails/headers', mail: @mail %>
+    </div>
+    <div class="rep--email-nav-container">
+      <%= render 'nav' %>
+    </div>
+  </div>
+</div>

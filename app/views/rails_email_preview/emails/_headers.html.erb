@@ -1,0 +1,10 @@
+<%= with_show_hook :headers do %>
+  <dl class="rep--headers-list">
+    <%= with_show_hook :headers_content do %>
+      <% human_headers mail do |name, value| %>
+        <dt><%= name %></dt>
+        <dd><%= value %></dd>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>

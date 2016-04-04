@@ -57,26 +57,13 @@ module RailsEmailPreview::EmailsHelper
     RailsEmailPreview.style
   end
 
-  def preview_params
-    params.except(*request.path_parameters.keys)
-  end
-
   def rep_btn_class(active = false)
-    rep_style[:"btn_#{active ? 'active' : 'default'}_class"]
-  end
-
-  def rep_row_class
-    rep_style[:row_class]
-  end
-
-  def rep_col_class(n)
-    rep_style[:column_class] % {n: n}
+    [rep_style[:btn_default_class], (rep_style[:btn_active_class_modifier] if active)].compact * ' '
   end
 
   def rep_btn_group_class
     rep_style[:btn_group_class]
   end
-
 
   def with_index_hook(key, &block)
     render_hook key, list: @list, previews: @previews, &block

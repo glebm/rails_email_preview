@@ -1,5 +1,5 @@
-javascript:
-  (function(doc) {
+<script>
+  (function (doc) {
     var rep = window['rep'] || (window['rep'] = { resizeAttached: false });
     rep.loaded = false;
 
@@ -22,12 +22,12 @@ javascript:
     function getBodyHeight(body) {
       // firefox sometimes returns the wrong value for all of these and needs a bit of extra height
       return (/Firefox/.test(navigator.userAgent) ? 50 : 0) +
-        Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
+          Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
     }
 
     function fetchHeaders() {
       var headersView = doc.getElementById('email-headers'),
-              xhr = new XMLHttpRequest();
+          xhr = new XMLHttpRequest();
       xhr.open('GET', headersView.getAttribute('data-url'), true);
       xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       xhr.send(null);
@@ -54,24 +54,27 @@ javascript:
 
     // Resize on window resize
     if (!rep.resizeAttached) {
-      window.addEventListener('resize', function() {
+      window.addEventListener('resize', function () {
         if (rep.loaded) resizeIframe();
       }, true);
       rep.resizeAttached = true
     }
 
     // Only show progress bar after some time to avoid flashing
-    setTimeout(function() {
+    setTimeout(function () {
       doc.getElementById('email-progress-bar').style.display = 'block';
     }, 350);
   })(document);
+</script>
 
+<div style="min-height: 450px; position: relative">
+  <div id="email-progress-bar" class="progress"
+       style="display: none; position: absolute; z-index: -1; width: 100%; text-align: center">
+    <div class="progress-bar progress-bar-striped active" style='width:100%'>
+      <%= t 'rep.base.loading' %>
+    </div>
+  </div>
 
-div style='min-height: 450px; position: relative'
-  #email-progress-bar.progress style='display: none; position: absolute; z-index: -1; width: 100%; text-align: center'
-    .progress-bar.progress-bar-striped.active style='width:100%'
-      = t 'rep.base.loading'
-
-  iframe#src-iframe[
-    srcdoc=(@mail_body_html.to_str) seamless="seamless" onload='rep.iframeOnLoad()'
-    style='width:100%;border:none;padding:0;margin:0;height:0;']
+  <iframe id="src-iframe" srcdoc="<%= @mail_body_html.to_str %>" seamless="seamless" onload="rep.iframeOnLoad()"
+          style="width:100%;border:none;padding:0;margin:0;height:0"></iframe>
+</div>

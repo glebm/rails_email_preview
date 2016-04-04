@@ -1,0 +1,11 @@
+<%= form_tag rails_email_preview.rep_test_deliver_url(params: preview_params), method: :post,
+             class:                                                                    'rep--send-to-form' do %>
+  <%= hidden_field_tag :email_locale, @email_locale %>
+<%# Indentation ensures the lack of a space in between the button and the field:  %>
+<%= content_tag :button, t('.send_btn'), type: 'submit',
+                class:                         rep_style[:btn_danger_class],
+                'data-confirm'                 => t('.send_are_you_sure') -%>
+<%= text_field_tag :recipient_email, '', type: :email, required: true,
+                   class:                      rep_style[:form_control_class],
+                   placeholder:                t('.send_recipient_placeholder') -%>
+<% end %>

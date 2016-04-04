@@ -1,0 +1,18 @@
+<%# Locale, format and actions %>
+<%= with_show_hook :nav do %>
+  <div class="rep--email-options">
+    <% if I18n.available_locales.length > 1 %>
+      <%= with_show_hook :nav_i18n do %>
+        <%= render 'rails_email_preview/emails/i18n_nav' %>
+      <% end %>
+    <% end %>
+    <%= with_show_hook :nav_format do %>
+      <%= render 'rails_email_preview/emails/format_nav' %>
+    <% end %>
+    <% if RailsEmailPreview.enable_send_email %>
+      <%= with_show_hook :nav_send do %>
+        <%= render 'rails_email_preview/emails/send_form' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

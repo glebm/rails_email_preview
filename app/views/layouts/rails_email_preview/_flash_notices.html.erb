@@ -1,0 +1,7 @@
+<% flash.each do |name, msg| %>
+  <% next unless msg.is_a?(String) %>
+  <div class="alert alert-<%= name.to_s =~ /notice/ ? 'success' : 'error' %>">
+    <button class="close" type="button" data-dismiss="alert"><i class="icon-remove"></i> &times;</button>
+    <%= content_tag :div, name.to_s.end_with?('_html') ? msg.html_safe : h(msg).gsub("\n", "<br>").html_safe, id: "flash_#{name.to_s.sub(/_html$/, '')}" %>
+  </div>
+<% end %>

@@ -1,33 +1,35 @@
--# When rendering inside rails_email_preview hide nav, and hide irrelevant things from the form
-ruby:
+<%
+  # When rendering inside rails_email_preview hide nav, and hide irrelevant things from the form
   adapter = ::RailsEmailPreview::Integrations::ComfortableMexicanSofa
   snippet = @snippet || (adapter.cms_snippet_class === @record && @record)
   if snippet && (p = adapter.rep_email_params_from_snippet(snippet))
     show_url = rails_email_preview.rep_raw_email_url(p)
   end
   customize_form = show_url.present? || snippet && !snippet.persisted?
-
-- if customize_form
-  javascript:
-    if (window.parent && window.parent.rep && (new RegExp('#{rails_email_preview.rep_root_path}')).test(parent.location.href)) {
-      jQuery(function($) {
+%>
+<% if customize_form %>
+  <script>
+    if (window.parent && window.parent.rep && (new RegExp('<%= rails_email_preview.rep_root_path %>')).test(parent.location.href)) {
+      jQuery(function ($) {
         // Hide nav:
         $('.left-column,.right-column').hide();
         $('.center-column').css('margin', 0);
         $('#comfy').css('backgroundColor', 'white');
 
-        var showUrl = '#{show_url}';
+        var showUrl = '<%= show_url %>';
 
         if (showUrl) {
           var parentParams = parent.location.search;
           if (!/\?/.test(showUrl)) showUrl += '?';
           showUrl = showUrl.replace(/\?.*$/, parentParams);
           $('.page-header h2').html(
-            "#{t '.edit_email'}" + " <a class='btn btn-primary' href='" + showUrl + "'>#{t '.view_link'}</a>");
+              "<%= t '.edit_email' %>" + " <a class='<%= RailsEmailPreview.style[:btn_default_class] %>' href='" + showUrl + "'><%= t '.view_link' %></a>");
         }
 
         // Snippet form:
-        var control = function(name) { return $('[name^="snippet[' + name + ']"]').closest('.form-group,.control-group'); };
+        var control = function (name) {
+          return $('[name^="snippet[' + name + ']"]').closest('.form-group,.control-group');
+        };
 
         // retext labels
         control('label').find('.control-label').text("Subject");
@@ -42,9 +44,11 @@ ruby:
       });
 
       // Schedule headers view refresh on next load
-      jQuery(window).on('load', function() {
-        setTimeout(function(){
+      jQuery(window).on('load', function () {
+        setTimeout(function () {
           window.parent.rep.fetchHeadersOnNextLoad = true;
         })
       });
     }
+  </script>
+<% end %>
