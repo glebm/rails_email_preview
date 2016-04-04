@@ -1,6 +1,6 @@
-## v0.2.30 (unreleased)
+## v0.2.30
 
-* Compatibility with namespaced email classes.
+* Compatibility with namespaced email classes. [#61](https://github.com/glebm/rails_email_preview/issues/61).
 * Spanish translation. Thanks, @epergo!
 
 ## v0.2.29
