@@ -1,3 +1,12 @@
+## v1.0.1
+
+Added `RailsEmailPreview.find_preview_classes(dir)` that also finds classes in subdirectories, and changed the default
+initializer to load classes like this:
+
+```ruby
+RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
+```
+
 ## v1.0.0
 
 **Breaking**: REP now uses a lightweight default theme with no dependencies by default.

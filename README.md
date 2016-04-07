@@ -17,7 +17,7 @@ REP comes with two themes: a simple standalone theme, and a theme that uses [Boo
 Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
-gem 'rails_email_preview', '~> 1.0.0'
+gem 'rails_email_preview', '~> 1.0.1'
 ```
 
 Add an initializer and the routes:
