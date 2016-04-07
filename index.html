@@ -25,21 +25,22 @@
 
 <p>Preview email in the browser with this Rails engine. Compatible with Rails 3 and 4.</p>
 
-<p>Preview:
-<img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png" alt="screenshot" title="Show Email Screenshot"></p>
+<p>An email review:</p>
 
-<p>List:
-<img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png" alt="screenshot" title="Email List Screenshot"></p>
+<p><img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png" alt="screenshot" title="Show Email Screenshot"></p>
 
-<p>REP can use your application styles, markup is compatible with <a href="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png" title="Show Email Screenshot (default styles)">bootstrap 3</a> by default.
-<em>These screenshots are using a custom Bootstrap theme</em></p>
+<p>The list of all email previews:</p>
+
+<p><img src="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png" alt="screenshot" title="Email List Screenshot"></p>
+
+<p>REP comes with two themes: a simple standalone theme, and a theme that uses <a href="https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png" title="Show Email Screenshot (default styles)">Bootstrap 3</a>.</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add <a href="https://rubygems.org/gems/rails_email_preview"><img src="http://img.shields.io/gem/v/rails_email_preview.svg" alt="Gem Version"></a> to Gemfile:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>rails_email_preview<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 0.2.29<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>rails_email_preview<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 1.0.1<span class="pl-pds">'</span></span></pre></div>
 
 <p>Add an initializer and the routes:</p>
 
@@ -166,16 +167,33 @@ You can set the language in <code>config.to_prepare</code> section of the initia
 <h3>
 <a id="views" class="anchor" href="#views" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Views</h3>
 
-<p>You can render all REP views inside your app layout (this will need styling to look nice if you don't use bootstrap):</p>
+<p>By default REP views will render inside its own layout.</p>
+
+<p>To render all REP views inside your app layout, first set the layout to use in the initializer:</p>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-c1">Rails</span>.application.config.to_prepare <span class="pl-k">do</span>
   <span class="pl-c"># Use admin layout with REP (this will also make app routes accessible within REP):</span>
   <span class="pl-c1">RailsEmailPreview</span>.layout <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>admin<span class="pl-pds">'</span></span>
 <span class="pl-k">end</span></pre></div>
 
-<p>You can <code>//= require 'rails_email_preview/layout'</code> REP-specific styles (<code>@import 'rails_email_preview/layout'</code> for SASS).</p>
+<p>Then, import REP styles into your <code>application.css.scss</code>:</p>
 
-<p>REP also allows you to customize some of the element classes via <a href="/lib/rails_email_preview.rb#L34"><code>RailsEmailPreview.style</code></a>.</p>
+<div class="highlight highlight-source-scss"><pre><span class="pl-k">@import</span> "<span class="pl-v">rails_email_preview/application</span>";</pre></div>
+
+<p>Alternatively, if you are using Bootstrap 3, <code>@import "rails_email_preview/application"</code>, and add the following
+to the initializer:</p>
+
+<div class="highlight highlight-source-ruby"><pre>config.style.merge!(
+    <span class="pl-c1">btn_active_class_modifier:</span> <span class="pl-s"><span class="pl-pds">'</span>active<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">btn_danger_class:</span>          <span class="pl-s"><span class="pl-pds">'</span>btn btn-danger<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">btn_default_class:</span>         <span class="pl-s"><span class="pl-pds">'</span>btn btn-default<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">btn_group_class:</span>           <span class="pl-s"><span class="pl-pds">'</span>btn-group btn-group-sm<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">btn_primary_class:</span>         <span class="pl-s"><span class="pl-pds">'</span>btn btn-primary<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">form_control_class:</span>        <span class="pl-s"><span class="pl-pds">'</span>form-control<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">list_group_class:</span>          <span class="pl-s"><span class="pl-pds">'</span>list-group<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">list_group_item_class:</span>     <span class="pl-s"><span class="pl-pds">'</span>list-group-item<span class="pl-pds">'</span></span>,
+    <span class="pl-c1">row_class:</span>                 <span class="pl-s"><span class="pl-pds">'</span>row<span class="pl-pds">'</span></span>,
+)</pre></div>
 
 <p>You can also override any individual view by placing a file with the same path in your project's <code>app/views</code>,
 e.g. <code>app/views/rails_email_preview/emails/index.html.slim</code>.</p>
