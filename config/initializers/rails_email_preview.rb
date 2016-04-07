@@ -32,7 +32,5 @@ Rails.application.config.to_prepare do
   # RailsEmailPreview.locale = :de
 
   # Auto-load preview classes from:
-  RailsEmailPreview.preview_classes = Dir[Rails.root.join 'app/mailer_previews/*_preview.rb'].map { |p|
-    File.basename(p, '.rb').camelize
-  }
+  RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
 end

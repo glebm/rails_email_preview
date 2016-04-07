@@ -9,6 +9,7 @@ require 'sass'
 require 'sass-rails'
 require 'request_store'
 require 'turbolinks'
+require 'pathname'
 
 module RailsEmailPreview
 
@@ -50,6 +51,11 @@ module RailsEmailPreview
     def preview_classes=(classes)
       @preview_classes = classes
       RailsEmailPreview::Preview.load_all(classes)
+    end
+
+    def find_preview_classes(dir)
+      return [] unless File.directory?(dir)
+      Dir.chdir(dir) { Dir['**/*_preview.rb'].map { |p| p.sub(/\.rb$/, '').camelize } }
     end
 
     def layout=(layout)
