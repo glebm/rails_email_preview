@@ -12,7 +12,8 @@ $rep-grid-gutter: 30px !default
 $rep-grid-breakpoint-sm: 768px !default
 $rep-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif !default
 $rep-font-size-nav: 1.15em !default
-$rep-text-color-secondary: #263238
+$rep-text-color: #575d6b !default
+$rep-text-color-secondary: #263238 !default
 
 =rep--media-sm-plus
   @media (min-width: $rep-grid-breakpoint-sm)
@@ -44,8 +45,9 @@ $rep-text-color-secondary: #263238
   border-top: 1px solid $rep-gray-lighter
 
 .rep--main-container
-  font-family: $rep-font-family
   box-sizing: border-box
+  color: $rep-text-color
+  font-family: $rep-font-family
   *, *::before, *::after
     box-sizing: inherit
   a

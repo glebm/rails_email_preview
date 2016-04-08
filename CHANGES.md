@@ -1,3 +1,7 @@
+## v1.0.2
+
+Added a couple of variables for further default theme customization.
+
 ## v1.0.1
 
 Added `RailsEmailPreview.find_preview_classes(dir)` that also finds classes in subdirectories, and changed the default
