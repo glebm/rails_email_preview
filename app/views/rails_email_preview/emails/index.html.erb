@@ -6,6 +6,9 @@
 <div class="rep--main-container">
   <h1><%= t '.list_title' %></h1>
 
+      <%= link_to 'Download all html templates in a Zip', rep_emails_path(format: :zip) %>
+    <br/>
+
   <%= with_index_hook :list do %>
     <div class="<%= rep_style[:row_class] %>">
       <% list.columns do |groups| %>

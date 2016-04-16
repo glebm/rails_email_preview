@@ -10,6 +10,7 @@ require 'sass-rails'
 require 'request_store'
 require 'turbolinks'
 require 'pathname'
+require 'zip'
 
 module RailsEmailPreview
 
