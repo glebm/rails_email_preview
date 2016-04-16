@@ -29,7 +29,7 @@ module RailsEmailPreview
 
     # Really deliver an email
     def test_deliver
-      redirect_url = rails_email_preview.rep_email_url(params.slice(:preview_id, :email_locale))
+      redirect_url = rails_email_preview.rep_email_url(preview_params.except(:recipient_email))
       if (address = params[:recipient_email]).blank? || address !~ /@/
         redirect_to redirect_url, alert: t('rep.test_deliver.provide_email')
         return
@@ -74,7 +74,11 @@ module RailsEmailPreview
     private
 
     def preview_params
-      params.except(*(request.path_parameters.keys - [:email_locale]))
+      if Rails::VERSION::MAJOR >= 5
+        params.to_unsafe_h.except(*(request.path_parameters.keys - [:email_locale]))
+      else
+        params.except(*(request.path_parameters.keys - [:email_locale]))
+      end
     end
 
     def deliver_email!(mail)

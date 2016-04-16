@@ -24,8 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'i18n-tasks', '>= 0.7.6'
   s.add_development_dependency 'capybara', '>= 2.3.0'
-  s.add_development_dependency 'rspec', '~> 3.4'
-  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-rails', '>= 3.4'
   s.add_development_dependency 'poltergeist'
 
   s.version = RailsEmailPreview::VERSION
