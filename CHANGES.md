@@ -1,3 +1,7 @@
+## v1.0.3
+
+Rails 5 support.
+
 ## v1.0.2
 
 Added a couple of variables for further default theme customization.
