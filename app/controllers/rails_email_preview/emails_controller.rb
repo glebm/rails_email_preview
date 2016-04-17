@@ -18,7 +18,7 @@ module RailsEmailPreview
           # Create zip file
           compressed_filestream = Zip::OutputStream.write_buffer do |zip|
             # Add all templates to zip
-            Preview.all.each do |preview|
+            @previews.each do |preview|
               mail = preview.preview_mail(true)
               body = mail_body_content(mail, 'html')
 
