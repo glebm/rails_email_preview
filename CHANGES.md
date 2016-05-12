@@ -1,4 +1,4 @@
-## v2.0.0
+## v2.0.1
 
 Drop support for all versions of Rails below 4.2.
 Fix Rails 5 deprecation warnings.
