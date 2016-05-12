@@ -1,3 +1,8 @@
+## v2.0.0
+
+Drop support for all versions of Rails below 4.2.
+Fix Rails 5 deprecation warnings.
+
 ## v1.0.3
 
 Rails 5 support.

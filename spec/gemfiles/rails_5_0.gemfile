@@ -2,9 +2,9 @@ source 'http://rubygems.org'
 
 gemspec path: '../..'
 
-gem 'rails', '~> 5.0.0.beta3'
+gem 'rails', '~> 5.0.0.rc1'
 
-gem 'sass-rails', '~> 5.0.1'
+gem 'sass-rails', '~> 6.0.0.beta1'
 group :test do
   gem 'rspec-rails', '~> 3.5.0.beta3'
 end

@@ -13,10 +13,8 @@ module Dummy
     config.i18n.available_locales = [:es, :en, :de, :ru]
     config.i18n.default_locale = :en
 
-    # Rails 3
-    if config.assets.respond_to?(:enabled=)
-      config.assets.enabled = true
-    end
+    config.assets.enabled = true
+    config.assets.precompile += %w(application.css application.js)
   end
 end
 

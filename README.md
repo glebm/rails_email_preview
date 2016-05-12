@@ -1,6 +1,6 @@
 # Rails Email Preview [![Build Status][travis-badge]][travis] [![Test Coverage][coverage-badge]][coverage] [![Code Climate][codeclimate-badge]][codeclimate] [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/glebm/rails_email_preview?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Preview email in the browser with this Rails engine. Compatible with Rails 3 and 4.
+Preview email in the browser with this Rails engine. Compatible with Rails 4.2+.
 
 An email review:
 
@@ -17,7 +17,7 @@ REP comes with two themes: a simple standalone theme, and a theme that uses [Boo
 Add [![Gem Version][gem-badge]][gem] to Gemfile:
 
 ```ruby
-gem 'rails_email_preview', '~> 1.0.3'
+gem 'rails_email_preview', '~> 2.0.0'
 ```
 
 Add an initializer and the routes:
@@ -222,7 +222,7 @@ Alternatively, to have custom rules just for REP you can:
 ```ruby
 Rails.application.config.to_prepare do
   RailsEmailPreview::ApplicationController.module_eval do
-    before_filter :check_rep_permissions
+    before_action :check_rep_permissions
 
     private
     def check_rep_permissions

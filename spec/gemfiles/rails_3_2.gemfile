@@ -1,8 +1,0 @@
-source "http://rubygems.org"
-
-gemspec path: '../..'
-
-gem 'rails', '~> 3.2.17'
-gem 'test-unit', '~> 3.0'
-
-eval_gemfile './shared.gemfile'
