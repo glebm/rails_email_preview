@@ -1,9 +1,9 @@
 module RailsEmailPreview
   class EmailsController < ::RailsEmailPreview::ApplicationController
     include ERB::Util
-    before_filter :load_preview, except: :index
-    around_filter :set_locale
-    before_filter :set_email_preview_locale
+    before_action :load_preview, except: :index
+    around_action :set_locale
+    before_action :set_email_preview_locale
     helper_method :with_email_locale
     helper_method :preview_params
 
@@ -83,7 +83,7 @@ module RailsEmailPreview
 
     def deliver_email!(mail)
       if mail.respond_to?(:deliver_now!)
-        # Rails 4.2+
+        # ActiveJob
         mail.deliver_now!
       elsif mail.respond_to?(:deliver!)
         # support deliver! if present (resque-mailer etc)
