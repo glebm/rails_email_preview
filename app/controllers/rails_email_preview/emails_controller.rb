@@ -10,7 +10,28 @@ module RailsEmailPreview
     # List of emails
     def index
       @previews = Preview.all
-      @list     = PreviewListPresenter.new(@previews)
+
+      respond_to do |format|
+        format.html { @list = PreviewListPresenter.new(@previews) }
+
+        format.zip do
+          # Create zip file
+          compressed_filestream = Zip::OutputStream.write_buffer do |zip|
+            # Add all templates to zip
+            @previews.each do |preview|
+              mail = preview.preview_mail(true)
+              body = mail_body_content(mail, 'html')
+
+              zip.put_next_entry(preview.name + '.html')
+              zip.print(body)
+            end
+          end
+
+          # Rewind and return file
+          compressed_filestream.rewind
+          send_data compressed_filestream.read, filename: 'all_templates.zip', type: 'application/zip'
+        end
+      end
     end
 
     # Preview an email
