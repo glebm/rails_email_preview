@@ -9,6 +9,8 @@ require 'rails_email_preview'
 #    Premailer::Rails::Hook.delivering_email(message)
 #    # or actionmailer-inline-css:
 #    ActionMailer::InlineCssHook.delivering_email(message)
+#    # or roadie-rails:
+#    Roadie::Rails::MailInliner.new(message, message.roadie_options).execute
 #  end
 #
 #  # do not show Send Email button

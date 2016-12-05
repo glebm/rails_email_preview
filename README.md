@@ -120,6 +120,12 @@ REP works with [Comfortable Mexican Sofa CMS](https://github.com/comfy/comfortab
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
 Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
+### Roadie
+
+An alternative to Premailer is [Roadie-rails](https://github.com/Mange/roadie-rails). It addition to inlining CSS, it additionally converts relative and protocol-less urls. Integration can be done by using the <code>before_render</code> hook.
+
+Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
+
 ### I18n
 
 REP expects emails to use current `I18n.locale`:
