@@ -16,7 +16,7 @@
               <% group_previews.each do |p| %>
                 <a class="<%= rep_style[:list_group_item_class] %>"
                    href="<%= rails_email_preview.rep_email_path(preview_id: p.id, email_locale: @email_locale) %>">
-                  <%= p.method_name %>
+                  <%= p.humanized_method_name %>
                 </a>
               <% end %>
             </div>

@@ -25,12 +25,14 @@ module RailsEmailPreview
     end
 
     def name
-      @name ||= "#{group_name}: #{method_name}"
+      @name ||= "#{group_name}: #{humanized_method_name}"
     end
 
-    def method_name
+    def humanized_method_name
       @action_name ||= preview_method.to_s.humanize
     end
+
+    alias_method :method_name, :humanized_method_name
 
     def group_name
       @group_name ||= preview_class_name.to_s.underscore.gsub('/', ': ').sub(/(_mailer)?_preview$/, '').humanize
@@ -40,7 +42,7 @@ module RailsEmailPreview
       def find(email_id)
         @by_id[email_id]
       end
-
+      
       alias_method :[], :find
 
       attr_reader :all
