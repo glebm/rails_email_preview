@@ -18,6 +18,7 @@ else
 
   group :development do
     gem 'puma'
+    gem 'coffee-script'
   end
 
   group :test do
