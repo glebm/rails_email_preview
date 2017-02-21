@@ -14,11 +14,11 @@ if ENV['TRAVIS']
 else
   group :test, :development do
     gem 'byebug', platform: :mri_21, require: false
+    gem 'coffee-rails'
   end
 
   group :development do
     gem 'puma'
-    gem 'coffee-script'
   end
 
   group :test do

@@ -32,6 +32,7 @@ module RailsEmailPreview
       @action_name ||= preview_method.to_s.humanize
     end
 
+    # @deprecated {#method_name} is deprecated and will be removed in v3
     alias_method :method_name, :humanized_method_name
 
     def group_name
@@ -42,7 +43,7 @@ module RailsEmailPreview
       def find(email_id)
         @by_id[email_id]
       end
-      
+
       alias_method :[], :find
 
       attr_reader :all
