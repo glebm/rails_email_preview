@@ -4,7 +4,6 @@ gemspec path: '../..'
 
 gem 'rails', '~> 5.0.2'
 
-gem 'sass-rails', '~> 6.0.0.beta1'
 group :test do
   gem 'rspec-rails', '~> 3.5.2'
 end
