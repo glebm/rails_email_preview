@@ -20,9 +20,15 @@
     }
 
     function getBodyHeight(body) {
-      // firefox sometimes returns the wrong value for all of these and needs a bit of extra height
-      return (/Firefox/.test(navigator.userAgent) ? 50 : 0) +
-          Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight);
+      var boundingRect = body.getBoundingClientRect();
+      var style = body.ownerDocument.defaultView.getComputedStyle(body);
+      var marginY = parseInt(style['margin-bottom'], 10) +
+          parseInt(style['margin-top'], 10);
+      // There may be a horizontal scrollbar adding to the height.
+      var scrollbarHeight = 17;
+      return scrollbarHeight + marginY + Math.max(
+          body.scrollHeight, body.offsetHeight, body.clientHeight,
+          boundingRect.height + boundingRect.top);
     }
 
     function fetchHeaders() {

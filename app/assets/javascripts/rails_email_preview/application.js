@@ -1,1 +1,1 @@
-#= require turbolinks
+//= require turbolinks

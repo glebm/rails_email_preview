@@ -5,7 +5,6 @@ require 'action_mailer/railtie'
 require 'sprockets/railtie'
 
 Bundler.require(*Rails.groups)
-require 'coffee_script'
 require 'rails_email_preview'
 
 module Dummy
