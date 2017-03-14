@@ -1,3 +1,8 @@
+## v2.0.2
+
+* Document roadie-rails support.
+* Fix body iframe height calculation.
+
 ## v2.0.1
 
 Drop support for all versions of Rails below 4.2.

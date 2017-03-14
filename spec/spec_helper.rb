@@ -1,17 +1,8 @@
-# -*- encoding : utf-8 -*-
 # Configure Rails Environment
 ENV['RAILS_ENV'] = ENV['RACK_ENV'] = 'test'
-if !(defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx')
-  if ENV['TRAVIS']
-    require 'codeclimate-test-reporter'
-    if CodeClimate::TestReporter.run?
-      require 'simplecov'
-      CodeClimate::TestReporter.start
-    end
-  else
-    require 'simplecov'
-    SimpleCov.start
-  end
+if ENV['COVERAGE'] && !%w(rbx jruby).include?(RUBY_ENGINE) && !ENV['MIGRATION_SPEC']
+  require 'simplecov'
+  SimpleCov.command_name 'RSpec'
 end
 
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
