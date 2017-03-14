@@ -115,7 +115,7 @@ REP works with [Comfortable Mexican Sofa CMS](https://github.com/comfy/comfortab
 
 ### CSS inlining
 
-For CSS inlining, REP support [Roadie](https://github.com/Mange/roadie) and
+For CSS inlining, REP supports [Roadie](https://github.com/Mange/roadie) and
 [Premailer](https://github.com/alexdunae/premailer).
 Both of these automatically translate CSS rules into inline styles and turn
 relative URLs into absolute ones.
