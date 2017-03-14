@@ -23,4 +23,7 @@ bundler_args: --path ../../vendor/bundle --without debug
 
 script:
 - bundle exec rspec --format d
-- bundle exec codeclimate-test-reporter
+- >
+  if [[ "$(rvm current)" = "ruby-"* ]]; then
+    bundle exec codeclimate-test-reporter
+  fi
