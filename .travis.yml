@@ -1,8 +1,8 @@
 language: ruby
 rvm:
   - 2.3.1
-  - jruby
-  - rbx
+  - jruby-9
+  - rbx-3
 gemfile:
   - spec/gemfiles/rails_4_2.gemfile
   - spec/gemfiles/rails_5_0.gemfile
@@ -14,10 +14,7 @@ env:
   - TRAVIS=1
 matrix:
   allow_failures:
-  - rvm: rbx
-  exclude:
-  - rvm: jruby
-    gemfile: spec/gemfiles/rails_5_0.gemfile
+  - rvm: rbx-3
 sudo: false
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
