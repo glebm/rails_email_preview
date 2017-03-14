@@ -12,8 +12,6 @@ env:
   global:
   - COVERAGE=1
   - TRAVIS=1
-  # codeclimate.com repo token:
-  - secure: Kh43fq+MfpGNfQ/0IBhMnbzixVS5+K2QFPPwYfcS9ISgMASY2MAbNS1ZaD9HJ5Ynta8tnqS2QodwfQavDYI4tsFXcJ8RXbGK7GX2BKKuhH2ZfwuTGgltg0W1zTJR/18PL6jlMqon4lPnjaQQhis/WhBHqjkxHNIDzYWocZo/hc0=
 matrix:
   allow_failures:
   - rvm: rbx
