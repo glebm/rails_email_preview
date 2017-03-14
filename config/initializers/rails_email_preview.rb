@@ -5,9 +5,11 @@ require 'rails_email_preview'
 #
 #  # hook before rendering preview:
 #  config.before_render do |message, preview_class_name, mailer_action|
-#    # apply premailer-rails:
+#    # Use roadie-rails:
+#    Roadie::Rails::MailInliner.new(message, message.roadie_options).execute
+#    # Use premailer-rails:
 #    Premailer::Rails::Hook.delivering_email(message)
-#    # or actionmailer-inline-css:
+#    # Use actionmailer-inline-css:
 #    ActionMailer::InlineCssHook.delivering_email(message)
 #  end
 #

@@ -113,12 +113,30 @@ REP works with [Comfortable Mexican Sofa CMS](https://github.com/comfy/comfortab
 
 [![screenshot](https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-edit-sofa.png)](https://github.com/glebm/rails_email_preview/wiki/Edit-Emails-with-Comfortable-Mexican-Sofa)
 
-### Premailer
+### CSS inlining
 
-[Premailer](https://github.com/alexdunae/premailer) automatically translates standard CSS rules into old-school inline styles. Integration can be done by using the <code>before_render</code> hook.
+For CSS inlining, REP support [Roadie](https://github.com/Mange/roadie) and
+[Premailer](https://github.com/alexdunae/premailer).
+Both of these automatically translate CSS rules into inline styles and turn
+relative URLs into absolute ones.
+
+Roadie additionally extracts styles that cannot be inlined into a separate
+`<style>` tag that is supported by some email clients. For this reason I
+recommend Roadie over Premailer.
+
+Unlike Premailer, Roadie does **not** automatically generate a plain text
+version for HTML emails, but you can use another gem for this, such as
+[plain-david](https://github.com/lucaspiller/plain-david).
+
+#### Roadie
+
+To integrate Roadie with your Rails app, use [roadie-rails](https://github.com/Mange/roadie-rails).
+To integrate roadie-rails with REP, uncomment the relevant option in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
+
+#### Premailer
 
 To integrate Premailer with your Rails app you can use either [actionmailer_inline_css](https://github.com/ndbroadbent/actionmailer_inline_css) or [premailer-rails](https://github.com/fphilipe/premailer-rails).
-Simply uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
+To integrate either with REP, uncomment the relevant options in [the initializer](https://github.com/glebm/rails_email_preview/blob/master/config/initializers/rails_email_preview.rb). *initializer is generated during `rails g rails_email_preview:install`*
 
 ### I18n
 
