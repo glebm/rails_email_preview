@@ -2,11 +2,11 @@ source 'http://rubygems.org'
 
 gemspec path: '../..'
 
-gem 'rails', '~> 5.0.0.rc1'
+gem 'rails', '~> 5.0.2'
 
 gem 'sass-rails', '~> 6.0.0.beta1'
 group :test do
-  gem 'rspec-rails', '~> 3.5.0.beta3'
+  gem 'rspec-rails', '~> 3.5.2'
 end
 
 eval_gemfile './shared.gemfile'
