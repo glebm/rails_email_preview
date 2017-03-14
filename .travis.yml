@@ -12,7 +12,6 @@ git:
   submodules: false
 env:
   global:
-  - COVERAGE=1
   - TRAVIS=1
 matrix:
   allow_failures:
@@ -22,7 +21,11 @@ cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 
 script:
-- bundle exec rspec --format d
+- if [[ "$(rvm current)" = "ruby-"* ]]; then
+    COVERAGE=1 bundle exec rspec --format d
+  else
+    bundle exec rspec --format d
+  fi
 - >
   if [[ "$(rvm current)" = "ruby-"* ]]; then
     bundle exec codeclimate-test-reporter
