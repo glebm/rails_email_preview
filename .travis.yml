@@ -21,8 +21,9 @@ cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 
 script:
-- if [[ "$(rvm current)" = "ruby-"* ]]; then
-    env COVERAGE=1 bundle exec rspec --format d
+- >
+  if [[ "$(rvm current)" = "ruby-"* ]]; then
+    COVERAGE=1 bundle exec rspec --format d
   else
     bundle exec rspec --format d
   fi
