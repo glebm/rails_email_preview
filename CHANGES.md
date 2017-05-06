@@ -1,3 +1,7 @@
+## v2.0.3
+
+Fix a URL generation issue in the CMS integration on Rails 5.
+
 ## v2.0.2
 
 * Document roadie-rails support.
