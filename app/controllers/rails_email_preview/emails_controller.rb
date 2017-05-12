@@ -164,7 +164,7 @@ module RailsEmailPreview
     end
 
     def load_preview
-      @preview = ::RailsEmailPreview::Preview[params[:preview_id]] or raise ActionController::RoutingError.new('Not Found')
+      @preview = ::RailsEmailPreview::Preview[params[:preview_id], params] or raise ActionController::RoutingError.new('Not Found')
       @part_type = params[:part_type] || 'html'
     end
   end
