@@ -1,0 +1,14 @@
+de:
+  rep:
+    test_deliver:
+      no_delivery_method: Bitte setze "config.action_mailer.delivery_method" um E-Mails in der „%{environment}“ Umgebung zu senden.
+      provide_email: An welche Adresse senden?
+      sent_notice: "Senden an %{address} mit %{delivery_method}"
+    list_title: Anwendungs E-Mails
+    breadcrumb_list: E-Mails
+    send_recipient_placeholder: E-Mail
+    send_btn: Senden an
+    send_are_you_sure: Diese Aktion wird diese E-Mail wirklich versenden. Bist du sicher?
+    view_link: Anzeigen
+    head_title: E-Mails - REP
+
