@@ -6,7 +6,6 @@ require 'rails_email_preview/delivery_handler'
 require 'rails_email_preview/view_hooks'
 
 require 'sass'
-require 'sass-rails'
 require 'request_store'
 require 'turbolinks'
 require 'pathname'
