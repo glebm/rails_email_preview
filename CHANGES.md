@@ -1,3 +1,7 @@
+## v2.0.4
+
+Depend on `sass` instead of `sass-rails`.
+
 ## v2.0.3
 
 Fix a URL generation issue in the CMS integration on Rails 5.
