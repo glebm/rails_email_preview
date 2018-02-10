@@ -25,12 +25,15 @@ module RailsEmailPreview
     end
 
     def name
-      @name ||= "#{group_name}: #{method_name}"
+      @name ||= "#{group_name}: #{humanized_method_name}"
     end
 
-    def method_name
+    def humanized_method_name
       @action_name ||= preview_method.to_s.humanize
     end
+
+    # @deprecated {#method_name} is deprecated and will be removed in v3
+    alias_method :method_name, :humanized_method_name
 
     def group_name
       @group_name ||= preview_class_name.to_s.underscore.gsub('/', ': ').sub(/(_mailer)?_preview$/, '').humanize
