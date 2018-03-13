@@ -1,3 +1,7 @@
+## v2.0.5
+
+CMS integration now supports Comfy v2.
+
 ## v2.0.4
 
 Depend on `sass` instead of `sass-rails`.
