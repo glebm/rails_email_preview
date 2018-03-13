@@ -3,10 +3,23 @@
           (new RegExp(document.querySelector('meta[name="rep-root-path"]').content)).test(parent.location.href))) return;
   document.querySelector('#cms-left').style.display = 'none';
   document.addEventListener('DOMContentLoaded', () => {
+    // Hide nav
     document.querySelector('#cms-right').style.display = 'none';
     const main = document.querySelector('#cms-main');
     main.classList.remove('col-lg-8');
     main.classList.add('col-lg-12');
+
+    // Replace header:
+    const repData = document.querySelector('#rep-cms-integration-data').dataset;
+    let showUrl = repData.showUrl;
+    if (showUrl) {
+      const parentParams = parent.location.search;
+      if (!/\?/.test(showUrl)) showUrl += '?';
+      showUrl = showUrl.replace(/\?.*$/, parentParams);
+      main.querySelector('.page-header h2').innerHTML =
+          `${repData.editEmailLabel} <a class='btn btn-link' href='${showUrl}'>${repData.viewLinkLabel}</a>`;
+      main.querySelector('.form-actions a').href = showUrl;
+    }
 
     const control = (name) => {
       const input = main.querySelector(`[name^="snippet[${name}]"]:not([type="hidden"])`);

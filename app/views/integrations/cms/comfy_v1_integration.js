@@ -5,14 +5,16 @@ if (window.parent && window.parent.rep && (new RegExp(document.querySelector('me
     $('.center-column').css('margin', 0);
     $('#comfy').css('backgroundColor', 'white');
 
-    var showUrl = '<%= show_url %>';
-
+    // Replace header:
+    const repData = document.querySelector('#rep-cms-integration-data').dataset;
+    let showUrl = repData.showUrl;
     if (showUrl) {
-      var parentParams = parent.location.search;
+      const parentParams = parent.location.search;
       if (!/\?/.test(showUrl)) showUrl += '?';
       showUrl = showUrl.replace(/\?.*$/, parentParams);
-      $('.page-header h2').html(
-          "<%= t '.edit_email' %>" + " <a class='<%= RailsEmailPreview.style[:btn_default_class] %>' href='" + showUrl + "'><%= t '.view_link' %></a>");
+      document.querySelector('.page-header h2').innerHTML =
+          `${repData.editEmailLabel} <a class='btn btn-link' href='${showUrl}'>${repData.viewLinkLabel}</a>`;
+      document.querySelector('.form-actions a').href = showUrl;
     }
 
     // Snippet form:

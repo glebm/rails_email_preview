@@ -9,6 +9,10 @@
 %>
 <% if customize_form %>
   <meta name="rep-root-path" content="<%= rails_email_preview.rep_root_path %>">
+  <div id="rep-cms-integration-data"
+       data-show-url="<%= show_url %>"
+       data-view-link-label="<%= t '.view_link' %>"
+       data-edit-email-label="<%= t '.edit_email'%>"></div>
   <% if adapter.cms_v2_plus? %>
     <script><%= render file: 'integrations/cms/comfy_v2_integration.js' %></script>
   <% else # CMS v1   %>
