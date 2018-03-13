@@ -146,6 +146,10 @@ module RailsEmailPreview
           end
         end
 
+        def cms_v2_plus?
+          cms_version_gte? '2.0.0'
+        end
+
         private
         def cms_version_gte?(version)
           (::ComfortableMexicanSofa::VERSION.split('.').map(&:to_i) <=> version.split('.').map(&:to_i)) >= 0
