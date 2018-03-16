@@ -8,4 +8,4 @@ group :test do
   gem 'rspec-rails', '~> 3.5.2'
 end
 
-eval_gemfile './shared.gemfile'
+eval_gemfile '../../shared.gemfile'
