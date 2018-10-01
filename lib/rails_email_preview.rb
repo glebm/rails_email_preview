@@ -5,7 +5,7 @@ require 'rails_email_preview/version'
 require 'rails_email_preview/delivery_handler'
 require 'rails_email_preview/view_hooks'
 
-require 'sass'
+require 'sassc-rails'
 require 'request_store'
 require 'turbolinks'
 require 'pathname'

@@ -6,10 +6,8 @@ rescue LoadError
 end
 
 # Load dummy app tasks
-if ENV['DUMMY']
-  APP_RAKEFILE = File.expand_path('../spec/dummy/Rakefile', __FILE__)
-  load 'rails/tasks/engine.rake'
-end
+APP_RAKEFILE = File.expand_path('spec/dummy/Rakefile', __dir__)
+load 'rails/tasks/engine.rake'
 
 Bundler::GemHelper.install_tasks
 
@@ -20,18 +18,16 @@ task default: :spec
 
 desc 'Start development web server'
 task :dev do
-  host = 'localhost'
-  port = 9292
-  require 'puma'
-  require 'rails/commands/server'
+  host = '0.0.0.0'
+  port = ENV['PORT'] || 9292
   ENV['RACK_ENV'] = ENV['RAILS_ENV'] = 'development'
   Dir.chdir 'spec/dummy'
+
   Rack::Server.start(
       environment: 'development',
       Host: host,
       Port: port,
-      config: 'config.ru',
-      server: 'puma'
+      config: 'config.ru'
   )
 end
 

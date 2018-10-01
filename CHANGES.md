@@ -1,3 +1,7 @@
+## v2.0.7
+
+Depend on `sassc` instead of `sass`.
+
 ## v2.0.6
 
 CMS integration now supports Comfy v2.

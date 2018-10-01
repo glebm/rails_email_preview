@@ -8,6 +8,7 @@ rvm:
 gemfile:
   - spec/gemfiles/rails_4_2.gemfile
   - spec/gemfiles/rails_5_0.gemfile
+  - spec/gemfiles/rails_5_2.gemfile
 git:
   submodules: false
 env:
@@ -16,7 +17,6 @@ env:
 matrix:
   allow_failures:
   - rvm: rbx-3
-sudo: false
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 

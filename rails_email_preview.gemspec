@@ -18,13 +18,14 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'rails', '>= 4.2'
-  s.add_dependency 'sass'
+  s.add_dependency 'sassc-rails', '>= 1.3.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
-  s.add_development_dependency 'i18n-tasks', '>= 0.7.6'
-  s.add_development_dependency 'capybara', '>= 2.3.0'
-  s.add_development_dependency 'rspec-rails', '>= 3.4'
+  s.add_development_dependency 'i18n-tasks', '>= 0.9.25'
+  s.add_development_dependency 'capybara', '>= 3.8.2'
+  s.add_development_dependency 'rspec-rails', '>= 3.8.0'
+  s.add_development_dependency 'puma', '>= 3.12.0'
   s.add_development_dependency 'poltergeist'
 
   s.version = RailsEmailPreview::VERSION
