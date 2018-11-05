@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'rails', '>= 4.2'
-  s.add_dependency 'sassc-rails', '>= 1.3.0'
+  s.add_dependency 'sassc-rails', '>= 2.0.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
