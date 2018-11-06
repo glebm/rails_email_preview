@@ -190,7 +190,7 @@ Then, import REP styles into your `application.css.scss`:
 @import "rails_email_preview/application";
 ```
 
-Alternatively, if you are using Bootstrap 3, `@import "rails_email_preview/application"`, and add the following
+Alternatively, if you are using Bootstrap 3, `@import "rails_email_preview/bootstrap3"`, and add the following
 to the initializer:
 
 ```ruby
