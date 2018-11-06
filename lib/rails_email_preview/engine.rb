@@ -7,6 +7,7 @@ module ::RailsEmailPreview
       RailsEmailPreview::Engine.config.assets.precompile += %w(
         rails_email_preview/application.js
         rails_email_preview/application.css
+        rails_email_preview/favicon.png
       )
     end
   end
