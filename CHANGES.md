@@ -1,6 +1,6 @@
-## v2.0.7
+## v2.1.0
 
-Depend on `sassc` instead of `sass`.
+Use `sassc-rails` instead of `sass-rails`.
 
 ## v2.0.6
 
