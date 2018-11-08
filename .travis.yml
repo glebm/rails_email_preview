@@ -2,7 +2,7 @@ language: ruby
 dist: trusty
 sudo: false
 rvm:
-  - 2.3.1
+  - 2.3.8
   - jruby-9
   - rbx-3
 gemfile:
