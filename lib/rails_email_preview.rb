@@ -85,6 +85,12 @@ module RailsEmailPreview
     def setup
       yield self
     end
+
+    # @api private
+    def rails_supports_csp_nonce?
+      @rails_supports_csp_nonce = (Rails.gem_version >= Gem::Version.new('5.2.0')) if @rails_supports_csp_nonce.nil?
+      @rails_supports_csp_nonce
+    end
   end
 
   # = Editing settings
