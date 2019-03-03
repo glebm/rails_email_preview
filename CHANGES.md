@@ -1,4 +1,4 @@
-## v2.1.1
+## v2.2.0
 
 Adds CSP nonce to inline script tags if CSP is enabled on Rails v5.2+.
 
