@@ -1,3 +1,7 @@
+## v2.2.1
+
+Fixes support for Rails <5.2 (regression introduced in v2.2.0).
+
 ## v2.2.0
 
 Adds CSP nonce to inline script tags if CSP is enabled on Rails v5.2+.
