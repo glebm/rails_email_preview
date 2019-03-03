@@ -21,7 +21,9 @@
       background-color: white;
     }
   </style>
-  <script>document.addEventListener('DOMContentLoaded', window.parent.rep.iframeOnDOMContentLoaded, true);</script>
+  <%= javascript_tag **({nonce: true} if RailsEmailPreview.rails_supports_csp_nonce?) do %>
+    document.addEventListener('DOMContentLoaded', window.parent.rep.iframeOnDOMContentLoaded, true);
+  <% end %>
 </head>
 <body>
 <div id="content" class="container">

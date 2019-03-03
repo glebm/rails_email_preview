@@ -14,8 +14,10 @@
        data-view-link-label="<%= t '.view_link' %>"
        data-edit-email-label="<%= t '.edit_email'%>"></div>
   <% if adapter.cms_v2_plus? %>
-    <script><%= render file: 'integrations/cms/comfy_v2_integration.js' %></script>
+    <%= javascript_tag render(file: 'integrations/cms/comfy_v2_integration.js'),
+                       **({nonce: true} if RailsEmailPreview.rails_supports_csp_nonce?) %>
   <% else # CMS v1   %>
-    <script><%= render file: 'integrations/cms/comfy_v1_integration.js' %></script>
+    <%= javascript_tag render(file: 'integrations/cms/comfy_v1_integration.js'),
+                       **({nonce: true} if RailsEmailPreview.rails_supports_csp_nonce?) %>
   <% end %>
 <% end %>

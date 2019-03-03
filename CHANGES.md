@@ -1,3 +1,7 @@
+## v2.1.1
+
+Adds CSP nonce to inline script tags if CSP is enabled on Rails v5.2+.
+
 ## v2.1.0
 
 Use `sassc-rails` instead of `sass-rails`.
