@@ -1,7 +1,7 @@
 require 'fileutils'
 module SaveScreenshots
   def screenshot!(name)
-    return unless [:selenium, :webkit, :poltergeist].include?(Capybara.current_driver)
+    return unless [:selenium, :webkit, :cuprite].include?(Capybara.current_driver)
     dir = File.expand_path('../screenshots', File.dirname(__FILE__))
     name = "#{name}.png" unless name =~ /\.png$/
     FileUtils.mkpath(dir) unless File.directory?(dir)
