@@ -1,3 +1,10 @@
+## v2.2.2
+
+1. Fixes deprecation warnings on Rails 6.
+2. Fixes unintentional processing of email HTML as ERB.
+   RCE vulnerability if preview body contains user input.
+   [#82](https://github.com/glebm/rails_email_preview/issues/82)
+
 ## v2.2.1
 
 Fixes support for Rails <5.2 (regression introduced in v2.2.0).
