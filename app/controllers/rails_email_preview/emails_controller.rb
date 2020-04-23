@@ -20,7 +20,7 @@ module RailsEmailPreview
       with_email_locale do
         if @preview.respond_to?(:preview_mail)
           @mail, body     = mail_and_body
-          @mail_body_html = render_to_string(inline: body, layout: 'rails_email_preview/email')
+          @mail_body_html = render_to_string(html: body, layout: 'rails_email_preview/email')
         else
           raise ArgumentError.new("#{@preview} is not a preview class, does not respond_to?(:preview_mail)")
         end
@@ -67,7 +67,7 @@ module RailsEmailPreview
       cms_edit_links!
       with_email_locale do
         _, body = mail_and_body
-        render inline: body, layout: 'rails_email_preview/email'
+        render html: body, layout: 'rails_email_preview/email'
       end
     end
 
@@ -118,7 +118,7 @@ module RailsEmailPreview
                   else
                     mail
                   end
-      return "<pre id='error'>#{html_escape(t('rep.errors.email_missing_format', locale: @ui_locale))}</pre>" if !body_part
+      return "<pre id='error'>#{html_escape(t('rep.errors.email_missing_format', locale: @ui_locale))}</pre>".html_safe if !body_part
       if body_part.content_type =~ /plain/
         "<pre id='message_body'>#{html_escape(body_part.body.to_s)}</pre>".html_safe
       else
