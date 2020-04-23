@@ -1,6 +1,5 @@
 language: ruby
-dist: xenial
-sudo: false
+os: linux
 rvm:
   - 2.3.8
   - jruby-9
@@ -14,9 +13,12 @@ git:
 env:
   global:
   - TRAVIS=1
-matrix:
+jobs:
   allow_failures:
   - rvm: rbx-3
+  exclude:
+  - rvm: jruby-9
+    gemfile: spec/gemfiles/rails_4_2.gemfile
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 
