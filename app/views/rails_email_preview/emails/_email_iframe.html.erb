@@ -7,6 +7,6 @@
   </div>
 
   <iframe id="rep-src-iframe" srcdoc="<%= @mail_body_html.to_str %>" seamless="seamless"></iframe>
-  <%= javascript_tag render(template: 'rails_email_preview/emails/email_iframe.js'),
+  <%= javascript_tag render(template: 'rails_email_preview/emails/email_iframe', formats: [:js]),
                      **(RailsEmailPreview.rails_supports_csp_nonce? ? {nonce: true} : {}) %>
 </div>
