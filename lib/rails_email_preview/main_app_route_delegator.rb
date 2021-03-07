@@ -8,7 +8,7 @@ module RailsEmailPreview::MainAppRouteDelegator
     end
   end
 
-  def respond_to?(method)
+  def respond_to_missing?(method)
     super || main_app_route_method?(method)
   end
 
