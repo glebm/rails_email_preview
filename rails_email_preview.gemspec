@@ -17,7 +17,22 @@ Gem::Specification.new do |s|
     s.metadata = { 'issue_tracker' => 'https://github.com/glebm/rails_email_preview' }
   end
 
-  s.add_dependency 'rails', '>= 4.2'
+  # We need to remove acivestorage, which is a dependency of Rails
+  # until https://github.com/rails/rails/issues/41750 is solved
+  # beginning of Rails dependencies
+  rails_version = ['~> 5.2', '< 6.0']
+  s.add_dependency 'actionmailer', *rails_version
+  s.add_dependency 'actionpack', *rails_version
+  s.add_dependency 'actionview', *rails_version
+  s.add_dependency 'activejob', *rails_version
+  s.add_dependency 'activemodel', *rails_version
+  s.add_dependency 'activerecord', *rails_version
+  s.add_dependency 'activesupport', *rails_version
+  s.add_dependency 'railties', *rails_version
+  s.add_dependency 'bundler', '>= 1.3.0'
+  s.add_dependency 'sprockets-rails', '>= 2.0.0'
+  # end of Rails dependencies
+
   s.add_dependency 'sassc-rails', '>= 2.0.0'
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
