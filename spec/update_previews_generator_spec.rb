@@ -24,9 +24,14 @@ end
     after do
       [expected_preview_path, test_mailer_path].each do |f|
         FileUtils.rm(f) if File.exist?(f)
+        Object.send(:remove_const, :NewMailer) if defined?(NewMailer)
+        Object.send(:remove_const, :NewMailerPreview) if defined?(NewMailerPreview)
       end
     end
     it 'creates a stub preview class' do
+      if Rails.respond_to?(:autoloaders) && Rails.autoloaders.respond_to?(:zeitwerk_enabled?)
+        require Rails.root.join(test_mailer_path)
+      end
       Rails::Generators.invoke('rails_email_preview:update_previews', [])
       path = Rails.root.join(expected_preview_path)
       expect(File).to exist(path)
