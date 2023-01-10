@@ -3,4 +3,5 @@ source 'https://rubygems.org'
 gemspec path: '../..'
 eval_gemfile '../../shared.gemfile'
 
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 6.1.7'
+gem 'puma', '~> 5.6.5'

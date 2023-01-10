@@ -1,26 +1,15 @@
-platform :rbx do
-  gem 'rubysl', '~> 2.0'
-  gem 'racc'
-end
-
 if defined?(JRUBY_VERSION)
   # JRuby attempts to install v0.9.2 even though jruby's reported required version is too low for it.
   gem 'i18n-tasks', '~> 0.8.7'
 end
 
-
-if ENV['TRAVIS']
-  gem 'codeclimate-test-reporter', group: :test, require: false
-else
+if !ENV['CI']
   group :test, :development do
-    gem 'byebug', platform: :mri_21, require: false
-    gem 'coffee-rails'
+    gem 'byebug', platform: [:mri], require: false
   end
+end
 
-  group :development do
-    gem 'puma'
-  end
-
+if ENV['COVERAGE']
   group :test do
     gem 'simplecov', require: false
   end

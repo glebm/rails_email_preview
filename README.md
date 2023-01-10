@@ -1,4 +1,4 @@
-# Rails Email Preview [![Build Status][travis-badge]][travis] [![Test Coverage][coverage-badge]][coverage] [![Code Climate][codeclimate-badge]][codeclimate] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/glebm/rails_email_preview?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Rails Email Preview [![Build Status][badge-ci]][ci] [![Test Coverage][coverage-badge]][coverage] [![Code Climate][codeclimate-badge]][codeclimate] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/glebm/rails_email_preview?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Preview email in the browser with this Rails engine. Compatible with Rails 4.2+.
 
@@ -269,11 +269,11 @@ This project rocks and uses MIT-LICENSE.
 [rep-nav-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-nav.png "Email List Screenshot"
 [rep-show-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show.png "Show Email Screenshot"
 [rep-show-default-screenshot]: https://raw.github.com/glebm/rails_email_preview/master/doc/img/rep-show-default.png "Show Email Screenshot (default styles)"
-[travis]: http://travis-ci.org/glebm/rails_email_preview
-[travis-badge]: http://img.shields.io/travis/glebm/rails_email_preview.svg
+[ci]: https://github.com/glebm/rails_email_preview/actions/workflows/tests.yml
+[badge-ci]: https://github.com/glebm/rails_email_preview/actions/workflows/tests.yml/badge.svg
 [gem]: https://rubygems.org/gems/rails_email_preview
 [gem-badge]: http://img.shields.io/gem/v/rails_email_preview.svg
-[codeclimate]: https://codeclimate.com/github/glebm/rails_email_preview
-[codeclimate-badge]: http://img.shields.io/codeclimate/github/glebm/rails_email_preview.svg
-[coverage]: https://codeclimate.com/github/glebm/rails_email_preview
-[coverage-badge]: https://codeclimate.com/github/glebm/rails_email_preview/badges/coverage.svg
+[codeclimate]: https://codeclimate.com/github/glebm/rails_email_preview/maintainability
+[codeclimate-badge]: https://api.codeclimate.com/v1/badges/b2b4b63c3f63e316b1e4/maintainability
+[coverage]: https://codeclimate.com/github/glebm/rails_email_preview/test_coverage
+[coverage-badge]: https://api.codeclimate.com/v1/badges/b2b4b63c3f63e316b1e4/test_coverage

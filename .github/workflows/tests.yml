@@ -1,0 +1,57 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - ruby_version: '2.7'
+            gemfile: rails_7_0
+            upload_coverage: true
+          - ruby_version: '2.5'
+            gemfile: rails_6_1
+          - ruby_version: '2.3'
+            gemfile: rails_5_0
+          - ruby_version: '2.3'
+            gemfile: rails_4_2
+            bundler: '1'
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      CI: 1
+      BUNDLE_GEMFILE: ${{ github.workspace }}/spec/gemfiles/${{ matrix.gemfile }}.gemfile
+    steps:
+      - name: "Determine whether to upload coverage"
+        if: ${{ env.CC_TEST_REPORTER_ID && matrix.upload_coverage }}
+        run: echo COVERAGE=1 >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Set up Ruby ${{ matrix.ruby_version }} and ${{ matrix.gemfile }}.gemfile
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler: ${{ matrix.bundler || 'Gemfile.lock' }}
+          bundler-cache: true
+      - name: Run tests
+        if: ${{ !env.COVERAGE }}
+        run: bundle exec rspec --format d
+      - name: Run tests and upload coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        if: ${{ env.COVERAGE }}
+        with:
+          coverageCommand: bundle exec rspec --format d
+  i18n-tasks:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/spec/gemfiles/i18n-tasks.gemfile
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby and i18n-tasks.gemfile
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+      - name: Run i18n-tasks
+        run: bundle exec i18n-tasks health

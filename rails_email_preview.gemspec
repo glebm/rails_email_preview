@@ -22,11 +22,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
-  s.add_development_dependency 'i18n-tasks', '>= 0.9.25'
-  s.add_development_dependency 'capybara', '>= 3.8.2'
+  s.add_development_dependency 'capybara', '>= 3.1.1'
   s.add_development_dependency 'cuprite', '>= 0.10'
   s.add_development_dependency 'rspec-rails', '>= 3.8.0'
-  s.add_development_dependency 'puma', '>= 3.12.0'
+  s.add_development_dependency 'puma', '>= 3.9.1'
 
   s.version = RailsEmailPreview::VERSION
 end

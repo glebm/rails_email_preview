@@ -1,7 +1,6 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
 gemspec path: '../..'
 eval_gemfile '../../shared.gemfile'
 
 gem 'rails', '~> 4.2.0'
-
