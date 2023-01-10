@@ -1,3 +1,9 @@
+## v2.2.3
+
+* Fixes Rails 7 compatibility.
+  [#88](https://github.com/glebm/rails_email_preview/pull/88)
+  [#90](https://github.com/glebm/rails_email_preview/issues/90)
+
 ## v2.2.2
 
 1. Fixes deprecation warnings on Rails 6.
