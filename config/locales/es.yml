@@ -1,29 +1,12 @@
 ---
 es:
-  rep:
-    headers:
-      subject: Asunto
-      from: De
-      to: A
-      reply_to: Responder a
-      cc: CC
-      bcc: BCC
-      attachments: Adjuntos
-    base:
-      email:
-        one: 1 email
-        other: "%{count} emails"
-      mailer:
-        one: 1 mailer
-        other: "%{count} mailers"
-      in: en
-      loading: Cargando...
-    test_deliver: 
-      no_delivery_method: Por favor configura 'config.action_mailer.delivery_method' para enviar correos en el entorno de '%{environment}'
-      provide_email: ¿A que dirección?
-      sent_notice: Enviado a %{address} vía %{delivery_method}
-    errors:
-      email_missing_format: Falta formato
+  integrations:
+    cms:
+      customize_cms_for_rails_email_preview:
+        edit_email: Editando el email
+        view_link: Ver
+      errors:
+        site_missing: Por favor, primero crea un CMS para %{locale}. Cuando estes usando varios idiomas el site debería estar
   layouts:
     rails_email_preview:
       application:
@@ -32,16 +15,33 @@ es:
     emails:
       index:
         list_title: Emails de la aplicación
-      show:
-        breadcrumb_list: Emails
       send_form:
         send_are_you_sure: Esto enviara el email. ¿Estás seguro?
         send_btn: Enviar a
         send_recipient_placeholder: Email
-  integrations:
-    cms:
-      errors:
-        site_missing: Por favor, primero crea un CMS para %{locale}. Cuando estes usando varios idiomas el site debería estar 
-      customize_cms_for_rails_email_preview:
-        edit_email: Editando el email
-        view_link: Ver
+      show:
+        breadcrumb_list: Emails
+  rep:
+    base:
+      email:
+        one: 1 email
+        other: "%{count} emails"
+      in: en
+      loading: Cargando...
+      mailer:
+        one: 1 mailer
+        other: "%{count} mailers"
+    errors:
+      email_missing_format: Falta formato
+    headers:
+      attachments: Adjuntos
+      bcc: BCC
+      cc: CC
+      from: De
+      reply_to: Responder a
+      subject: Asunto
+      to: A
+    test_deliver:
+      no_delivery_method: Por favor configura 'config.action_mailer.delivery_method' para enviar correos en el entorno de '%{environment}'
+      provide_email: "¿A que dirección?"
+      sent_notice: Enviado a %{address} vía %{delivery_method}

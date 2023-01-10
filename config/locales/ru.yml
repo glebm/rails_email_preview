@@ -1,51 +1,51 @@
 ---
 ru:
-  rep:
-    headers:
-      subject: "Тема"
-      from: "Отправитель"
-      to: "Получатель"
-      reply_to: "Ответ на"
-      cc: "Копия"
-      bcc: "Скрытая копия"
-      attachments: "Вложения"
-    base:
-      email:
-        one: "%{count} письмо"
-        few: "%{count} письма"
-        many: "%{count} писем"
-        other: "%{count} письма"
-      in: "в"
-      mailer:
-        one: "%{count}-й коллекции"
-        few: "%{count}-х коллекциях"
-        many: "%{count}-и коллекциях"
-        other: "%{count} коллекциях"
-      loading: "Письмо загружается..."
-    test_deliver:
-      no_delivery_method: "Настройте 'config.action_mailer.delivery_method', чтобы отправлять письма в среде '%{environment}'"
-      provide_email: "На какой адрес отправить?"
-      sent_notice: "Оправлено на %{address} через %{delivery_method}"
-    errors:
-      email_missing_format: "Формат отсутствует"
+  integrations:
+    cms:
+      customize_cms_for_rails_email_preview:
+        edit_email: Редактировать
+        view_link: Показать
+      errors:
+        site_missing: Сначала создайте сайт для %{locale} в CMS (отметьте опцию "Mirrored").
   layouts:
     rails_email_preview:
       application:
-        head_title: "Письма - REP"
+        head_title: Письма - REP
   rails_email_preview:
     emails:
       index:
-        list_title: "Письма от приложения"
-      show:
-        breadcrumb_list: "Письма"
+        list_title: Письма от приложения
       send_form:
-        send_are_you_sure: "Письмо будет по-настоящему отправлено. Продолжить?"
-        send_btn: "Отправить на"
-        send_recipient_placeholder: "Адрес эл. почты"
-  integrations:
-    cms:
-      errors:
-        site_missing: Сначала создайте сайт для %{locale} в CMS (отметьте опцию "Mirrored").
-      customize_cms_for_rails_email_preview:
-        edit_email: "Редактировать"
-        view_link: "Показать"
+        send_are_you_sure: Письмо будет по-настоящему отправлено. Продолжить?
+        send_btn: Отправить на
+        send_recipient_placeholder: Адрес эл. почты
+      show:
+        breadcrumb_list: Письма
+  rep:
+    base:
+      email:
+        few: "%{count} письма"
+        many: "%{count} писем"
+        one: "%{count} письмо"
+        other: "%{count} письма"
+      in: в
+      loading: Письмо загружается...
+      mailer:
+        few: "%{count}-х коллекциях"
+        many: "%{count}-и коллекциях"
+        one: "%{count}-й коллекции"
+        other: "%{count} коллекциях"
+    errors:
+      email_missing_format: Формат отсутствует
+    headers:
+      attachments: Вложения
+      bcc: Скрытая копия
+      cc: Копия
+      from: Отправитель
+      reply_to: Ответ на
+      subject: Тема
+      to: Получатель
+    test_deliver:
+      no_delivery_method: Настройте 'config.action_mailer.delivery_method', чтобы отправлять письма в среде '%{environment}'
+      provide_email: На какой адрес отправить?
+      sent_notice: Оправлено на %{address} через %{delivery_method}

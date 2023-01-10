@@ -8,3 +8,6 @@ data:
   yaml:
     write:
       line_width: -1
+ignore_inconsistent_interpolations:
+ - 'rep.base.email.one'
+ - 'rep.base.mailer.one'

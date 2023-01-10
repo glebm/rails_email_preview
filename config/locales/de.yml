@@ -1,29 +1,12 @@
 ---
 de:
-  rep:
-    base:
-      email:
-        one: 1 E-Mail
-        other: "%{count} E-Mails"
-      mailer:
-        one: 1 Mailer
-        other: "%{count} Mailer"
-      in: in
-      loading: Lade...
-    test_deliver:
-      no_delivery_method: Bitte setze 'config.action_mailer.delivery_method' um E-Mails in der „%{environment}“ Umgebung zu senden.
-      provide_email: An welche Adresse senden?
-      sent_notice: Senden an %{address} mit %{delivery_method}
-    headers:
-      subject: Betreff
-      from: Aus
-      to: Zu
-      reply_to: Beantworten
-      cc: CC
-      bcc: BCC
-      attachments: Anhänge
-    errors:
-      email_missing_format: Format fehlenden
+  integrations:
+    cms:
+      customize_cms_for_rails_email_preview:
+        edit_email: E-Mail bearbeiten
+        view_link: Anzeigen
+      errors:
+        site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt werden.
   layouts:
     rails_email_preview:
       application:
@@ -32,16 +15,33 @@ de:
     emails:
       index:
         list_title: Anwendungs E-Mails
-      show:
-        breadcrumb_list: E-Mails
       send_form:
         send_are_you_sure: Diese Aktion wird diese E-Mail wirklich versenden. Bist du sicher?
         send_btn: Senden an
         send_recipient_placeholder: E-Mails
-  integrations:
-    cms:
-      customize_cms_for_rails_email_preview:
-        edit_email: E-Mail bearbeiten
-        view_link: Anzeigen
-      errors:
-        site_missing: Bitte erstellen Sie eine CMS-Website für %{locale} zuerst. Bei der Verwendung von mehreren Gebietsschemas sollte der Standort gespiegelt werden.
+      show:
+        breadcrumb_list: E-Mails
+  rep:
+    base:
+      email:
+        one: 1 E-Mail
+        other: "%{count} E-Mails"
+      in: in
+      loading: Lade...
+      mailer:
+        one: 1 Mailer
+        other: "%{count} Mailer"
+    errors:
+      email_missing_format: Format fehlenden
+    headers:
+      attachments: Anhänge
+      bcc: BCC
+      cc: CC
+      from: Aus
+      reply_to: Beantworten
+      subject: Betreff
+      to: Zu
+    test_deliver:
+      no_delivery_method: Bitte setze 'config.action_mailer.delivery_method' um E-Mails in der „%{environment}“ Umgebung zu senden.
+      provide_email: An welche Adresse senden?
+      sent_notice: Senden an %{address} mit %{delivery_method}
