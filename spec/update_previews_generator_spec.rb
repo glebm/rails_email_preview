@@ -23,7 +23,7 @@ end
     end
     after do
       [expected_preview_path, test_mailer_path].each do |f|
-        FileUtils.rm(f) if File.exists?(f)
+        FileUtils.rm(f) if File.exist?(f)
       end
     end
     it 'creates a stub preview class' do

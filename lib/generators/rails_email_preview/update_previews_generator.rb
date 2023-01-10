@@ -12,7 +12,7 @@ module RailsEmailPreview
             next
           end
           preview_path = File.join(previews_dir, "#{basename}_preview.rb")
-          if File.exists?(preview_path)
+          if File.exist?(preview_path)
             shell.say_status :exist, preview_path, :blue
             next
           end
