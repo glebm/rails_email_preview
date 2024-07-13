@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     s.metadata = { 'issue_tracker' => 'https://github.com/glebm/rails_email_preview' }
   end
 
-  s.add_dependency 'rails', '>= 4.2'
+  s.add_dependency 'rails', '>= 6.1'
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 

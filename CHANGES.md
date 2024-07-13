@@ -1,3 +1,7 @@
+* Remove explicit dependency on `sassc-rails`. Allow the use of this gem with either:
+  `dartsass-sprockets`, `sassc-rails`, `dartsass-rails`, or `cssbundling-rails`
+* Drop support for EOL ruby and rails versions (rails >6.1, ruby >3.1)
+
 ## v2.2.3
 
 * Fixes Rails 7 compatibility.
