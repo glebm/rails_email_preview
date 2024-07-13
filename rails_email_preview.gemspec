@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'rails', '>= 4.2'
-  s.add_dependency 'dartsass-sprockets'
   s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
