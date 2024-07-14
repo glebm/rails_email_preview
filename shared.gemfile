@@ -14,3 +14,6 @@ if ENV['COVERAGE']
     gem 'simplecov', require: false
   end
 end
+
+# For development/testing; when running as a library, you can pick your own sass compiler
+gem 'dartsass-sprockets'

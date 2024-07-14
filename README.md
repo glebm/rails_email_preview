@@ -1,6 +1,6 @@
 # Rails Email Preview [![Build Status][badge-ci]][ci] [![Test Coverage][coverage-badge]][coverage] [![Code Climate][codeclimate-badge]][codeclimate] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/glebm/rails_email_preview?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Preview email in the browser with this Rails engine. Compatible with Rails 4.2+.
+Preview email in the browser with this Rails engine. Compatible with Rails 6.1+.
 
 An email review:
 
@@ -19,6 +19,12 @@ Add [![Gem Version][gem-badge]][gem] to Gemfile:
 ```ruby
 gem 'rails_email_preview', '~> 2.2.3'
 ```
+
+This gem requires a Sass engine, please ensure you have **one** of these gems in your Gemfile:
+- [`dartsass-sprockets`](https://github.com/tablecheck/dartsass-sprockets): Dart Sass engine, recommended but only works for Ruby 2.6+ and Rails 5+
+- [`dartsass-rails`](https://github.com/rails/dartsass-rails): Dart Sass engine, recommended for Rails projects that use Propshaft
+- [`cssbundling-rails`](https://github.com/rails/cssbundling-rails): External Sass engine
+- [`sassc-rails`](https://github.com/sass/sassc-rails): SassC engine, deprecated but compatible with Ruby 2.3+ and Rails 4
 
 Add an initializer and the routes:
 

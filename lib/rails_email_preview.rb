@@ -5,7 +5,25 @@ require 'rails_email_preview/version'
 require 'rails_email_preview/delivery_handler'
 require 'rails_email_preview/view_hooks'
 
-require 'sassc-rails'
+# sass engine loader
+begin
+  require 'dartsass-sprockets'
+rescue LoadError
+  begin
+    require 'sassc-rails'
+  rescue LoadError
+    begin
+      require 'dartsass-rails'
+    rescue LoadError
+      begin
+        require 'cssbundling-rails'
+      rescue LoadError
+        raise LoadError.new("rails_email_preview requires a Sass engine. Please add dartsass-sprockets, sassc-rails, dartsass-rails or cssbundling-rails to your dependencies.")
+      end
+    end
+  end
+end
+
 require 'request_store'
 require 'turbolinks'
 require 'pathname'
