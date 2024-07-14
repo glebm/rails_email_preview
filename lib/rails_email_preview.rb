@@ -18,7 +18,7 @@ rescue LoadError
       begin
         require 'cssbundling-rails'
       rescue LoadError
-        raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets, sassc-rails, dartsass-rails or cssbundling-rails to your dependencies.")
+        raise LoadError.new("rails_email_preview requires a Sass engine. Please add dartsass-sprockets, sassc-rails, dartsass-rails or cssbundling-rails to your dependencies.")
       end
     end
   end
