@@ -20,12 +20,6 @@ Add [![Gem Version][gem-badge]][gem] to Gemfile:
 gem 'rails_email_preview', '~> 2.2.3'
 ```
 
-This gem requires a Sass engine, please ensure you have **one** of these gems in your Gemfile:
-- [`dartsass-sprockets`](https://github.com/tablecheck/dartsass-sprockets): Dart Sass engine, recommended but only works for Ruby 2.6+ and Rails 5+
-- [`dartsass-rails`](https://github.com/rails/dartsass-rails): Dart Sass engine, recommended for Rails projects that use Propshaft
-- [`cssbundling-rails`](https://github.com/rails/cssbundling-rails): External Sass engine
-- [`sassc-rails`](https://github.com/sass/sassc-rails): SassC engine, deprecated but compatible with Ruby 2.3+ and Rails 4
-
 Add an initializer and the routes:
 
 ```console
