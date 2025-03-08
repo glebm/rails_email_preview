@@ -18,12 +18,13 @@ task default: :spec
 
 desc 'Start development web server'
 task :dev do
+  require 'rackup'
   host = '0.0.0.0'
   port = ENV['PORT'] || 9292
   ENV['RACK_ENV'] = ENV['RAILS_ENV'] = 'development'
   Dir.chdir 'spec/dummy'
 
-  Rack::Server.start(
+  Rackup::Server.start(
       environment: 'development',
       Host: host,
       Port: port,
