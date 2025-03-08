@@ -2,12 +2,10 @@
 <html>
 <head>
   <title><%= t('.head_title') %></title>
-  <%= stylesheet_link_tag 'rails_email_preview/application', 'data-turbolinks-track' => 'reload' %>
   <%= csrf_meta_tag %>
   <%= csp_meta_tag if RailsEmailPreview.rails_supports_csp_nonce? %>
-  <%= javascript_include_tag 'rails_email_preview/application',
-                             'data-turbolinks-track' => 'reload' %>
-  <%= favicon_link_tag 'rails_email_preview/favicon.png' %>
+  <%= tag :link, rel: 'icon', type: 'image/png', href: "data:image/png;base64,#{Base64.strict_encode64(File.binread(RailsEmailPreview::Engine.root.join("app/assets/images/rails_email_preview/favicon.png")))}" %>
+  <%= content_tag :style, File.read(RailsEmailPreview::Engine.root.join("app/assets/stylesheets/rails_email_preview/application.css")).html_safe, **(RailsEmailPreview.rails_supports_csp_nonce? ? {nonce: content_security_policy_nonce} : {}) %>
   <%= yield(:head) %>
 </head>
 <body>

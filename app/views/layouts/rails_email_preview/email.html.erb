@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style type="text/css">
+  <%= content_tag(:style, **(RailsEmailPreview.rails_supports_csp_nonce? ? {nonce: content_security_policy_nonce} : {})) do %>
     #message_body, #raw_message {
       font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       word-break: break-word;
@@ -20,7 +20,7 @@
     body {
       background-color: white;
     }
-  </style>
+  <% end %>
   <%= javascript_tag **(RailsEmailPreview.rails_supports_csp_nonce? ? {nonce: true} : {}) do %>
     document.addEventListener('DOMContentLoaded', window.parent.rep.iframeOnDOMContentLoaded, true);
   <% end %>

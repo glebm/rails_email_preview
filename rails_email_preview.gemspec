@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'rails', '>= 6.1'
-  s.add_dependency 'turbolinks'
   s.add_dependency 'request_store'
 
   s.add_development_dependency 'capybara', '>= 3.1.1'
