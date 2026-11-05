@@ -1,3 +1,4 @@
+* Remove the dependency on `rails-ujs` for the send email confirmation dialog.
 * Remove explicit dependency on `sassc-rails`. Allow the use of this gem with either:
   `dartsass-sprockets`, `sassc-rails`, `dartsass-rails`, or `cssbundling-rails`
 * Drop support for EOL ruby and rails versions (rails >6.1, ruby >3.1)
