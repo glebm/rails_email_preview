@@ -20,6 +20,7 @@ Capybara.register_driver :cuprite do |app|
   options = {
     window_size: [800, 800],
     timeout: 15,
+    process_timeout: 30,
   }
   options[:browser_path] = ENV['CHROMIUM_BIN'] if ENV['CHROMIUM_BIN']
   Capybara::Cuprite::Driver.new(app, options)
